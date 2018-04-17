@@ -10,9 +10,33 @@
             1、ES6   javascript的标准规范
             2、BOM   浏览器对象模型     核心对象基于window
             3、DOM   文档对象模型
+
+        事件：
+            JavaScript是一门以事件驱动为核心的语言
+        事件三要素：
+            1、事件源   (开关，名词。js中主要指DOM对象，比如 div,span,button等标签)
+                    获取事件源
+            2、事件     (按下，动词。js中常见的事件有 按下、鼠标经过、鼠标移动、键盘按下等事件)
+                    绑定事件
+            3、驱动程序  (事件驱动，当事件执行的时候，做出相应的动作。例如 按下开关灯亮了；)
+                    书写事件驱动程序
+        编码实现三部曲：
+            1、获取事件源：( document.getElementById("box"); )
+            2、绑定事件：box.onclick = function () { 运行程序代码 }
+            3、书写事件驱动程序
     -->
 
 <body>
-    
+<script type="text/html">
+    // 所有全局变量都是window的属性
+    function fc() {
+        console.log(111)
+    }
+    fc();
+    window.fc();
+</script>
+<script>
+    console.log(window.document);
+</script>
 </body>
 </html>
