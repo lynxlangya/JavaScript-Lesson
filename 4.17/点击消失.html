@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击消失</title>
+
+    <style>
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #000;
+            margin: 0 auto;
+        }
+
+        #close {
+            width: 20px;
+            height: 20px;
+            background: red;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+<div id="box">
+    <div id="close">&nbsp;X </div>
+</div>
+<script>
+    var box = document.getElementById("box");
+    var close = document.getElementById("close");
+
+    console.log(box);
+    console.log(close);
+
+    close.onclick = function () {
+        box.style.display = "none";
+    }
+
+</script>
+
+</body>
+</html>
