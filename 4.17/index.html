@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>JS特效、BOM与DOM</title>
+
+    <script>
+        window.onload = function () {
+            // 1.获取事件源
+            var btn = document.getElementById("btn");
+            // var btn = document.querySelector("#btn");
+            // console.log(btn);
+            // btn.onclick = function () {
+            //     alert("hello");
+            // }
+
+            btn.onclick = deal;
+            function deal() {
+                alert("hello");
+            }
+        }
+    </script>
+
 </head>
 
     <!--
@@ -24,8 +42,23 @@
             1、获取事件源：( document.getElementById("box"); )
             2、绑定事件：box.onclick = function () { 运行程序代码 }
             3、书写事件驱动程序
-    -->
+        事件源获取方式：
+            通过ID获取（getElementById）
+            通过name属性（getElementsByName）
+            通过标签名（getElementsByTagName）
+            通过类名（getElementsByClassName）
+            获取html的方法（document.documentElement）
+            获取body的方法（document.body）
+            通过选择器获取一个元素（querySelector）
+            通过选择器获取一组元素（querySelectorAll）
+        事件绑定：
+            匿名函数绑定：
+                事件源.事件 = function () { 事件驱动程序 }；
 
+        onl
+
+    -->
+    <button id="btn">click</button>
 <body>
 <script type="text/html">
     // 所有全局变量都是window的属性
@@ -35,8 +68,6 @@
     fc();
     window.fc();
 </script>
-<script>
-    console.log(window.document);
-</script>
+
 </body>
 </html>
