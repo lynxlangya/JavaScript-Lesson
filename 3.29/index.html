@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>伪类选择器 导航条</title>
+	</head>
+	
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			width: 960px;
+			height: 40px;
+			background: grey;
+			margin: 100px auto;
+		}
+		
+		ul li{
+			list-style: none;
+			width: 120px;
+			height: 40px;
+			float: left;
+			background: #69BFE8;
+			text-align: center;
+			line-height: 40px;
+		}
+		ul li a{
+			width: 120px;
+			height: 40px;
+			display: inline-block;
+		}
+		a{
+			color: white;
+			text-decoration: none;
+		}
+		/*a:link{
+			color: white;
+		}*/
+		a:visited{
+			color: #0000FF;
+		}
+		a:hover{
+			color: darkgoldenrod;
+			background: aquamarine;
+		}
+		a:active{
+			color: burlywood;
+		}
+	</style>
+
+	<body>
+		<ul>
+			<li><a href="https://www.zhihu.com/#signin">导航</a></li>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">我的</a></li>
+			<li><a href="#">关于</a></li>
+			<li><a href="#">我们</a></li>
+			<li><a href="#">电话</a></li>
+			<li><a href="#">地址</a></li>
+			<li><a href="#">联系方式</a></li>
+		</ul>
+	</body>
+
+</html>

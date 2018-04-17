@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>过渡效果</title>
+	</head>
+
+	<style>
+		
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div {
+			width: 960px;
+			height: 600px;
+			border: 1px solid #000;
+			margin: 0 auto;
+		}
+		
+		li{
+			list-style: none;
+			width: 100px;
+			height: 60px;
+			background: red;
+			margin-top: 50px;
+			border-radius: 9px;
+			transition-property: margin-left,background;
+			transition-duration: 5s,6s;
+		}
+		
+		div:hover li{
+			margin-left: 860px;
+			background: yellowgreen;
+		}
+		
+		li:nth-child(1){
+			transition-timing-function: ease;
+		}
+		li:nth-child(2){
+			transition-timing-function: ease-in;
+		}
+		li:nth-child(3){
+			transition-timing-function: ease-out;
+		}
+		li:nth-child(4){
+			transition-timing-function: ease-in-out;
+		}
+		li:nth-child(5){
+			transition-timing-function: linear;
+		}
+	</style>
+
+	<body>
+		<div>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</body>
+
+</html>

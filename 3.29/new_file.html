@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>过渡模块</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			div{
+				width: 200px;
+				height: 200px;
+				background: red;
+				transition-property: width,background,height;
+				transition-duration: 3s,5s,6s;
+			}
+			
+			div:hover{
+				width: 300px;
+				height: 900px;
+				background: yellow;
+			}
+			li{
+				width: 100px;
+				height: 100px;
+				background: red;
+				transition-property: width;
+				transition-delay: 2s;
+				transition-duration: 3s;
+			}
+			li:hover{
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div></div>
+		<li></li>
+	</body>
+
+</html>

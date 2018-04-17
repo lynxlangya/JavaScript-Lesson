@@ -1,0 +1,194 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+.header{
+	width: 960px;
+	height: 80px;
+	background: antiquewhite;
+	margin: 0 auto;
+}
+
+.content{
+	width: 960px;
+	height: 600px;
+	/*background: #5974A5;*/
+	margin: 0 auto;
+}
+
+.content .top{
+	width: 960px;
+	height: 38px;
+	background: #69bfe8;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+}
+
+.content .top h3{
+	color: #ffffff;
+	line-height: 38px;
+}
+
+.content .bottom{
+	width: 960px;
+	height: 562px;
+}
+
+.active{
+	width: 642px;
+	height: 562px;
+	float: left;
+	padding-top: 50px;
+	padding-left: 80px;
+	float: left;
+	box-sizing: border-box;
+}
+
+.activeTop{
+	width: 560px;
+	height: 60px;
+	
+}
+
+.activeBottom{
+	width: 560px;
+	height: 373px;
+}
+
+.line{
+	width: 413px;
+	height: 28px;
+}
+
+.line span{
+	width: 60px;
+	float: left;
+	height: 28px;
+	font-size: 12px;
+	line-height: 28px;
+	text-align: right;
+}
+
+.line span strong{
+	color: red;
+}
+
+.line div{
+	float: right;
+	width: 333px;
+	height: 28px;
+}
+
+.line input{
+	width: 200px;
+	height: 28px;
+}
+
+.line select{
+	width: 100px;
+	height: 28px;
+}
+
+.p_u{
+	font-size: 12px;
+	line-height: 28px;
+}
+
+.right{
+	width: 318px;
+	height: 562px;
+	float: left;
+	background: blue;
+}
+
+.footer{
+	width: 960px;
+	height: 48px;
+	background: #A9A9A9;
+	margin: 0 auto;
+}
+
