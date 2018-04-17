@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标移入移出</title>
+
+    <style>
+        #box {
+            width: 300px;
+            height: 500px;
+        }
+    </style>
+
+</head>
+<body>
+<img id="box" src="img/01.JPG" alt="">
+
+<script>
+    var box = document.getElementById("box");
+
+    // console.log(box);
+
+    box.onmouseover = function () {
+        this.src = "img/02.JPG";
+        console.log(this);
+
+        //  this 就是当前这个对象。
+
+        console.log("鼠标进入");
+    };
+
+    box.onmouseout = function () {
+        this.src = "img/01.JPG";
+        console.log("鼠标退出");
+    };
+
+    box.onmousemove = function () {
+        console.log("鼠标移动")
+    }
+</script>
+
+</body>
+</html>
