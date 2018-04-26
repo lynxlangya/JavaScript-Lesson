@@ -14,7 +14,8 @@
 <body>
 
 <div id="box">
-
+    <p class="del">123</p>
+    <button>Click</button>
 </div>
 <script>
     window.onload = function () {
@@ -23,8 +24,16 @@
     //    1、创建节点
         var img = document.createElement("img");
         img.src = "img/01.JPG";
-        img.style.height = "100%";
-        box.appendChild(img);
+        img.style.height = "60%";
+        // box.appendChild(img);
+        var btn = document.getElementsByTagName("button")[0];
+        box.insertBefore(img,btn);
+
+    //    删除节点
+        var del = document.getElementsByClassName("del")[0];
+        console.log(del);
+        // del.parentNode.removeChild(del);
+        del.remove();
     }
 </script>
 </body>
