@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>DOM基础知识</title>
+    <style>
+        #box{
+            width: 600px;
+            height: 600px;
+            background: darkgrey;
+        }
+    </style>
 </head>
 <body>
 
+<div id="box">
 
+</div>
+<script>
+    window.onload = function () {
+        var box = document.getElementById("box");
 
+    //    1、创建节点
+        var img = document.createElement("img");
+        img.src = "img/01.JPG";
+        img.style.height = "100%";
+        box.appendChild(img);
+    }
+</script>
 </body>
 </html>
