@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二维码显示隐藏</title>
+    <style>
+        #e_col {
+            width: 15px;
+            height: 15px;
+            background: url("img/er.png");
+            cursor: pointer;
+            position: fixed;
+            top: 40%;
+        }
+
+        #e_app {
+            width: 785px;
+            height: 537px;
+            display: none;
+            position: absolute;
+            left: 15px;
+            top: -200px;
+        }
+    </style>
+</head>
+<body>
+<div id="e_col">
+    <div id="e_app">
+        <img src="img/timg.jpg" alt="">
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var col = document.getElementById("e_col");
+        var app = document.getElementById("e_app");
+
+        col.onmouseover = function () {
+            col.style.background = 'url("img/er1.png")';
+
+            app.style.display = "block";
+        };
+        col.onmouseout = function () {
+            debugger;
+            col.style.background = 'url("img/er.png)';
+
+            // app.style.display = "none";
+        };
+    }
+</script>
+
+</body>
+</html>

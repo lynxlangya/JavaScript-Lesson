@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片切换</title>
+</head>
+<body>
+<img src="img/FX2.png" alt=""><br>
+<button id="prev">上一张</button>
+<button id="next">下一张</button>
+
+<script>
+    window.onload = function () {
+        var img = document.getElementsByTagName("img")[0];
+        var prev = document.getElementById("prev");
+        var next = document.getElementById("next");
+
+        //    监听按钮的点击
+        var maxIndex = 3, minIndex = 1, currentIndex = minIndex;
+
+        prev.onclick = function () {
+            if (currentIndex === minIndex) {
+                currentIndex = maxIndex;
+            } else {
+                currentIndex--;
+            }
+
+            img.setAttribute("src","img/FX" + currentIndex +".png");
+
+        };
+
+        next.onclick = function () {
+            if (currentIndex === maxIndex) {
+                currentIndex = minIndex;
+            } else {
+                currentIndex++;
+            }
+
+            img.setAttribute("src","img/FX" + currentIndex +".png");
+        };
+    }
+</script>
+</body>
+</html>
