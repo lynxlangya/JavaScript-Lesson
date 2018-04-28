@@ -68,7 +68,7 @@
     }
 </script>
 
-<script>
+<script type="text/html">
 
 
     /*var num, num1;
@@ -80,9 +80,9 @@
     //    2、判断大小
 
     if (num > num1){
-        alert(num);
+    alert(num);
     }else {
-        alert(num1);
+    alert(num1);
     }
     //    3、输出数据*/
 
@@ -92,22 +92,107 @@
     c = +(window.prompt("请输入第三个数字"));
 
     if (a >= b && b >= c) {
-        console.log(a, b, c);
+    console.log(a, b, c);
     } else if (a >= c && c >= b) {
-        console.log(a, c, b);
+    console.log(a, c, b);
     } else if (b >= a && a >= c) {
-        console.log(b, a, c);
+    console.log(b, a, c);
     } else if (b >= c && c >= a) {
-        console.log(b, c, a);
+    console.log(b, c, a);
     } else if (c >= a && a >= b) {
-        console.log(c, a, b);
+    console.log(c, a, b);
     } else if (c >= b && b >= a) {
-        console.log(c, b, a);
+    console.log(c, b, a);
     } else {
-        alert("不知所云");
+    alert("不知所云");
     }
 
 </script>
+
+<script type="text/html">
+    var a, b, c;
+    a = +(window.prompt("请输入第一个数字"));
+    b = +(window.prompt("请输入第二个数字"));
+    c = +(window.prompt("请输入第三个数字"));
+
+    //    选择排序
+
+    var temp;
+
+    if (a > b){
+    temp = a;
+    a = b;
+    b = temp;
+    }
+
+    if (a > c){
+    temp = a;
+    a = c;
+    c = temp;
+    }
+
+    if (b > c){
+    temp = b;
+    b = c;
+    c = temp;
+    }
+
+    console.log(a,b,c);
+</script>
+
+<script type="text/html">
+    var a, b, c;
+    a = +(window.prompt("请输入第一个数字"));
+    b = +(window.prompt("请输入第二个数字"));
+    c = +(window.prompt("请输入第三个数字"));
+
+    //    冒泡排序
+
+    var temp;
+
+    if (a > b) {
+    temp = a;
+    a = b;
+    b = temp;
+    }
+
+    if (b > c) {
+    temp = b;
+    b = c;
+    c = temp;
+    }
+
+    if (a > b) {
+    temp = a;
+    a = b;
+    b = temp;
+    }
+
+    console.log(a, b, c);
+
+</script>
+
+<script>
+    var str = 123, num = 123, str1 = "123";
+
+    switch (str) {
+        case str:
+            alert("字符串");
+            break;
+        case num:
+            alert("数字");
+            break;
+        case str1:
+            alert("数字");
+            break;
+        default:
+            alert("不知所云");
+    }
+
+    //    在 case 语句最后必须加上 break；否则不能跳出，在执行完以后，会继续执行后面的语句。
+
+</script>
+
 </body>
 
 </html>
