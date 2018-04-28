@@ -7,15 +7,107 @@
 <body>
 
 
-<script>
-    var age = 18;
+<script type="text/html">
+    /* var age = 18;
 
     if (age > 18){
-        console.log("大");
+    console.log("大");
     }else {
-        console.log("合适");
+    console.log("合适");
+    }*/
+
+    var age = 22;
+    if (18 < age) {
+    console.log(age);
+    }
+
+    //    在做判断的时候，尽量把常量写在变量前面。可以规避很多错误。
+
+</script>
+
+<script type="text/html">
+    /*var temp;
+
+    temp = +(window.prompt("请输入一个整数！多谢"))
+    if (isNaN(temp)) {
+    alert("输入错误！")
+    } else {
+    (0 === temp % 2) ? alert("YES") : alert("NO");
+    }*/
+
+    //    1、定义变量
+    var day;
+
+    //    2、接受用户输入的数据
+    day = +(window.prompt("请输入数字1～7！"))
+
+    switch (day) {
+    case 1:
+    alert("星期一");
+    break;
+    case 2:
+    alert("星期二");
+    break;
+    case 3:
+    alert("星期三");
+    break;
+    case 4:
+    alert("星期四");
+    break;
+    case 5:
+    alert("星期五");
+    break;
+    case 6:
+    alert("星期六");
+    break;
+    case 7:
+    alert("星期天");
+    break;
+    default:
+    alert("输入有误！")
+    }
+</script>
+
+<script>
+
+
+    /*var num, num1;
+    //    1、定义变量
+
+    num = +(window.prompt());
+    num1 = +(window.prompt());
+
+    //    2、判断大小
+
+    if (num > num1){
+        alert(num);
+    }else {
+        alert(num1);
+    }
+    //    3、输出数据*/
+
+    var a, b, c;
+    a = +(window.prompt("请输入第一个数字"));
+    b = +(window.prompt("请输入第二个数字"));
+    c = +(window.prompt("请输入第三个数字"));
+
+    if (a >= b && b >= c) {
+        console.log(a, b, c);
+    } else if (a >= c && c >= b) {
+        console.log(a, c, b);
+    } else if (b >= a && a >= c) {
+        console.log(b, a, c);
+    } else if (b >= c && c >= a) {
+        console.log(b, c, a);
+    } else if (c >= a && a >= b) {
+        console.log(c, a, b);
+    } else if (c >= b && b >= a) {
+        console.log(c, b, a);
+    } else {
+        alert("不知所云");
     }
 
 </script>
 </body>
+
 </html>
