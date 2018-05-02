@@ -40,7 +40,7 @@
     }
 </script>
 
-<script>
+<script type="text/html">
     var num1, op, num2, result;
     // 1. 定义变量；
 
@@ -70,6 +70,24 @@
 
         alert("运算结果为" + result);
     // 4. 根据用户的输入的出结果
+</script>
+
+<script>
+  /*  var num = 0;
+
+    while (num < 10) {
+        console.log("小于100的数。");
+    }
+    没有 num++的时候， 陷入死循环；导致浏览器卡死。  切记！！！
+
+    */
+
+    var num = 0;
+
+    while (num < 10) {
+        console.log("小于100的数。");
+        num++;
+    }
 </script>
 
 </body>
