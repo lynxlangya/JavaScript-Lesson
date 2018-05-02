@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/html">
+    var score;
+
+    score = +(window.prompt("请输入0-100的数字！"))
+
+    var level = Math.floor(score / 10);
+
+    switch (level) {
+    case 9:
+    case 10:
+    alert("A");
+    break;
+    case 8:
+    alert("B");
+    break;
+    case 7:
+    alert("C");
+    break;
+    case 6:
+    alert("D");
+    break;
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    alert("不及格");
+    break;
+    default:
+    alert("请输入0-100的数字！");
+    break;
+    }
+</script>
+
+<script>
+    var num1, op, num2, result;
+    // 1. 定义变量；
+
+    num1 = +(window.prompt("请输入第一个数！"));
+    op = window.prompt("请输入运算符：+，-，*，/");
+    num2 = +(window.prompt("请输入第二个数！"));
+    // 2. 接受用户的输入
+
+    switch (op) {
+        case "+":
+            result = num1 + num2;
+            break;
+        case "-":
+            result = num1 - num2;
+            break;
+        case "*":
+            result = num1 * num2;
+            break;
+        case "/":
+            result = num1 / num2;
+            break;
+        default:
+            alert("好像出了点错~");
+            break;
+    }
+    // 3. 运算结果
+
+        alert("运算结果为" + result);
+    // 4. 根据用户的输入的出结果
+</script>
+
+</body>
+</html>
