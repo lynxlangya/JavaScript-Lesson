@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for_循环</title>
+
+    <style>
+        span{
+            border: 1px solid #69BFE8;
+            margin: 3px;
+            padding: 10px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+
+<script type="text/html">
+    for (var a = 0; a < 10; a++) {
+    console.log(a);
+    }
+
+    /*
+    * 死循环
+    *
+    * 1、      for( ; ; ){
+    *
+    *          }
+    *
+    *
+    * 2、      while(1){
+    *
+    *          }
+    * */
+
+
+</script>
+
+<script type="text/html">
+
+    // 打印好友列表
+
+    for (var i = 1; i <= 2; i++) {
+    console.log("好友列表" + i);
+    for (var temp = 1; temp < 4; temp++) {
+    console.log("   好友" + temp)
+    }
+    }
+
+</script>
+
+<script type="text/html">
+
+    /*
+    * 绘制图形
+    *
+    *           ****
+    *           ****
+    *           ****
+    *
+    * */
+
+    for (var i = 1; i < 4; i++) {
+    // 外循环控制列数
+
+    for (var j = 1; j < 5; j++) {
+    window.document.write("*");
+
+    console.log("( " + i + "," + j + " )");
+    }
+    // 内循环控制行数
+
+    window.document.write("<br/>");
+    // 在列数后面加上换行
+    }
+
+</script>
+
+<script type="text/html">
+    /*
+    *
+    * 绘制图形
+    *
+    *              *
+    *              **
+    *              ***
+    *              ****
+    *              *****
+    *
+    * */
+
+    for (i = 0; i < 5; i++) {
+    for (j = 0; j <= i; j++) {
+    window.document.write("*\t");
+    //    外循环控制列数
+
+    }
+    window.document.write("<br/>");
+    }
+
+
+    /*
+    *   绘制三角形
+    *
+    * */
+
+    for (x = 0; x < 5; x++) {
+    for (y = x; y < 5; y++) {
+    window.document.write("*\t");
+    }
+    window.document.write("<br/>");
+    }
+</script>
+
+<script type="text/html">
+
+    /*
+    * 打印三角形
+    *
+    * */
+
+    for (i = 0; i <= 5; i++) {
+    for (j = 0; j < 5 - i; j++) {
+    window.document.write("-\t");
+    }
+    window.document.write("<br/>");
+    }
+</script>
+
+<script>
+    /*
+    *
+    * 99 乘法表
+    *
+    * */
+
+    for (i = 1; i < 9; i++) {
+        for (j = 1; j <= i; j++) {
+            window.document.write("<span>" + i + "*" + j + "=" + i * j + "</span>");
+        }
+        window.document.write("<br/>");
+    }
+
+</script>
+
+</body>
+</html>
