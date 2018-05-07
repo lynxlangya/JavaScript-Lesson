@@ -13,7 +13,7 @@
         可以重复执行
 -->
 
-<script>
+<script type="text/html">
     // 1. 函数声明方式
 
     function sum() {
@@ -32,6 +32,13 @@
 
     var sdd = Function("console.log(1+3);");
     sdd();
+</script>
+
+<script>
+    function f(sum1, sum2) {        // sum1,sum2    形参  占位
+        console.log(sum1 + sum2);
+    }
+    f(100,200);         // 100，200      实参  参与运算
 </script>
 
 </body>
