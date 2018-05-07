@@ -144,8 +144,46 @@
 
 </script>
 
-<script>
+<script type="text/html">
+    /*
+    *
+    *   求 1 ～ 100 之间的所有偶数的和，奇数的和
+    *
+    * */
 
+    var evenSum = 0;     // 偶数和
+    var oddSum = 0;     // 奇数和
+//    1. 定义变量
+
+    for (var i = 1; i <= 100; i++) {
+    //    判断奇偶数
+        if (i % 2 === 0) {
+            evenSum += i;
+        }else {
+            oddSum += i;
+        }
+    }
+
+//    输出结果
+    console.log("所有偶数的和：" + evenSum + ";" + "所有奇数的和：" + oddSum);
+
+</script>
+
+<script>
+    /*
+    *
+    * 1w元，存入银行五年能拿到的利息
+    * */
+
+    var money = 10000;
+    var rote = 0.003;
+//    1.定义变量
+    
+    for (var i = 1; i <= 5; i++) {
+        money *= rote + 1;
+    }
+
+    console.log(money);
 </script>
 
 </body>
