@@ -34,11 +34,31 @@
     sdd();
 </script>
 
-<script>
+<script type="text/html">
     function f(sum1, sum2) {        // sum1,sum2    形参  占位
         console.log(sum1 + sum2);
     }
     f(100,200);         // 100，200      实参  参与运算
+</script>
+
+<script type="text/html">
+
+    // 定时器
+
+    setInterval(function () {
+        console.log('10s');
+    },1000);
+</script>
+
+<script type="text/html">
+    // 闭包
+    (function () {
+        alert("闭包")
+    })();
+</script>
+
+<script>
+
 </script>
 
 </body>
