@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS_随机点名</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #A9A9A9;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        #box {
+            width: 1000px;
+            height: 400px;
+            background: bisque;
+            margin: 50px auto;
+            clear: both;
+        }
+
+        #btn {
+            width: 80px;
+            height: 30px;
+            background: crimson;
+            border-radius: 9px;
+            border: 0;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            margin-left: 50%;
+        }
+
+        .name {
+            width: 100px;
+            height: 30px;
+            float: left;
+            background: #69BFE8;
+            margin-left: 10px;
+            margin-top: 12px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        #span{
+            float: right;
+            position: relative;
+
+
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>随机点名</h1>
+<span id="span"></span>
+<div id="box" class="box"></div>
+<input type="button" value="开始点名" id="btn">
+
+<script>
+    // 数据
+    var arrs = ["ajsh", "ajsh1", "ajwsh", "ajssh", "ajdsh", "ajssh", "ajszh", "ajsdh", "ajfsh", "afjsh", "ajsh", "ajsh", "ajsh", "ajsh", "ajsh", "ajsh", "ajsh", "ajsh", "ajsh2", "ajsh4", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs3h", "ajs1sh", "ajshf", "ajsh", "axjsh", "ajzsh", "ajsh", "ajsdsh", "ajsch"];
+
+    //    数据插入HTML      节点插入
+
+    var boxNode = document.querySelector("#box");
+
+    for (var i = 0; i < arrs.length; i++) {
+        var divNode = document.createElement('div');
+        divNode.innerHTML = arrs[i];
+        divNode.className = 'name';
+        boxNode.appendChild(divNode);
+    }
+
+    //    点名
+    var btn = document.querySelector('#btn');
+    var timeId;
+    btn.onclick = function () {
+        if (this.value === '开始点名') {
+            timeId = setInterval(function () {
+
+                for (var i = 0; i < arrs.length; i++) {
+                    boxNode.children[i].style.background = null;
+                }
+
+                var random = parseInt(Math.random() * arrs.length);
+                boxNode.children[random].style.background = 'yellow';
+            },100);
+            this.value = "停止！！！";
+        }else {
+            clearInterval(timeId);
+            this.value = "开始点名";
+        }
+    };
+
+    var spanNode = document.querySelector('#span');
+    getTime();
+    setInterval();
+    function getTime() {
+        var day = new Date();
+        var year = day.getFullYear();
+
+        spanNode.innerHTML = year + '-' + month + '-' + dat + '-'+ hours + '-' + minitues + ''
+    }
+</script>
+
+</body>
+</html>
