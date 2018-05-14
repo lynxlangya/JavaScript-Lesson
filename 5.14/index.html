@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script type="text/html">
+
+    /*变量提升*/
+
+    function foo() {
+        var x = 'Hello,' + y;
+        var y = 'Bob';
+        console.log(x);
+    }
+    foo();
+    /*
+    *
+    * 此时输出的 “Hello,undefined”
+    * 原因是，var x = 'Hello,' + y; 此时y的变量相当于提前声明了，但是y的赋值js并没有提升。
+    * 若想输出 Hello,Bob； 只需要把var y = 'Bob';    放到前面就行。输出   “Hello,Bob”。
+    *
+    * */
+
+/*    function fo() {
+        var
+            y = 'Bob';
+            x = 'Hello' + y;
+            alert(x);
+    }
+    fo();*/
+
+
+</script>
+
+<script>
+/*    let [x,[y,z]] = ['Hello',['Js','ES6']];
+    console.log(x);
+    console.log(y);
+    console.log(z);
+
+    //  ES6 语法
+    */
+
+</script>
+
+</body>
+</html>
