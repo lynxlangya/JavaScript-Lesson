@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6</title>
+</head>
+<body>
+
+
+<script type="text/html">
+/*    {
+        var a = 10;
+        let b = 100;
+        alert(b);
+    }*/
+
+var temp = new Date();
+
+function foo() {
+    console.log(temp);
+    if (false) {
+        var temp = 'Hello World';
+        // console.log(temp);
+    }
+}
+foo();
+// 变量提升，导致内部temp 变量覆盖了外部的变量。
+</script>
+
+<script>
+    var tmp = new Date();
+
+    function f() {
+        console.log(tmp);
+        if (false) {
+            let tmp = 'hello world';
+        }
+    }
+
+    f();
+</script>
+
+</body>
+</html>
