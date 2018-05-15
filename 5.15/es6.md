@@ -72,3 +72,55 @@ function func(arg) {
 //    函数的两个代码块，都声明了变量a，最后输出10；表示外部的代码不受内部代码的影响。
 //    如果都用 var 声明，输出就是5。
 ```
+## const 命令 ##
+### 基本用法 ###
+`const` 声明一个只读的常量，一旦声明，常量的值就不能再改变。
+```ecmascript 6
+const a = 10;
+
+console.log(a);
+
+a = 100;    
+
+// 报错。VM257:5 Uncaught TypeError: Assignment to constant variable.
+```
+`const` 声明的变量不能改变值，这就意味着，`const` 一旦声明变量，就必须立即初始化，不能留在以后再进行赋值。
+```ecmascript 6
+const foo;
+// Uncaught SyntaxError: Missing initializer in const declaration.
+// 在 const 声明中缺少初始化的值。
+```
+上面的例子说明：对于 `const` 来说，只声明，不赋值就会报错。
+
+`const` 的作用域和 `let` 命令相同：只在声明所在的块级作用域有效。
+```ecmascript 6
+if (true) {
+    const max = 10;
+    // console.log(max)        // 不会报错
+}
+
+console.log(max);       // max is not defined
+```
+如果在块级作用域外面就会报错。如上，显示未定义。
+`const` 声明的常量也是不会提升，同样存在暂时性死区，只能在声明的位置后面使用。
+```ecmascript 6
+if (true) {
+    console.log(a);
+    const a = 10;
+}
+
+// a is not defined
+```
+上面的代码中，常量 `a` 在声明之前就调用，所以报错。
+
+```ecmascript 6
+var mas = "Hello";
+let age = 22;
+
+// 一下两行都报错
+const mas = "World";
+let age = 21;
+
+// Identifier 'message' has already been declared
+// 标识符已被声明
+```
