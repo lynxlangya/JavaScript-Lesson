@@ -8,36 +8,71 @@
 
 
 <script type="text/html">
-/*    {
-        var a = 10;
-        let b = 100;
-        alert(b);
+    /*    {
+    var a = 10;
+    let b = 100;
+    alert(b);
     }*/
 
-var temp = new Date();
+    var temp = new Date();
 
-function foo() {
+    function foo() {
     console.log(temp);
     if (false) {
-        var temp = 'Hello World';
-        // console.log(temp);
+    var temp = 'Hello World';
+    // console.log(temp);
     }
-}
-foo();
-// 变量提升，导致内部temp 变量覆盖了外部的变量。
+    }
+    foo();
+    // 变量提升，导致内部temp 变量覆盖了外部的变量。
 </script>
 
-<script>
+<script type="text/html">
     var tmp = new Date();
 
     function f() {
-        console.log(tmp);
-        if (false) {
-            let tmp = 'hello world';
-        }
+    console.log(tmp);
+    if (false) {
+    let tmp = 'hello world';
+    }
     }
 
     f();
+</script>
+
+<script type="text/html">
+    function f() {
+        let a = 10;
+        if (true) {
+            let a = 5;
+            //    console.log(a);     // 5
+        }
+        console.log(a);         // 10
+    }
+
+    f();
+    //    函数的两个代码块，都声明了变量a，最后输出10；表示外部的代码不受内部代码的影响。
+    //    如果都用 var 声明，输出就是5；
+</script>
+
+<script type="text/html">
+/*    let [a,...c] = [1,2,3];
+/!*    if (a + b > 2) {
+        alert(c);
+    }*!/
+    console.log(a);
+    console.log(c);*/
+
+let [a,b,c] = [1,2];
+console.log(a);
+console.log(b);
+console.log(c);
+</script>
+
+<script>
+    let {floor,pow} = Math;
+    let a = 1.9;
+    console.log(pow(2,3));
 </script>
 
 </body>

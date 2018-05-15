@@ -56,3 +56,19 @@ function func(arg) {
   }
 }
 ```
+
+### ES6 块级作用域 ### 
+例如：
+```javascript
+    function f() {
+        let a = 10;
+        if (true) {
+            let a = 5;
+        //    console.log(a);     // 5
+        }
+        console.log(a);         // 10
+    }
+    f();
+//    函数的两个代码块，都声明了变量a，最后输出10；表示外部的代码不受内部代码的影响。
+//    如果都用 var 声明，输出就是5。
+```
