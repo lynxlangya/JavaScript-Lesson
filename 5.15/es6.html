@@ -42,12 +42,12 @@
 
 <script type="text/html">
     function f() {
-        let a = 10;
-        if (true) {
-            let a = 5;
-            //    console.log(a);     // 5
-        }
-        console.log(a);         // 10
+    let a = 10;
+    if (true) {
+    let a = 5;
+    //    console.log(a);     // 5
+    }
+    console.log(a);         // 10
     }
 
     f();
@@ -56,17 +56,17 @@
 </script>
 
 <script type="text/html">
-/*    let [a,...c] = [1,2,3];
-/!*    if (a + b > 2) {
-        alert(c);
+    /*    let [a,...c] = [1,2,3];
+    /!*    if (a + b > 2) {
+    alert(c);
     }*!/
     console.log(a);
     console.log(c);*/
 
-let [a,b,c] = [1,2];
-console.log(a);
-console.log(b);
-console.log(c);
+    let [a,b,c] = [1,2];
+    console.log(a);
+    console.log(b);
+    console.log(c);
 </script>
 
 <script type="text/html">
@@ -80,10 +80,68 @@ console.log(c);
     console.log(a);
 </script>
 
-<script>
+<script type="text/html">
+
+    let s = 'Hello';
+
+    for (let i = 0; i < s.length; i++) {
+        console.log(s[i]);
+    }
+
+    console.log(i);
+
+    /*
+    *
+    * 此处如果用 var 的话，console.log(i); 可以被执行。泄漏变量，不安全。
+    *
+    * let 不可以被执行。
+    *
+    * */
 
 </script>
 
+<script type="text/html">
+    function f() {
+        let n = 5;
+        if (true) {
+            let n = 10;
+        }
+        console.log(n);
+    }
+    f();
+    /*
+    *
+    * 此处打印 'n' 的值为 5 ；let 只在当前的作用域内有效。
+    * 如果用 var 的话，打印的值就是 10 ；
+    * */
+</script>
+
+<script type="text/html">
+    {
+        {
+            {
+                {
+                    {
+                        let i = "Hello World";
+                        console.log(i);            // 可以执行。 let 只在当前作用域有效
+                    }
+                    console.log(i);             // 报错。 i is not defined；        i 未定义;
+                }
+            }
+        }
+    }
+
+    /*
+    *
+    * ES6 允许块级作用域任意嵌套，
+    * 不论嵌套多少层，外层作用域无法读取内层作用域的变量。
+    *
+    * */
+</script>
+
+<script>
+    
+</script>
 
 </body>
 </html>
