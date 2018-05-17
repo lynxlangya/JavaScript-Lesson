@@ -140,7 +140,22 @@
 </script>
 
 <script>
-    
+    function f() {
+        var i = 0;
+        return function () {
+            console .log(++i);
+        };
+    }
+
+    var counter = f();
+    counter();
+    counter();
+
+    var counter2 = f();
+    counter2();
+    counter2();
+
+    console.log(i);
 </script>
 
 </body>
