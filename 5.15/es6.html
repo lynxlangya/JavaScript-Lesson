@@ -139,7 +139,7 @@
     * */
 </script>
 
-<script>
+<script type="text/html">
     function f() {
         var i = 0;
         return function () {
@@ -156,6 +156,28 @@
     counter2();
 
     console.log(i);
+</script>
+
+<script>
+    let [a,[b],c] = [1,[2],3];
+
+    console.log(a,b,c);         // 1 2 3
+    console.log(a);             // 1
+    console.log(b);             // 2
+    console.log(c);             // 3
+
+    /*
+    * 上面的代码表示，可以从数组中提取值，按照对应的位置，对变量赋值。
+    *
+    * 本质上，这种写法属于“ 模式匹配 ”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。
+    *
+    * */
+
+    let [x,y,...z] = ['a'];
+
+    console.log(x);
+    console.log(y);
+    console.log(z);
 </script>
 
 </body>
