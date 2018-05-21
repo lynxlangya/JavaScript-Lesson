@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transform运用</title>
+
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 100px;
+        }
+    </style>
+
+</head>
+<body>
+<button id="btn">按钮</button>
+<div id="box"></div>
+
+<script>
+    window.onload = function () {
+
+        let index = 0;
+        $('btn').onclick = function () {
+            index++;
+            $('box').style.transform = 'translate(' + (index * 100) + 'px,' + (index * 50) + 'px) rotate(' + (index * 20) + 'deg) scale(' + (index * 1.5) + ')';
+        }
+    };
+
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</body>
+</html>
