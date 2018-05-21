@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+
+    <style>
+        #prompt{
+            font-size: 12px;
+            color: #cccccc;
+        }
+
+        #score{
+            border: 1px solid #3ECC00;
+        }
+
+        .nice{
+            color: #3ECC00;
+        }
+
+        .err{
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box">
+    <label>输入成绩：</label><br>
+    <input type="text" placeholder="请输入..." id="score">
+    <span id="prompt">请输入您的成绩。</span>
+</div>
+
+<script>
+    window.onload = function () {
+
+        $('score').onblur = function () {
+            // 1. 获取输入内容
+            let value = parseFloat($("score").value);
+
+            if (isNaN(value)) {          //  不是数字的时候
+                $('prompt').innerHTML = "输入成绩不正确。";
+                $('prompt').className = 'err';
+                $('score').style.borderColor = 'red';
+            }else if(value >= 0 && value <=100){
+                $('prompt').innerHTML = "输入成绩正确。";
+                $('prompt').className = 'nice';
+                $('score').style.borderColor = '#3ECC00';
+            }
+        }
+
+        $('score').onfocus = function () {
+            $('prompt').innerHTML = "请输入您的成绩。";
+            $('prompt').className = '';
+            $('score').style.borderColor = 'red';
+        }
+    };
+
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+</body>
+</html>
