@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This</title>
+</head>
+<body>
+
+<button id="btn">close</button>
+
+<script>
+    // This 指针，指向一个内存地址
+
+    /*
+    *
+    * This 所在的函数在那个对象中，This就指向这个对象
+    * */
+
+    // console.log(this);      // this 指向 window
+
+    let btn = document.getElementById('btn');
+
+    btn.onclick = function () {
+        console.log(this);      // 打印出  <button id="btn">close</button>
+    }
+
+</script>
+
+</body>
+</html>

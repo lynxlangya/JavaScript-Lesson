@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排他思想</title>
+</head>
+<body>
+
+<button>close1</button>
+<button>close2</button>
+<button>close3</button>
+<button>close4</button>
+<button>close5</button>
+<button>close6</button>
+
+<script>
+    window.onload = function () {
+        // 1. 获取所有的按钮
+
+        let btns = document.querySelectorAll('button');
+
+        // 2. 遍历
+
+        for (let i = 0; i < btns.length; i++) {
+            console.log(i);
+            btns[i].onclick = function () {
+                alert(i+1);
+            }
+        }
+        /*
+        *
+        * 这个例子中如果把 let 换成 var 则无法直接执行
+        * */
+    }
+</script>
+
+</body>
+</html>
