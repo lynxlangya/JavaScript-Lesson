@@ -5,10 +5,77 @@
 * {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 a {
     text-decoration: none;
     color: black;
+}
+
+#box {
+    width: 600px;
+    height: 120px;
+    border: 1px solid #cccccc;
+    margin: 100px auto;
+}
+
+#header {
+    background-color: #A9A9A9;
+    height: 22px;
+    cursor: pointer;
+}
+
+#header ul {
+    width: 602px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#header ul li {
+    float: left;
+    width: 120px;
+    text-align: center;
+    border-bottom: 1px solid #cccccc;
+}
+
+#header ul li.active {
+    background-color: #ffffff;
+    border-bottom: none;
+
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
+#header ul li:nth-child(1){
+    border-left: none;
+}
+
+#header ul li:nth-child{
+    border-right: none;
+}
+
+#header ul li:hover{
+    color: red;
+}
+
+
+/*内容区域*/
+
+#content .dom{
+    padding: 20px;
+    display: none;
+}
+
+.dom ul li {
+    float: left;
+    width: 220px;
+    text-align: center;
+    margin: 5px;
+}
+
+.dom ul li a:hover{
+    color: red;
 }
 
