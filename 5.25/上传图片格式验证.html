@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片格式验证</title>
+</head>
+<body>
+<lable>图片格式验证</lable>
+<br>
+<input type="file" id="file">
+
+<script>
+
+    /*
+    * .jpg
+    * .png
+    * .gif
+    *
+    * */
+
+    window.onload = function () {
+        // 1. 获取标签
+        let file = document.getElementById('file');
+
+        // 2. 监听作用域的变化
+        file.onchange = function () {
+            // 2.1 拿到 图片上传路径
+            let path = this.value;
+            // console.log(path);
+
+            // 2.2 截取后缀
+            let suffix = path.substr(path.lastIndexOf('.'));
+            // console.log(suffix);
+
+            // 2.3 统一转换小写
+            let lower_suffix = suffix.toLowerCase();
+            // console.log(lower_suffix);
+
+            // 2.4 判断是否属于上面三种格式
+            if (lower_suffix === '.jpg' || lower_suffix === '.png' || lower_suffix === 'gif'){
+
+            }else {
+                alert("图片格式不正确，请选择 “.jpg,.png,.gif”格式图片")
+            }
+
+        }
+    }
+</script>
+
+</body>
+</html>
