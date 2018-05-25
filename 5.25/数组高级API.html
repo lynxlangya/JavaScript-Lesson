@@ -6,13 +6,48 @@
 </head>
 <body>
 
-<script>
+<script type="text/html">
     // 1. Instanceof
 
-    let arr = [1,2,'雲与云帆'];
+    /*let arr = [1,2,'雲与云帆'];
 
     console.log(typeof arr);            // object
-    console.log(arr instanceof Array);  // true
+    console.log(arr instanceof Array);  // true*/
+
+    // 2. Array.isArray(变量)
+
+    let arr = [1,2,'雲与云帆'];
+    let arr1 = new Array();
+
+    console.log(Array.isArray(arr));    // true
+    console.log(Array.isArray(arr1));   // true
+    /*
+    *
+    * 只要是个数组，输出必定是true
+    * */
+</script>
+
+<script>
+    // 3. toString
+    // let arr = [1,2,"王云帆",123456,321321];
+
+    /*console.log(typeof arr.toString());     // String*/
+
+    // 4. valueOf();
+    // console.log(arr.valueOf());
+
+    // 5. indexOf()、lastIndexOf()
+
+    let arr = [1,2,3,4,5];
+
+    console.log(arr.indexOf(2));    // 1
+    console.log(arr.lastIndexOf(3));    // 2
+
+    /*
+    *
+    * 如果没有找到则返回 -1 ;
+    *
+    * */
 </script>
 
 </body>
