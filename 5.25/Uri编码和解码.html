@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uri编码和解码</title>
+</head>
+<body>
+
+<script>
+    let str = "https://www.google.com.hk/";
+    let str1 = "http://localhost:63342/Insist/5.25/Uri%E7%BC%96%E7%A0%81%E5%92%8C%E8%A7%A3%E7%A0%81.html?_ijt=8gnv68a7rved3h1pb77fjlcf6p";
+
+    // 1. 编码
+    let encodestr = encodeURIComponent(str);
+    console.log(encodestr);     // https%3A%2F%2Fwww.google.com.hk%2F
+
+    // 2. 解码
+    let decodestr = decodeURIComponent(str1);
+    console.log(decodestr);     // http://localhost:63342/Insist/5.25/Uri编码和解码.html?_ijt=8gnv68a7rved3h1pb77fjlcf6p
+</script>
+
+</body>
+</html>
