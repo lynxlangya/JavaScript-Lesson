@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串相关操作</title>
+</head>
+<body>
+
+<script type="text/html">
+    let str = '王老四';
+    let age = 22;
+
+    console.log(typeof str);    // string
+    console.log(typeof (age + ''));    // string,   number 转 string,后面机上 '';
+</script>
+
+<script type="text/html">
+    let str = 'A Hello World';
+
+    console.log(str.charAt(1));         // 打印出  空格
+
+    /*
+    * 字符串中 空格 也是占有一个字节的。
+    * */
+</script>
+
+<script>
+    let str = "Hello World";
+    let str1 = "你好，四爷！";
+
+    function getStrLength(str) {
+        // 1. 定义变量
+        let len = 0;
+
+        // 2. 遍历
+        for (let i = 0; i < str.length; i++) {
+            // 2.1 Unicode
+            code = str.charCodeAt(i);
+            console.log(code);
+        }
+
+    }
+
+    getStrLength(str);
+    getStrLength(str1);
+</script>
+
+</body>
+</html>
