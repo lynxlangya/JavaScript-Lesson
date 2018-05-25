@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dom补充</title>
+</head>
+<body>
+
+<script type="text/html">
+
+    // 面试题
+
+    f2();
+    console.log(cc);        // 9
+    console.log(bb);        // 9
+    console.log(aa);        // is not defined
+
+    function f2() {
+        let aa = bb = cc = 9;
+        console.log(aa);        // 9
+        console.log(bb);        // 9
+        console.log(cc);        // 9
+    }
+</script>
+
+<script>
+    /*var a = 123;
+    f1();
+    function f1() {
+        var b = 456;
+        console.log(a);     // undefined
+        console.log(b);     // 456
+        var a = '12306';
+    }*/
+
+    /*
+    *
+    * 如果此题把 var 转换成 let 则会直接报错。
+    * let 作用域不会提升变量
+    *
+    * */
+
+    let a = 123;
+    f1();
+    function f1() {
+        let b = 456;
+        console.log(a);         // is not defined   报错
+        console.log(b);
+        let a = '12306';
+    }
+</script>
+
+</body>
+</html>
