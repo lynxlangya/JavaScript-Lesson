@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单日历</title>
+
+    <style>
+        #box {
+            width: 250px;
+            height: 320px;
+            background: #cccccc;
+            margin: 100px auto;
+            border-radius: 9px;
+        }
+
+        #box #top {
+            font-size: 22px;
+            color: azure;
+            margin-bottom: 40px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #bottom {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            background: cyan;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box">
+    <div id="top">
+
+    </div>
+    <div id="bottom">
+
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        // 1. 创建日期对象
+
+        let date = new Date();
+
+        let y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        let d = date.getDate();
+        let week = date.getDay();
+
+        let weeks = ['星期天', '星期壹', '星期贰', '星期叁', '星期肆', '星期伍', '星期陆'];
+
+        //    2. 赋值
+        $('top').innerText = y + '/' + m + '/' + d + ' ' + weeks[week];
+        $('bottom').innerText = d;
+    };
+
+    function $(id) {
+        return typeof id === 'string' ? document.getElementById(id) : null;
+    }
+</script>
+
+</body>
+</html>
