@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九宫格</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #top {
+            padding: 20px;
+        }
+
+        #bottom {
+            position: relative;
+        }
+
+        .box {
+            width: 220px;
+            height: 360px;
+            margin: 0 10px 10px 0;
+            background: #cccccc;
+        }
+
+        .box p:last-child {
+            font-size: 14px;
+            color: #A9A9A9;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="top">
+    <button>显示3列</button>
+    <button>显示4列</button>
+    <button>显示5列</button>
+</div>
+<div id="bottom">
+    <div class="box">
+        <img src="img/1.jpg" alt="">
+        <p>骨语</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/2.jpg" alt="">
+        <p>如果爱</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/3.jpg" alt="">
+        <p>宫心计</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/4.jpg" alt="">
+        <p>华尔街</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/5.jpg" alt="">
+        <p>归去来</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/6.jpg" alt="">
+        <p>温暖的弦</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/7.jpg" alt="">
+        <p>乡村爱情</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/8.jpg" alt="">
+        <p>人生若如初相见</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+    <div class="box">
+        <img src="img/98.jpg" alt="">
+        <p>爱情的边疆</p>
+        <p>这些口碑剧值得N刷走起</p>
+    </div>
+</div>
+
+
+<script>
+    /*
+    * 九宫格算法掌握
+    * 1. 利用控件的索引index计算出控件所在的行号和列号
+    *
+    * 2. 利用列号计算出控件的left距离
+    *
+    * 3. 利用行号计算出控件的top 距离
+    *
+    * */
+    // 1. 获取需要的标签
+    let btns = document.getElementById("top").children;
+    let bottom = document.getElementById("bottom");
+    // console.log(btns, bottom);
+
+    //     2. 监听按钮点击
+    btns[0].onclick = function () {
+        j_flex(3, bottom);
+    };
+
+    // 4列
+    btns[1].onclick = function () {
+        j_flex(4, bottom);
+    };
+
+    // 5列
+    btns[2].onclick = function () {
+        j_flex(5, bottom);
+    };
+
+    function j_flex(allCols, parentNode) {
+        //    3. 定义变量
+        let boxW = 220, boxH = 360, marginXY = 10;
+
+        //    4. 遍历
+        for (let i = 0; i < parentNode.children.length; i++) {
+            //    5. 求出当前盒子所在的行和列
+            let row = parseInt(i / allCols);
+            let col = parseInt(i % allCols);
+            // console.log("当前盒子在第" + row + "行,第" + cols + "列");
+
+            //    5. 盒子的定位
+            let currentBox = parentNode.children[i];
+            currentBox.style.position = 'absolute';
+            currentBox.style.left = col * (boxW + marginXY) + 'px';
+            currentBox.style.top = row * (boxH + marginXY) + 'px';
+        }
+    }
+
+</script>
+
+</body>
+</html>
