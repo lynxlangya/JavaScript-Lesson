@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言吧</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box {
+            width: 800px;
+            /*height: 600px;*/
+            border: 1px solid #cccccc;
+            margin: 100px auto;
+            padding: 50px;
+        }
+
+        #text {
+            width: 100%;
+            max-width: 100%;
+            min-width: 20%;
+            height: 200px;
+            min-height: 80px;
+        }
+
+        .box_top button {
+            width: 80px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #ul li {
+            border-bottom: 1px dotted red;
+            color: black;
+            line-height: 40px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        #ul li a {
+            float: right;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box">
+    <div class="box_top">
+        <label>评论：</label>
+        <textarea id="text" placeholder="请输入留言..."></textarea>
+        <button id="btn">发表</button>
+    </div>
+    <ul id="ul">
+        <!--<li>asd <a href="javascript:">删除</a></li>-->
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        // 1. 监听点击按钮
+
+        $("btn").onclick = function () {
+            let content = $("text").value;
+
+        //    2. 做个判断
+            if (content.length === 0) {
+                alert("请输入留言内容");
+                return;
+            }
+        //    3. 创建li标签
+            let li = document.createElement("li");
+            li.innerHTML = content + '<a href="javascript:">删除</a>';
+            // $('ul').appendChild(li);
+            $('ul').insertBefore(li,$('ul').children[0]);
+
+        //    4. 清楚输入框内容
+            $("text").value = '';
+
+        //    5. 删除
+
+            let as = $('ul').getElementsByTagName("a");
+
+            for (let i = 0; i < as.length; i++) {
+                let a = as[i];
+                a.onclick = function () {
+                    this.parentNode.remove();
+                }
+            }
+        }
+    };
+
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</body>
+</html>
