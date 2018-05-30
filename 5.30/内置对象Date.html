@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内置对象Date</title>
+</head>
+<body>
+
+<script>
+    let da = new Date();
+    // console.log(da);     Wed May 30 2018 14:41:14 GMT+0800 (中国标准时间)
+
+    console.log(da.getDate());      // 获取日  1-31
+    console.log(da.getDay());   // 获取星期  0-6
+    console.log(da.getMonth() + 1); // 获取月  0-11
+    console.log(da.getHours());     // 获取小时 0-23
+    console.log(da.getFullYear());  // 获取完整年份
+    console.log(da.getMinutes());   // 获取分钟 0-59
+    console.log(da.getSeconds());   // 获取秒 0-59
+    console.log(da.getMilliseconds());   // 获取毫秒 0-59
+    console.log(da.getTime());      // 返回累计毫秒数（从1970/1/1午夜） 时间戳
+    console.log(da.getTimezoneOffset());   //本地时间与 GMT 时间之间的时间差，以分钟为单位。
+</script>
+
+</body>
+</html>
