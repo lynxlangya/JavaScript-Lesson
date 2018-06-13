@@ -38,10 +38,10 @@
 				//Safari
 				else if(explorer.indexOf("Safari") >= 0) {
 					return 'Safari';
-				}
 			}
+            }
 
-			function method1(tableid) { //整个表格拷贝到EXCEL中
+           		function method1(tableid) { //整个表格拷贝到EXCEL中
 				if(getExplorer() == 'ie') {
 					var curTbl = document.getElementById(tableid);
 					var oXL = new ActiveXObject("Excel.Application");
@@ -164,5 +164,4 @@
 		<br/>
 		<input type="button" value="导出EXCEL" onclick="method1('ta')" />
 	</body>
-
 </html>
