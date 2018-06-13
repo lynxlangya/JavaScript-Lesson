@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>VIM创建</title>
+    <style>
+        #time {
+            font-size: 50px;
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="time">
+    距离放假还有180天01小时03分钟20秒
+</div>
+
+
+<script>
+    /* let currentDate = new Date();
+     console.log(currentDate);*/
+
+    window.onload = function () {
+        //1. 获取需要的标签
+        let time = document.getElementById('time');
+
+        //2. 自定义将来的时间
+        let nextDate = new Date('2018/06/13 16:21:10');
+
+        //3. 开启定时器
+        setInterval(function () {
+            //4. 获取现在的时间
+            let currentDate = new Date();
+
+            //5. 获取时间戳
+            let currentTime = currentDate.getTime();
+            let nextTime = currentDate.getTime();
+
+            // 6. 计算剩下的时间戳
+            let allTime = nextTime - currentTime;
+
+            //7. 毫秒转成秒
+            let allSecond = parseInt(allTime / 1000);
+
+            //8. 转化
+            let d = size(allSecond / 3600 / 24);
+            let h = size(allSecond / 3600 % 24);
+            let m = size(allSecond / 60 % 60);
+            let s = size(allSecond % 60);
+
+            //9. 注入
+            time.innerText = "距离放假还有" + d + "天" + h + "小时" + m + "分钟" + s + "秒";
+
+        }, 1000);
+
+        function size(num) {
+            return num >= 10 ? num : '0' + num;
+        }
+    }
+</script>
+</body>
+</html>
