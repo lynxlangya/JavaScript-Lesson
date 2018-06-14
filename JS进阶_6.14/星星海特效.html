@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星星海</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background: #000000;
+        }
+
+        span {
+            width: 30px;
+            height: 30px;
+            background: url("img/star.png") no-repeat;
+            position: absolute;
+            background-size: 100% 100%;
+            animation: flash 1s alternate infinite;
+        }
+
+        /*触摸放大*/
+        span:hover {
+            -webkit-transform: scale(3, 3) rotate(180deg) !important;
+            -moz-transform: scale(3, 3) rotate(180deg) !important;
+            -ms-transform: scale(3, 3) rotate(180deg) !important;
+            -o-transform: scale(3, 3) rotate(180deg) !important;
+            transform: scale(3, 3) rotate(180deg) !important;
+            transition: all 1s;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<script>
+    window.onload = function () {
+        // 1. 求出屏幕尺寸
+        let screenW = document.documentElement.clientWidth;
+        let screenH = document.documentElement.clientHeight;
+
+        // 2. 动态创建星星
+        for (let i = 0; i < 180; i++) {
+            // 3. 创建星星
+            let span = document.createElement('span');
+            document.body.appendChild(span);
+
+            // 4. 随机坐标
+            let x = parseInt(Math.random() * screenW);
+            let y = parseInt(Math.random() * screenH);
+
+            // console.log(x, y);
+
+            span.style.left = x + 'px';
+            span.style.top = y + 'px';
+
+            // 5. 随机缩放
+
+            let scale = Math.random() * 1.5;
+            span.style.transform = 'scale(' + scale + ',' + +scale + ')';
+
+            // 6. 控制频率
+
+            let rate = Math.random() * 1.5;
+            span.style.animationDelay = rate + 's';
+        }
+    }
+</script>
+
+</body>
+</html>
