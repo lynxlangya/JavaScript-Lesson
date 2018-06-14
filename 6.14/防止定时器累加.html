@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防止定时器累加</title>
+
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="box"></div>
+
+<script>
+    // 1. 获取需要标签
+    let box = document.getElementById('box');
+
+    let height = 0;
+    timer = null;
+    // 2. 监听鼠标进入
+
+    /*
+    *
+    * 防止定时器累加。
+    * 先清除定时器，后设置定时器
+    * */
+    box.onmouseover = function () {
+        // 清除定时器
+        clearInterval(timer);
+
+        // 3. 设置定时器
+        timer = setInterval(function () {
+            height += 1;
+            console.log(height);
+        }, 1000)
+    }
+</script>
+</body>
+</html>
