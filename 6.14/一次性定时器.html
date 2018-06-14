@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一次性定时器</title>
+</head>
+<body>
+
+<button id="btn">click</button>
+<button id="btn_y1">stop</button>
+
+
+
+<script>
+    let btn = document.getElementById('btn');
+    let btn1 = document.getElementById('btn_y1');
+    let timer = null;
+
+    btn.onclick = function () {
+
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            alert('Hello World');
+        },1000)
+    };
+
+    btn1.onclick = function () {
+        clearTimeout(timer);
+    }
+</script>
+</body>
+</html>
