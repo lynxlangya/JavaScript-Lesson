@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js函数库</title>
+</head>
+<body>
+
+<script src="js/underscore.js"></script>
+
+<script>
+    let dataArr = ['Warren', 22, '男', 123, 99];
+
+    _.each(dataArr, function (item, index, arr) {
+        console.log(item, index, arr);
+    });
+
+    console.log(_.without(dataArr, 'Warren'));
+
+    console.log(_.random(-10, 100));
+</script>
+
+</body>
+</html>
