@@ -34,10 +34,12 @@
         }
 
         #ps li.current {
-            left: 50%;
-            top: 50%;
-            transform: rotate(0deg) translate(-50%, -50%) scale(1.5, 1.5);
+            left: 50% !important;
+            top: 50% !important;
+            transform: rotate(0deg) translate(-50%, -50%) scale(1.5, 1.5) !important;
             z-index: 9999;
+
+            transition: all 1s;
         }
     </style>
 
@@ -91,7 +93,10 @@
 
             // 5.4 监听点击事件
             li.onclick = function () {
-
+                for (let i = 0; i < allLis.length; i++) {
+                    allLis[i].className = '';
+                }
+                this.className = 'current';
             }
         }
 
