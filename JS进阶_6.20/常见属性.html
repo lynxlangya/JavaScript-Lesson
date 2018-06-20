@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>常见属性</title>
+</head>
+<body>
+
+<script>
+    document.onclick = function (event) {
+        let e = event || window.event;
+        /*
+        screenX , screenY 是以屏幕为基准进行测量，即：当前元素距离屏幕的尺寸。
+        连同上面的地址栏以及标签栏一同算了进去，有扩展屏幕的话，同样也算进去了。
+
+        alert(event.screenX + 'px,' + event.screenY + 'px');*/
+
+        /*
+
+        pageX 和 pageY 是以当前文档（绝对定位）为基准，不适用于 IE6-8。只算网页可编辑的这部分，地址栏，导航栏不会算进去。扩展屏也不会算进去。
+            但是会加上滚动条。
+        alert(event.pageX + ',' + event.pageY);
+
+        */
+
+        /*
+
+        clientX 和 clientY 是以当前可是区域为基准，类似于固定定位。不会加上滚动条的。
+
+        alert(event.clientX + ',' + event.clientY);
+
+         */
+
+    }
+</script>
+
+</body>
+</html>
