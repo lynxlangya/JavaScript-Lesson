@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: none;
+            list-style: none;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        #box {
+            width: 350px;
+            height: 350px;
+            background-color: #3ECC00;
+            margin: 100px auto auto 100px;
+            position: absolute;
+        }
+
+        #box_u1{
+            width: 100%;
+            height: 100%;
+            border: 1px solid #cccccc;
+        }
+
+        #box_u1 img{
+            width: 350px;
+            height: 350px;
+        }
+
+        #mask{
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255,255,0,0.4);
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: move;
+            display: none;
+        }
+
+        #box_u2 {
+            width: 600px;
+            height: 600px;
+            border: 1px solid #cccccc;
+            overflow: hidden;
+            position: absolute;
+            left: 360px;
+            top: 0;
+            display: none;
+        }
+
+        #list{
+            position: absolute;
+            left: 100px;
+            top: 455px;
+        }
+
+        #list img{
+            border: 1px solid #cccccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box_u1">
+        <img src="img/1.jpg" alt="">
+        <span id="mask"></span>
+    </div>
+    <div id="box_u2">
+        <img src="img/1.jpg" alt="" style="position:absolute; left: 0; top: 0;">
+    </div>
+</div>
+<div id="list">
+    <img src="img/2.jpg" alt="">
+    <img src="img/3.jpg" alt="">
+    <img src="img/4.jpg" alt="">
+</div>
+
+<script>
+    window.onload = function () {
+        // 1. 获取标签
+        let box = document.getElementById('box');
+        let box_u1 = document.getElementById('box_u1');
+        let box_u2 = document.getElementById('box_u2');
+        let mask = document.getElementById('mask');
+        let big_img = box_u1.children[0];
+        let list = document.getElementById('list').children;
+
+        // 2. 监听鼠标进入小盒子
+        box_u1.onmouseover = function () {
+            // 2.1 把隐藏的内容显示出来
+            mask.style.display = "block";
+            box_u2.style.display = "block";
+
+            // 2.2 监听鼠标的移动
+            box_u1.onmousemove = function (event) {
+                var event = event || window.event;
+
+                // 2.3 求出鼠标的坐标
+                let pointX = event.clientX - box_u1.offsetParent.offsetLeft - mask.offsetWidth * 0.5;
+                let pointY = event.clientY - box_u1.offsetParent.offsetTop - mask.offsetHeight * 0.5;
+
+                // 2.5 边界检测
+                if (pointX < 0) {
+                    pointX = 0;
+                }else if (pointX >= box_u1.offsetWidth - mask.offsetWidth) {
+                    pointX = box_u1.offsetWidth - mask.offsetWidth;
+                }
+
+                if (pointY < 0) {
+                    pointY = 0;
+                }else if (pointY >= box_u1.offsetHeight - mask.offsetHeight) {
+                    pointY = box_u1.offsetHeight - mask.offsetHeight;
+                }
+
+                // 2.4 让放大镜移动起来
+                mask.style.left = pointX + 'px';
+                mask.style.top = pointY + 'px';
+
+                // 2.6 让大图移动起来
+                big_img.style.left = - pointX / (box_u1.offsetWidth / box_u2.offsetWidth) + 'px';
+                big_img.style.top = - pointY / (box_u1.offsetHeight / box_u2.offsetHeight) + 'px';
+            }
+        };
+
+        // 3. 鼠标离开小盒子
+        box_u1.onmouseout = function () {
+            // 3.1 把显示的内容隐藏
+            mask.style.display = "";
+            box_u2.style.display = "";
+        }
+    }
+</script>
+
+</body>
+</html>
