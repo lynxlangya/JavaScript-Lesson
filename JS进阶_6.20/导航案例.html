@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+
+        body {
+            background: gainsboro;
+        }
+
+        #box {
+            width: 100%;
+            height: 64px;
+            background: url("img/img_2.png") no-repeat right center #3ECC00;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        #box ul {
+            position: relative;
+        }
+
+        #box ul li {
+            float: left;
+            width: 180px;
+            height: 64px;
+            text-align: center;
+            line-height: 95px;
+            cursor: pointer;
+        }
+
+        #mail {
+            width: 180px;
+            height: 64px;
+            background: url("img/img_1.png") no-repeat;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<nav id="box">
+    <span id="mail"></span>
+    <ul>
+        <li>双11狂欢</li>
+        <li>服装会场</li>
+        <li>数码家电</li>
+        <li>家具建材</li>
+        <li>母婴童装</li>
+        <li>手机会场</li>
+        <li>美妆会场</li>
+        <li>进口会场</li>
+        <li>飞猪旅行</li>
+    </ul>
+</nav>
+
+<!--
+
+1. clientX      光标相对于该网页的水平位置
+2. clientY      光标相对于该网页的垂直位置
+3. type         事件的类型
+4. target       该事件被传送到的对象
+5. screenX      光标相对于该屏幕的水平位置
+6. screenY      光标相对于该屏幕的垂直位置
+7. pageX        光标相对于该网页的水平位置（IE不适用）
+8. pageY        光标相对于该网页的垂直位置（IE不适用）
+9. width        该窗口或者框架的宽度
+10. height      该窗口或者框架的高度
+11. data        返回拖拽对象的URL字符串
+
+-->
+<script>
+    window.onload = function () {
+
+        // 1. 获取需要的标签
+        let box = $('box');
+        let mail = box.children[0];
+        let ul = box.children[1];
+        let allLis = ul.children;
+
+        // 记录鼠标点击的位置
+        let beginX = 0;
+
+        // 2. 遍历
+        for (let i = 0; i < allLis.length; i++) {
+            let li = allLis[i];
+
+
+            // 2.1 监听鼠标进入
+            li.onmouseover = function () {
+                // console.log('进入');
+                end = this.offsetLeft;
+                li.style.color = "#fff";
+            };
+
+
+            // 2.2 监听鼠标按下
+            li.onmousedown = function () {
+                // console.log('按下');
+                beginX = this.offsetLeft;
+            };
+
+            // 2.3 监听鼠标离开
+            li.onmouseout = function () {
+                // console.log('离开');
+                end = beginX;
+                li.style.color = "";
+            }
+        }
+
+        // 3. 缓动动画
+        let begin = 0, end = 0;
+        setInterval(function () {
+            begin = begin + (end - begin) * 0.1;
+            mail.style.left = begin + "px";
+        });
+
+        function $(id) {
+            return typeof id === "string" ? document.getElementById(id) : null;
+        }
+    }
+</script>
+
+</body>
+</html>
