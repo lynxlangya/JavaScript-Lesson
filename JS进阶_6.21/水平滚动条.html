@@ -58,6 +58,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .mask:hover{
+            background-color: red;
+        }
     </style>
 
 </head>
@@ -123,6 +127,13 @@
 
             // 3.4 动起来
             mask.style.left = endX + 'px';
+
+            // 内容走的距离 = （ 内容的长度 - 盒子的长度 ） \/ （盒子的长度 - 滚动条的长度） * 滚动条走的距离
+
+            let content_len = (box_top.offsetWidth - box.offsetWidth) / (box.offsetWidth - mask.offsetWidth) * endX;
+
+            box_top.style.left = - content_len + 'px';
+
             return false;
         };
 
