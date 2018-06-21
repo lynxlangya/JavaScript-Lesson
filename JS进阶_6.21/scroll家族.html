@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll</title>
+    <style>
+        body{
+            height: 3000px;
+            width: 3000px;
+        }
+    </style>
+</head>
+<body>
+
+
+<script>
+    // console.log(document.body.scrollTop);
+    /*window.onscroll = function () {
+        console.log(document.documentElement.scrollTop, document.documentElement.scrollLeft);
+    };*/
+
+    /*
+    *
+    * scroll 滚动条
+    * document.documentElement.scrollTop, document.documentElement.scrollLeft
+    * 拿到滚动条的高度以及宽度
+    *
+    * */
+    /*window.onscroll = function () {
+        // ie9+   最新浏览器
+        console.log(window.pageXOffset,window.pageYOffset);
+    }*/
+
+//    兼容模式
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+    console.log(scrollTop, scrollLeft);
+//    在谷歌中需要适时刷新。
+
+</script>
+
+</body>
+</html>
