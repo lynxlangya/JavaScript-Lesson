@@ -28,7 +28,7 @@
         }
 
         #box ul {
-            width: 1300px;
+            width: 2600px;
             position: absolute;
             left: 0;
             top: 0;
@@ -53,10 +53,10 @@
             position: absolute;
             left: 0;
             top: 0;
-            /*width: 50px;*/
             height: 10px;
             background-color: orangered;
             border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 
@@ -73,6 +73,14 @@
         <li><img src="img/6.jpeg" alt=""></li>
         <li><img src="img/7.jpeg" alt=""></li>
         <li><img src="img/8.jpeg" alt=""></li>
+        <li><img src="img/1.jpeg" alt=""></li>
+        <li><img src="img/2.jpeg" alt=""></li>
+        <li><img src="img/3.jpeg" alt=""></li>
+        <li><img src="img/4.jpeg" alt=""></li>
+        <li><img src="img/5.jpeg" alt=""></li>
+        <li><img src="img/6.jpeg" alt=""></li>
+        <li><img src="img/7.jpeg" alt=""></li>
+        <li><img src="img/8.jpeg" alt=""></li>
     </ul>
     <div id="box_bottom">
         <span class="mask"></span>
@@ -80,6 +88,49 @@
 </div>
 
 <script>
+    // 1. 获取需要的标签
+    let box = document.getElementById('box');
+    let box_top = document.getElementById('box_top');
+    let box_bottom = document.getElementById('box_bottom');
+    let mask = box_bottom.children[0];
+
+    // 2. 设置滚动条的长度
+    // 滚动条的长度 = （盒子的宽度 / 内容的宽度） * 盒子的宽度
+    let mask_len = (box.offsetWidth / box_top.offsetWidth) * box.offsetWidth;
+
+    mask.style.width = mask_len + 'px';
+
+    // 3. 鼠标操作
+    mask.onmousedown = function (event) {
+        let e = event || window.event;
+
+        // 3.1 求出初始值
+        let beginX = event.clientX - mask.offsetLeft;
+
+        // 3.2 移动
+
+        document.onmousemove = function (event) {
+            let e = event || window.event;
+
+            // 3.3 求出移动的距离
+            let endX = event.clientX - beginX;
+
+            if (endX < 0) {
+                endX = 0;
+            } else if (endX >= box.offsetWidth - mask.offsetWidth) {
+                endX = box.offsetWidth - mask.offsetWidth;
+            }
+
+            // 3.4 动起来
+            mask.style.left = endX + 'px';
+            return false;
+        };
+
+        // 4 监听鼠标抬起
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        }
+    }
 
 </script>
 
