@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>侧边广告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+
+        #aside {
+            width: 150px;
+            position: absolute;
+            left: 0;
+            top: 300px;
+        }
+
+        #aside img {
+            width: 150px;
+            height: 250px;
+        }
+
+        p {
+            text-align: center;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="aside">
+    <img src="img/5.jpeg" alt="">
+</div>
+
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<p>长风破浪会有时，只挂云帆济沧海</p>
+<script src="js/myfunc.js"></script>
+<script>
+    window.onload = function () {
+        // 1. 获取广告头部高度
+        let offset_top = $('aside').offsetTop;
+
+        // 2. 监听窗口的滚动
+        let begin = 0, end = 0, timer = null;
+        window.onscroll = function () {
+            // 2.0 清除定时器
+            clearInterval(timer);
+
+            // 2.1 获取滚动高度
+            let scroll_top = scroll().top;
+            end = offset_top + scroll_top;
+
+            // 2.2 开启缓动动画
+            timer = setInterval(function () {
+                begin = begin + (end - begin) * 0.2;
+                $('aside').style.top = begin + "px";
+                
+                if (Math.round(begin) === end) {
+                    clearInterval(timer);
+                }
+                
+            }, 20)
+        };
+
+        
+        function $(id) {
+            return typeof id === "string" ? document.getElementById(id) : null;
+        }
+    }
+</script>
+</body>
+</html>
