@@ -22,3 +22,25 @@ function scroll() {
         left: document.body.scrollLeft
     }
 }
+
+function $(id) {
+    return typeof id === "string" ? document.getElementById(id) : null;
+}
+
+/*
+*
+* 获取屏幕的宽度和高度
+* */
+function client() {
+    if (window.innerWidth) {
+        return{
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+    }else if (document.compatMode === "CSS1Compat") {
+        return{
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+        }
+    }
+}
