@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡机制</title>
+    <style>
+        #gr {
+            width: 800px;
+            height: 800px;
+            background-color: orangered;
+        }
+
+        #father {
+            width: 600px;
+            height: 600px;
+            background-color: burlywood;
+        }
+    </style>
+</head>
+<body>
+<div id="gr">
+    <div id="father">
+        <button id="btn">Close</button>
+    </div>
+</div>
+<!--
+冒泡机制：
+    气泡从水底开始往上升，由深到浅，升到最上面.在上升的过程中，气泡会经过不同深度层次的水.
+  相对应的:
+    这个气泡就相当于我们这里的事件,而水则相当于我们的整个DOM树;事件从DOM树的底层,层层往上传递,直至传递到DOM的根节点.
+    这里有个小细节,DOM点击后,它所有的父级都会触发,这样是耗费事件和性能处理的,但是,如果我们把事件都绑定到document根节点,这样只需要在最后一级的时候,区别是那个DOM触发的就行了,这个也叫事件委托.
+-->
+<script>
+    let gr = document.getElementById('gr');
+    let father = document.getElementById('father');
+    let btn = document.getElementById('btn');
+
+    btn.onclick = function (event) {
+
+        // 阻止冒泡事件
+        if (event && event.stopPropagation) {  // W3C标准
+            event.stopPropagation();
+        } else {        // IE系列.
+            event.cancelBubble = true;
+        }
+
+        alert('点击了按钮！');
+    };
+
+    father.onclick = function () {
+        alert('点击了父标签！')
+    };
+
+    gr.onclick = function () {
+        alert('点击了祖父标签!')
+    };
+
+    document.onclick = function () {
+        alert('点击了文档!牛逼')
+    }
+</script>
+</body>
+</html>
