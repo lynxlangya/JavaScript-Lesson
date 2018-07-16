@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蒙板效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 3000px;
+        }
+
+        #btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -100px;
+            width: 200px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        #panel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .4);
+            display: none;
+            /*
+            opacity: 0.4;   // w3c 透明度标准
+            filter: alpha(opacity:40);      // IE系列 透明度标准
+            */
+        }
+
+        #login {
+            width: 300px;
+            height: 300px;
+            background-color: #69bfe8;
+            border-radius: 8px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">立即登录</button>
+<div id="panel"></div>
+<div id="login"></div>
+<script src="js/myfunc.js"></script>
+<script>
+    let btn = document.getElementById('btn');
+    let panel = document.getElementById('panel');
+    let login = document.getElementById('login');
+
+    // 点击按钮显示蒙板和登录界面,并且隐藏滚动条.
+    btn.onclick = function () {
+
+        // 阻止冒泡
+        if (event && event.stopPropagation) {
+            event.stopPropagation();
+        }else {
+            window.event.cancelBubble = true;
+        }
+
+
+        // 1. 显示面板和蒙板
+        panel.style.display = 'block';
+        login.style.display = 'block';
+
+        // 1.2 隐藏滚动条
+        document.body.style.overflow = 'hidden';
+    };
+
+    document.onclick = function (event) {
+        let e = event || window.event;
+
+        // 2 获取点击的标签
+        let targetId = e.target ? e.target.id : e.srcElement.id;
+
+        // 2.1 判断
+        if (targetId !== "login") {
+            panel.style.display = 'none';
+            login.style.display = 'none';
+
+            document.body.style.overflow = 'auto';
+        }else {
+            window.location.href = "http://beiguos.top/"
+        }
+
+    }
+
+</script>
+</body>
+</html>
