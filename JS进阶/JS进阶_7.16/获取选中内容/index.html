@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取用户选中内容</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        p {
+            margin: 100px;
+            width: 200px;
+            height: 500px;
+        }
+
+        #text {
+            background: #69bfe8;
+            width: 150px;
+            color: red;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<p id="word">
+    华帝还称，从2018年4月份起不再要求该客户打款提货，不存在某些舆论报道的公司为了销售增长而要求客户压货的情况。“此次事件系京津地区经销商其个人不当行为所致，华帝已第一时间向法院申请裁定查封，并按照法律法规处理后续相关事宜，保证消费者的利益不受侵害，确保一切市场工作均如常进行。
+</p>
+<div id="text">
+    保证消费者的利益不受侵害
+</div>
+
+<script>
+    let word = document.getElementById('word');
+    let text = document.getElementById('text');
+
+    word.onmouseup = function () {
+        let e = event || window.event;
+        // 1 获取选中的文字
+        let selectdText;
+        if (window.getSelection) {
+            selectdText = window.getSelection().toString();
+        } else {
+            selectdText = document.selection.createRange().text;
+        }
+
+        // console.log(selectdText);
+
+        // 显示面板
+        if (selectdText !== '') {
+            text.innerText = selectdText;
+            text.style.display = 'block';
+
+            // 改变位置
+            text.style.left = e.clientX + 'px';
+            text.style.top = e.clientY + 'px';
+        }
+    };
+
+    document.onmousedown = function (event) {
+        let e = event || window.event;
+
+        // 获取点击区域的ID
+        let targetId = e.target ? e.target.id : e.srcElement.id;
+        // 判断
+        if (targetId !== 'text') {
+            text.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>
