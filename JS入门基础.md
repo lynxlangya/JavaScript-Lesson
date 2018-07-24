@@ -46,4 +46,46 @@ a+b             // 标识符不能包含加号
 ```
 ---
 > JavaScript有一些保留字,不能用作标识符: arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
+### 4.注释
+源码中被JavaScript引擎忽略的部分就叫做注释, 是对代码进行的解释. JavaScript 提供了两种注释的写法:
+1. 单行注释, 用 `//` 起头.
+2. 多行注释, 放在 `/*` 和 `*/` 之间
+```
+//          这是单行注释
 
+/*
+这是
+多行
+注释
+*/
+```
+
+### 5. 区块
+JavaScript 使用大括号,将多个相关的语句组合在一起,称之为 "区块" (block).
+
+对于 `let` 命令来说,JavaScript 的区块不构成单独的作用域(scope).
+```
+{
+    let a = 1;
+    console.log(a);         // 1
+}
+
+a       // Uncaught ReferenceError: a is not defined
+```
+```
+{
+    var a = 1;
+}
+
+a       // 1
+```
+上面的代码都在区块内部,分别使用 `let` 和 `var` 命令声明并赋值了变量 `a` , 但是 `let` 只有在区块内才能使用,外部不可调用; `var` 则可以在外部调用.
+### 6. 条件语句
+JavaScript 提供 `if` 结构和 `switch` 结构,完成条件判断,即只有满足预设的条件,才会执行相应的语句.
+#### 6.1 if结构
+`if` 结构先判断一个表达式的布尔值,然后根据布尔值的真伪,执行不同的语句.所谓布尔值,值得就是JavaScript 的两个特殊的值, `true` 表示 `真`, `false` 表示 `伪`.
+```
+// if (布尔值) 执行语句.
+
+if (true) alert ("Hello World!")        // Hello World!
+```
