@@ -44,3 +44,6 @@ a+b             // 标识符不能包含加号
     let 临时变量 = 1;
     console.log(临时变量);      // 1
 ```
+---
+> JavaScript有一些保留字,不能用作标识符: arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
+
