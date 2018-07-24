@@ -7,4 +7,4 @@
 
 阮一峰ES6: [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
-交流群: 484421586
+QQ交流群: 484421586
