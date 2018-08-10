@@ -99,3 +99,32 @@ typeof null         // "object"
 ```
 
 `null`的类型是`object`, 这是由于历史原因造成的.1995年的JavaScript语言的第一版,只设计了五种数据类型(对象,整数,浮点数,字符串和布尔值),没考虑`null`,只把它当做`object`的一种特殊值.后来 `null` 独立出来,作为一种单独的数据类型,为了兼容以前的代码, `typeof null` 返回 `object` 就没法改变了.
+# null,undefined和布尔值
+## 1. null和undefined
+### 1.1 概述
+`null` 与 `undefined` 都可以表示"没有",含义非常相似.将变量赋值为`undefined`或`null`,语法效果几乎没有区别.
+
+```
+let a = undefined;
+
+let a = null;
+```
+
+上面代码中,变量`a` 分别被赋值为 `undefined`和`null`,这两种写法的效果几乎相同,无差别.
+
+在 `if` 语句中,它们都会被自动转为 `false` ,相等运算符 (`==`) 甚至直接报告两者相等.
+```
+if (!undefined) {
+    console.log('undefined is false');
+}
+// undefined is fasle
+
+if (!null) {
+    console.log('null is false');
+}
+// null is false
+
+
+undefined == null;
+// true
+```
