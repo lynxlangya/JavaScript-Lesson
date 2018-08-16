@@ -579,3 +579,53 @@ parseInt('1546', 2)     // 1
 parseInt('546', 2)      // NaN
 ```
 上面代码中,对于二进制来说, `1` 是有意义的字符, `5`, `4`, `6`,都是无意义的字符,所以第一行返回1,第二行返回 `NaN`.
+
+### 5.2 parseFloat()
+`parseFloat` 方法用于将一个字符串转为浮点数
+
+```
+parseFloat('3.14')      // 3.14
+```
+
+如果字符串符合科学计数法,则会进行相应的转换
+
+```
+parseFloat('314e-2')        // 3.14
+
+parseFloat('0.0314E+2')     // 3.14
+```
+
+如果字符串包含不能转为浮点数的字符,则不再进行往后转换,返回已经转好的部分
+
+```
+parseFloat('3.14Hello World')       // 3.14
+```
+
+`parseFloat` 方法会自动过滤字符串前导的空格
+
+```
+parseFloat('\t\v\r12.34\n')        // 12.34
+```
+
+如果参数不是字符串,或者字符串的第一个字符不能转化为浮点数,则返回 `NaN`.
+
+```
+parseFloat([])          // NaN
+parseFloat('FF2')       // NaN
+parseFloat('')          // NaN
+```
+
+这些特点使得 `parseFloat` 的转换结果不同于 `Number` 函数
+```
+parseFloat(true)  // NaN
+Number(true) // 1
+
+parseFloat(null) // NaN
+Number(null) // 0
+
+parseFloat('') // NaN
+Number('') // 0
+
+parseFloat('123.45#') // 123.45
+Number('123.45#') // NaN
+```
