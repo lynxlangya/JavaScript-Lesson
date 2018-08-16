@@ -434,3 +434,114 @@ typeof NaN      // number
 NaN === NaN     // false
 ```
 
+`NaN` 与任何数(包括它自己)的运算,得到的都是 `NaN`
+
+### 4.3 Infinity
+`Infinity` 表示"无穷",用来表示两种场景.一种是一个正的数值太大,或一个负的数值太小,另一种是非0数值除以0,得到 `Infinity`
+
+`Infinity` 有正负之分,`Infinity` 表示正无穷, `-Infinity` 表示负无穷.
+
+```
+Math.pow(2, 1024)       // Infinity
+
+0 / 0           // NaN
+
+1 / 0           // Infinity
+```
+
+由于数值正向溢出(overflow),负向溢出(underflow)和被 `0` 除,JavaScript都不会报错,而是返回 `Infinity`.
+
+`Infinity` 大于一切数值(除了 `NaN`), `-Infinity` 小于一切数值(除了 `NaN`). `Infinity` 与 `NaN` 比较,总是返回 `false`
+
+```
+Infinity > 1000     // true
+-Infinity < -1000   // true
+
+Infinity > NaN // false
+-Infinity > NaN // false
+
+Infinity < NaN // false
+-Infinity < NaN // false
+```
+
+`Infinity` 的四则运算,符合无穷的数学计算规则.
+```
+5 * Infinity    // Infinity
+5 - Infinity    // -Infinity
+Infinity / 5    // Infinity
+5 / Infinity    // 0
+```
+
+0 乘以 `Infinity`,返回 `NaN` ;0除以 `Infinity` ,返回 `0`; `Infinity` 除以0; 返回 `Infinity`.
+
+`Infinity` 加上或乘以 `Infinity`, 返回的还是 `Infinity`
+
+`Infinity` 减去或除以 `Infinity`, 得到 `NaN`
+
+`Infinity` 与 `null` 计算时, `null`会转为0,等同于与 `0` 的计算.
+
+```
+null * INfinity         // NaN
+null / Infinity         // 0
+Infinity / null         // Infinity
+```
+
+`Infinity` 与 `undefined` 计算,返回的都是 `NaN`.
+
+## 5. 与数值相关的全局方法
+### 5.1 parseInt()
+`parseInt` 方法用于将字符串转为整数.
+
+```
+// parseInt 方法用于将字符串转为整数
+parseInt('123')         // 123
+
+// 如果字符串头部有空格,空格会被自动去除
+parseInt('  88')        // 88
+
+如果 parseInt 的参数不是字符串,则会先转为字符串再转换
+parseInt(1.23)      // 1
+    等同于
+parseInt('1.23')    // 1
+```
+
+字符串转为整数的时候,是一个个字符依次转换,如果遇到不能转为数字的字符,就不再进行下去,返回已经转好的部分.
+
+```
+parseInt('8a')      // 8
+parseInt('12**')    // 12
+parseInt('12.34')   // 12
+parseInt('15e2')    // 15
+parseInt('15px')    // 15
+```
+
+如果字符串的第一个字符不能转为数字(后面跟着数字的正负号除外),返回 `NaN`
+
+```
+parseInt('abc')     // NaN
+parseInt('.3')      // NaN
+parseInt('')        // NaN
+parseInt('+')       // NaN
+parseInt('+1')      // 1
+```
+
+所以,`parseInt` 的返回值只有两种,要么是一个十进制整数,要么是 `NaN`
+```
+// 如果字符串以 0x 或 0X 开头,parsrInt会将其按照十六进制数解析
+parseInt('0x10')        // 16
+
+如果字符串以 0 开头,将其按照十进制解析
+// parseInt('011')      // 11
+```
+
+对于那些会自动转为科学计数法的数字,`parseInt` 会将科学计数法的表示方法视为字符串,因此导致一些奇怪的结果
+
+```
+parseInt(1000000000000000000000.5) // 1
+// 等同于
+parseInt('1e+21') // 1
+
+parseInt(0.0000008) // 8
+// 等同于
+parseInt('8e-7') // 8
+```
