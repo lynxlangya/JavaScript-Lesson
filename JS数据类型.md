@@ -629,3 +629,75 @@ Number('') // 0
 parseFloat('123.45#') // 123.45
 Number('123.45#') // NaN
 ```
+
+### 5.3 isNaN()
+`isNaN` 方法可以用来判断一个值是否为 `NaN`
+
+```
+isNaN(NaN)          // true
+
+isNaN(123)          // false
+```
+
+但是 `isNaN` 只对数值有效, 如果传入其他值, 会被先转为数值.比如传入字符串的时候,字符串会被先转为 `NaN` ,所以最后返回 `true`, 这一点要特别引起注意.也就是说, `isNaN` 为 `true` 的值,有可能不是 `NaN`,而是一个字符串
+
+```
+isNaN('Hello')      // true
+// 相当于
+isNaN(Number('Hello'))  // true
+```
+
+出于同样的原因,对于对象和数组, `isNaN` 也返回 `true`.
+
+```
+isNaN({}) // true
+// 等同于
+isNaN(Number({})) // true
+
+isNaN(['xzy']) // true
+// 等同于
+isNaN(Number(['xzy'])) // true
+```
+
+但是,对于空数组和只有一个数值成员的数组, `isNaN` 返回 `false`
+
+```
+isNaN([])           // false
+isNaN([123])        // false
+isNaN(['123'])      // false
+```
+
+之所以返回 `false`, 原因是这些数组能被 `Number` 函数转成数值.
+
+因此,使用 `isNaN` 之前,最好判断一下数据类型
+```
+function myIsNaN(value) {
+    return typeof value === 'number' && isNaN(value);
+}
+```
+
+判断 `NaN` 更可靠的方法是,利用 `NaN` 为唯一不等于自身的值的这个特点,进行判断.
+```
+function myIsNaN(value) {
+    return value !== value;
+}
+```
+
+### 5.4 isFinite()
+`isFinite` 方法返回一个布尔值,表示某个值是否为正常的数值.
+
+```
+isFinite(Infinity)      // false
+isFinite(-Infinity)     // false
+isFinite(NaN)           // false
+isFinite(undefined)     // false
+isFinite(null)          // true
+isFinite(-1)            // true
+```
+
+除了 `Infinity`, `-Infinity`, `NaN` 和 `undefined` 这几个值会返回 `false`, `inFinite` 对于其他的数值都会返回 `true`
+
+# 字符串
+## 1.概述
+### 1.1 定义
+字符串就是零个或多个排在一起的字符,放在单引号和双引号之中.
