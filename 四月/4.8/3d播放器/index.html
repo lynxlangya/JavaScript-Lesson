@@ -1,156 +1,156 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-			}
-			
-			body {
-				background: url(img/1.jpg) no-repeat;
-				background-size: cover;
-				overflow: hidden;
-			}
-			
-			ul {
-				width: 200px;
-				height: 200px;
-				/*background-color: seashell;*/
-				position: absolute;
-				bottom: 100px;
-				left: 50%;
-				margin-left: -100px;
-				transform-style: preserve-3d;
-				/*transform: rotateX(-10deg);*/
-				animation: sport 6s linear 0s infinite normal;
-			}
-			
-			ul li {
-				background: black;
-				list-style: none;
-				width: 200px;
-				height: 200px;
-				font-size: 60px;
-				text-align: center;
-				line-height: 200px;
-				position: absolute;
-				left: 0;
-				top: 0;
-			}
-			
-			ul li img{
-				width: 200px;
-				height: 200px;
-				border: 5px solid cornflowerblue;
-				box-sizing: border-box;
-			}
-			
-			.heart{
-				width: 173px;
-				height: 159px;
-				position: absolute;
-				top: 80%;
-				left: 50px;
-				animation: move 10s linear 0s infinite normal;
-			}
-			
-			ul li:nth-child(1) {
-				transform: rotateY(60deg) translateZ(200px);
-			}
-			
-			ul li:nth-child(2) {
-				transform: rotateY(120deg) translateZ(200px);
-			}
-			
-			ul li:nth-child(3) {
-				transform: rotateY(180deg) translateZ(200px);
-			}
-			
-			ul li:nth-child(4) {
-				transform: rotateY(240deg) translateZ(200px);
-			}
-			
-			ul li:nth-child(5) {
-				transform: rotateY(300deg) translateZ(200px);
-			}
-			
-			ul li:nth-child(6) {
-				transform: rotateY(360deg) translateZ(200px);
-			}
-			
-			ul:hover{
-				animation-play-state: paused;
-				cursor: pointer;
-			}
-			ul:hover li img{
-				opacity: 0.5;
-			}
-			
-			ul li:hover img{
-				opacity: 1;
-			}
-			
-			@keyframes sport{
-				from{
-					transform: rotateX(-10deg) rotateY(0deg);
-				}
-				to{
-					transform: rotateX(-10deg) rotateY(360deg);
-				}
-			}
-			
-			@keyframes move{
-				0%{
-					top: 80%;
-					left: 5%;
-					opacity: 1;
-				}
-				20%{
-					top:60%;
-					left: 15%;
-					opacity: 0.5;
-				}
-				40%{
-					top: 40%;
-					left: 35%;
-					opacity: 0;
-				}
-				60%{
-					top: 0;
-					left: 50%;
-					opacity: 1;
-				}
-				80%{
-					top: 30%;
-					left: 75%;
-					opacity: 0.5;
-				}
-				100%{
-					top: 50%;
-					left: 100%;
-					opacity: 0;
-				}
-			}
-			
-		</style>
-	</head>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: url(img/1.jpg) no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+        
+        ul {
+            width: 200px;
+            height: 200px;
+            /*background-color: seashell;*/
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            margin-left: -100px;
+            transform-style: preserve-3d;
+            /*transform: rotateX(-10deg);*/
+            animation: sport 6s linear 0s infinite normal;
+        }
+        
+        ul li {
+            background: black;
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            font-size: 60px;
+            text-align: center;
+            line-height: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        ul li img {
+            width: 200px;
+            height: 200px;
+            border: 5px solid cornflowerblue;
+            box-sizing: border-box;
+        }
+        
+        .heart {
+            width: 173px;
+            height: 159px;
+            position: absolute;
+            top: 80%;
+            left: 50px;
+            animation: move 10s linear 0s infinite normal;
+        }
+        
+        ul li:nth-child(1) {
+            transform: rotateY(60deg) translateZ(200px);
+        }
+        
+        ul li:nth-child(2) {
+            transform: rotateY(120deg) translateZ(200px);
+        }
+        
+        ul li:nth-child(3) {
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        
+        ul li:nth-child(4) {
+            transform: rotateY(240deg) translateZ(200px);
+        }
+        
+        ul li:nth-child(5) {
+            transform: rotateY(300deg) translateZ(200px);
+        }
+        
+        ul li:nth-child(6) {
+            transform: rotateY(360deg) translateZ(200px);
+        }
+        
+        ul:hover {
+            animation-play-state: paused;
+            cursor: pointer;
+        }
+        
+        ul:hover li img {
+            opacity: 0.5;
+        }
+        
+        ul li:hover img {
+            opacity: 1;
+        }
+        
+        @keyframes sport {
+            from {
+                transform: rotateX(-10deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(-10deg) rotateY(360deg);
+            }
+        }
+        
+        @keyframes move {
+            0% {
+                top: 80%;
+                left: 5%;
+                opacity: 1;
+            }
+            20% {
+                top: 60%;
+                left: 15%;
+                opacity: 0.5;
+            }
+            40% {
+                top: 40%;
+                left: 35%;
+                opacity: 0;
+            }
+            60% {
+                top: 0;
+                left: 50%;
+                opacity: 1;
+            }
+            80% {
+                top: 30%;
+                left: 75%;
+                opacity: 0.5;
+            }
+            100% {
+                top: 50%;
+                left: 100%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
 
-	<body>
-		<ul>
-			<li><img src="img/2.jpg"/></li>
-			<li><img src="img/3.jpg"/></li>
-			<li><img src="img/4.jpg"/></li>
-			<li><img src="img/5.jpg"/></li>
-			<li><img src="img/6.jpg"/></li>
-			<li><img src="img/7.jpg"/></li>
-		</ul>
-		<img src="img/8.png" alt="" class="heart"/>
-		<audio src="audio/老板娘与酒客 - 疯女人的马戏团.mp3" autoplay="autoplay" loop="loop" controls="controls"></audio>
-		<!--
+<body>
+    <ul>
+        <li><img src="img/2.jpg" /></li>
+        <li><img src="img/3.jpg" /></li>
+        <li><img src="img/4.jpg" /></li>
+        <li><img src="img/5.jpg" /></li>
+        <li><img src="img/6.jpg" /></li>
+        <li><img src="img/7.jpg" /></li>
+    </ul>
+    <img src="img/8.png" alt="" class="heart" />
+    <audio src="audio/老板娘与酒客 - 疯女人的马戏团.mp3" autoplay="autoplay" loop="loop" controls="controls"></audio>
+    <!--
 			autoplay="autoplay"
 				自动播放
 			loop="loop" 
@@ -158,6 +158,6 @@
 			controls="controls"
 				显示播放、暂停按钮
 		-->
-	</body>
+</body>
 
 </html>
