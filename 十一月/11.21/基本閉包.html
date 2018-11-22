@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 一個是可以讀取函數內部的變量；
+        // 另一個就是讓這些變量的值始終保持在內存中；
+
+        function test1() {
+            let age = 22; // 局部變量
+            return function() {
+                console.log(age);
+            }
+        }
+        let func = test1();
+        func();
+    </script>
+</body>
+
+</html>
