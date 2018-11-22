@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let num = 3; // 外部變量
+        (function() {
+            (function() {
+                (function() {
+                    let num = 2; // 內部變量
+                    console.log(num); // 2
+                })();
+            })();
+        })();
+    </script>
+    <!-- 
+        外部變量不會影響內部變量，但是爲了避免不必要的性能耗費，最好使用內部變量。
+
+        變量會逐條從內部往外部找。
+    -->
+</body>
+
+</html>
