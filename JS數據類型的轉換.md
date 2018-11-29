@@ -88,3 +88,73 @@ String(true)        // "true"
 String(undefined)   // "undefined"
 String(null)        // null
 ```
+
+### 對象
+`String` 方法的參數如果是對象，返回一個類型字符串；如果是數組，返回該數組的字符串形式
+```
+String({a:1})       // "[object Object]"
+
+String([1,2,3])     // "1,2,3"
+```
+`String` 方法背後的轉換規則，與 `Number` 方法基本雷同，只是互換了 `valueOf` 方法和 `toString` 方法的執行順序。
+
+1. 先調用對象自身的 `toString` 方法。如果返回原始類型的值，則對該值使用 `String` 函數，不再進行一下步驟。
+2. 如果 `toString` 方法返回的是對象，再調用原對象的 `valueOf` 方法返回原始類型的值，則對該值使用 `String` 函數，不再進行以下步驟。
+3. 如果 `valueOf` 方法返回的是對象，就報錯。
+
+### Boolean()
+`Boolean` 函數可以將任意類型的值轉爲布爾值
+
+它的轉換規則相對簡單：除了以下五個值的轉換結果爲 `false`，其他的值全部爲 `true`。
+- `undefined`
+- `null`
+- `-0`or `+0`
+- `NaN`
+- `''` (空字符串)
+```
+Boolean(undefined) // false、
+
+Boolean(null) // false
+
+Boolean(0) // false
+
+Boolean(NaN) // false
+
+Boolean('') // false
+```
+
+<b style="color:red">注意：所有對象（包括空對象）的轉換結果都是`true`,甚至連 `false` 對應的布爾對象 `new Bollean(false)` 也是 `true`</b>
+```
+Boolean({}) // true
+
+Boolean([]) // true
+
+Boolean(new Boolean(false)) // true
+```
+所有對象的布爾值都是 `true`，這是因爲 JavaScript 語言設計的時候，處於性能考慮，如果對象西藥計算才能得到布爾值，對於 `obj1 && obj2` 這樣的場景，可能會需要較多的計算。爲了保證性能，就統一規定，對象的布爾值爲 `true`。
+
+## 自動轉換
+遇到以下三種情況時，JavaScript 會自動轉換數據類型，即轉換是自動完成的，用戶是不可見的。
+
+第一種情況：不同類型的數據互相運算
+```
+123 + ‘asd’         // 123asd
+```
+
+第二種情況：對非布爾值類型的數據求布爾值
+```
+if ('abc') {
+    console.log("Hello")
+}
+// Hello
+```
+
+第三種情況：對非數值類型的值使用一元運算符 （即 `+` and `-`）
+```
++ {foo: 'bar'}      // NaN
+
+- [1,2,3]           // NaN
+```
+自動轉換的規則是這樣的：預期什麼類型的值，就調用該類型的轉換函數。比如，某個位置預期爲字符串，就調用 `String` 函數進行轉換。如果該位置既可以是字符串，也可能是數值，那麼默認轉爲數值。
+
+由於自動轉換具有不確定性，而且不易除錯，建議在預期爲布爾值、數值、字符串的地方，全部使用 `Boolean`、`Number`、`String` 函數進行顯示轉換
