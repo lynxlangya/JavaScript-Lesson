@@ -160,3 +160,39 @@ if ('abc') {
 由於自動轉換具有不確定性，而且不易除錯，建議在預期爲布爾值、數值、字符串的地方，全部使用 `Boolean`、`Number`、`String` 函數進行顯示轉換。
 
 # 錯誤處理機制
+- message: 錯誤提示信息
+- name: 錯誤名稱（非標準屬性）
+- stack: 錯誤的堆棧（非標準屬性）
+
+### SyntaxError對象
+`SyntaxError` 對象是解析代碼時發聲的語法錯誤。
+```
+// 变量名错误
+var 1a;
+// Uncaught SyntaxError: Invalid or unexpected token
+
+// 缺少括号
+console.log 'hello');
+// Uncaught SyntaxError: Unexpected string
+```
+上面代碼的錯誤，都是在語法解析階段就可以發現，所以會拋出`SyntaxError`。第一個錯誤提示是 “token 非法”；第二個錯誤提示是“字符串不符合要求”
+
+### ReferenceError對象
+`ReferenceError` 對象是引用一個不存在的變量時發生的錯誤。
+```
+// 使用一个不存在的变量
+unknownVariable
+// Uncaught ReferenceError: unknownVariable is not defined
+```
+
+另一種觸發場景是，講一個值分配給無法分配的對象，比如對函數的運行結果或者 `this` 賦值。
+```
+// 等号左侧不是变量
+console.log() = 1
+// Uncaught ReferenceError: Invalid left-hand side in assignment
+
+// this 对象不能手动赋值
+this = 1
+// ReferenceError: Invalid left-hand side in assignment
+```
+上面代碼對函數 `console.log` 的運行結果和 `this` 賦值，結果都引發了 `ReferenceError` 錯誤。
