@@ -196,3 +196,40 @@ this = 1
 // ReferenceError: Invalid left-hand side in assignment
 ```
 上面代碼對函數 `console.log` 的運行結果和 `this` 賦值，結果都引發了 `ReferenceError` 錯誤。
+
+### RangeError對象
+`RangeError`對象是一個值超出有效範圍時發生的錯誤。主要有幾種情況，一是數組長度爲負數，而是 `Number` 對象的方法參數超出範圍，以及函數堆棧超過最大值。
+```
+// 數組長度不得爲負數
+new Array(-1)
+// VM205:1 Uncaught RangeError: Invalid array lengthat                          <anonymous>:1:1
+```
+
+### TypeError對象
+`TypeError` 對象是變量或參數不是迂曲類型時發生的錯誤。比如，對字符串、布爾值、數值等原始類型的值使用`new`命令，就會拋出這種錯誤，因爲 `new` 命令的參數應該是一個構造函數。
+```
+new 123
+// Uncaught TypeError: 123 is not a constructor at <anonymous>:1:1
+```
+
+# 編程風格
+## 區塊
+如果循環和判斷的代碼體只有一行，JavaScript 允許該區塊省略大括號。
+```
+if (a)
+    b();
+    c();
+
+// 上面代碼的願意可能是下面這樣的
+if(a){
+    b();
+    c();
+}
+// 但是實際效果卻是下面這樣的
+if(a) {
+    b()
+}
+c();
+```
+<b style="color:red">因此，建議總是使用大括號</b>
+
