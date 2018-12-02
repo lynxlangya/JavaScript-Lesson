@@ -26,6 +26,19 @@
         let beatles = ["John", "Paul", "George", "Ringo"]
         console.log(beatles[1])
         
+        // 數組還可以是變量：
+        let beatles2 = [];
+        let name = "John";
+        beatles2[0] = name;
+        // 這將把beatles2數組的第一個元素賦值爲“John”
+
+        // 数组还可以包含其他的数组，数组中的任何一个元素都可以把一个数组作为它的值。
+        let lennon = ["John", 22, false];
+        let beatle = [];
+        beatle[0] = lennon;
+        console.log(beatle[0][0]);      // John
+        console.log(beatle[0][1]);      // 22
+        console.log(beatle[0][2]);      // false
     </script>
   </body>
 </html>
