@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        与数组类似，对象也是使用一个名字的一组值。对象的每个值都是对象的一个属性。
+     -->
+    <script>
+        let lennon = {
+            name: "John",
+            year: 22,
+            living: false
+        };
+        let beatles = Array();
+        beatles[0] = lennon;
+        console.log(beatles[0].name)
+    </script>
+
+
+     <!-- 
+        条件语句：
+            if 后面的圆括号中，条件的求值结果永远是一个布尔值。
+            花括号中的语句，不管有多少条，只有条件的求值语句在 true 的情况下才能执行。
+      -->
+        <script>
+            if (1 > 2) {
+                alert("永远不出弹出！")
+            }       
+            // 这种情况下，这个alert永远不会弹出
+        </script>
+</body>
+</html>
