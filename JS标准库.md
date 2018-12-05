@@ -251,3 +251,98 @@ a.join(' ')         // '1 2 3 4'
 a.join(‘ | ’)       // "1 | 2 | 3 | 4"
 a.join()            // "1,2,3,4"
 ```
+如果数组成员是`undefined`或`null`或空位，会被转成空字符串。
+```
+[undefined, null].join('#')     // '#'
+
+['a',, 'b'].join('-')           // 'a--b'
+```
+
+通过`call`方法，这个方法也可以用于字符串或类似数组的对象。
+```
+Array.prototype.join.call('hello', '-')
+// "h-e-l-l-o"
+
+let obj = {0: 'a', 1: 'b', length: 2};
+Array.prototype.join.call(obj, '-')         // 'a-b'
+```
+
+## concat()
+`concat`方法用于多个数组的合并。它将新数组的成员，添加到原数组成员的后补，然后返回一个新的数组，原数组不变。
+```
+['hello'].concat(['world'])
+// ["hello", "world"]
+    // 0: "hello"
+    // 1: "world"
+    // length: 2
+
+['hello'].concat(['world'], ['!'])
+// ["hello", "world", "!"]
+
+[].concat({a: 1}, {b: 2})
+// [{ a: 1 }, { b: 2 }]
+
+[2].concat({a: 1})
+// [2, {a: 1}]
+```
+除了数组作为参数，`concat`也接受其他类型的值作为参数，添加到目标数组尾部。
+```
+[1, 2, 3].concat(4, 5, 6)
+// [1, 2, 3, 4, 5, 6]
+```
+如果数组成员包括对象，`concat`方法返回但钱数组的一个浅拷贝。所谓“浅拷贝”明智的是新数组拷贝的是对象的引用。
+```
+let obj = {a: 1};
+let oldArray = [obj];
+
+let new Array = oldArray.concat();
+
+obj.a = 2;
+newArray[0].a           // 2
+```
+上面代码中，原数组包含一个对象，`caocat`方法生成的新数组包含这个对象的引用。所以，改变元对象以后，新数组跟着改变。
+
+## reverse()
+`reverse`方法用于颠倒排列数组元素，返回改变后的数组。注意，该方法将改变原数组。
+```
+let a = ['a', 'b', 'c'];
+
+a.revarse()         // ["c", "b", "a"]
+a                   // ["c", "b", "a"]
+```
+
+## slice()
+`slice`方法用于提取目标数组的一部分，返回一个新数组，原数组不变。
+```
+arr.slice(start, end);
+```
+它的第一个参数为起始位置(从0开始)，第二个参数为终止位置(但该位置的元素本身不包括在内)。如果省略第二个参数，则一直返回到原数组的最后一个成员。
+```
+var a = ['a', 'b', 'c'];
+
+a.slice(0) // ["a", "b", "c"]
+a.slice(1) // ["b", "c"]
+a.slice(1, 2) // ["b"]
+a.slice(2, 6) // ["c"]
+a.slice() // ["a", "b", "c"]
+```
+最后一个例子`slice`没有参数，实际上等于返回一个原数组的拷贝。
+
+如果`slice`方法的参数是负数，则表示倒数计算的位置。
+```
+var a = ['a', 'b', 'c'];
+a.slice(-2) // ["b", "c"]
+a.slice(-2, -1) // ["b"]
+```
+上面代码中，`-2`表示倒数计算的第二个位置，`-1`表示倒数计算的第一个位置。
+
+如果第一个参数大于或等于数组长度，或者第二个参数小于第一个参数，则返回空数组。
+
+`slice`方法的一个重要应用，是将类似数组的对象转为真正的数组。
+```
+Array.prototype.slice.call({0:'a', 1:'b', length:2})
+// ['a', 'b']
+
+Array.prototype.slice.call(document.querySelectorAll("div"));
+Array.prototype.slice.call(arguments);
+```
