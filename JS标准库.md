@@ -138,3 +138,116 @@ type();             // "undefined"
 type(/abcd/);       // "regex"
 type(new Date());   // "date"
 ```
+# Array对象
+## 构造函数
+`Array`是JavaScript的原生对象，同事也是一个构造函数，可以用它生成新的数组。
+```
+let arr = new Array(2);
+arr.length      // 2
+arr             // [empty x 2]
+```
+上面代码中，`Array`构造函数的参数`2`，表示生成一个两个成员的数组，每个位置都是空值。
+
+如果没有使用`new`，运行结果也是一样的。
+```
+let arr = new Array(2);
+// 等同于
+let arr = Array(2)
+```
+`Array`构造函数有一个很大的缺陷，就是不同的参数，会导致它的行为不一致。
+
+## 静态方法
+### Array.isArray()
+`Array.isArray`方法返回一个布尔值，表示参数是否为数组。它可以弥补`typeof`运算符的不足。
+```
+let arr = [1, 2, 3];
+
+typeof arr          // "object"
+Array.isArray(arr)      // true
+```
+上面代码中，`typeof`运算符只能显示数组的类型是`Object`，而`Array.isArray`方法可以识别数组。
+
+### push(), pop()
+`push`方法用于在数组的末端添加一个或多个元素，并返回添加元素后的数组长度。注意，该方法会改变原数组。
+```
+let arr = [];
+
+arr.push(1);        // 1
+arr.push('a');      // 2
+arr.push(true,{})   // 4
+arr                 // [1, 'a', true, {}]
+```
+上面代码使用`push`方法，往数组中添加了四个成员。
+
+`pop`方法用于删除数组的最后一个元素，并返回该元素。注意，该方法会改变原数组。
+```
+let arr = ['a', 'b', 'c'];
+
+arr.pop()       // 'c'
+arr             // ['a', 'b']
+```
+上面的数组使用`pop`方法，删除了`c`。
+
+对空数组使用`pop`方法，不会报错，而是返回`undefined`
+```
+[].pop()            // undefined
+```
+`push`和`pop`结合使用，就构成了“后进先出”的栈结构（stack）。
+```
+let arr = [];
+
+arr.push(1, 2);
+arr.push(3);
+arr.pop();
+arr             // [1, 2]
+```
+上面代码中，`3`是最后进入数组的，但是最早离开数组。
+
+## shift(), unshift()
+`shift()`方法用于删除数组的第一个元素，并返回该元素。注意，该方法会改变原数组。
+```
+let a = ['a', 'b', 'c'];
+
+a.shift()       // 此处删除了'a'
+a               // ['b', 'c']
+```
+
+`shift()`方法可以遍历并清空一个数组
+```
+let list = [1, 2, 3, 4];
+let item;
+
+while (item = list.shift()){
+    console.log(item);      // 1, 2, 3, 4
+}
+
+list                        // []
+```
+上面代码通过`list.shift()`方法每次取出一个元素，从而遍历数组。它的前提是数组元素不能是`0`或任何布尔值等于`false`的元素，因此这样的遍历不是很靠谱。
+
+`push()`和`shift()`结合使用，就构成了“先进先出”的队列结构。
+
+`unshift()`方法用于在数组的第一个位置添加元素，并返回添加新元素后的数组长度。注意，该方法会改变原数组。
+```
+let i = ['a', 'b', 'c'];
+
+i.unshift('x');         // 4
+i               // ['x', 'a', 'b', 'c']
+```
+
+`unshift()`方法可以接受多个参数，这些参数都会添加到目标数组头部。
+```
+let arr = ['c', 'd'];
+arr.unshift('a', 'b')       // 4
+arr             // [ 'a', 'b', 'c', 'd']
+```
+
+## join()
+`join()`方法以指定参数作为分隔符，将所有数组成员连接为一个字符串返回。如果不提供参数，默认用逗号分割。
+```
+let a = [1, 2, 3, 4];
+
+a.join(' ')         // '1 2 3 4'
+a.join(‘ | ’)       // "1 | 2 | 3 | 4"
+a.join()            // "1,2,3,4"
+```
