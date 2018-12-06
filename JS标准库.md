@@ -489,3 +489,15 @@ function log(element, index, array) {
 // [2] = 9
 ```
 上面代码中，`forEach`遍历数组不是为了得到返回值，而是为了在屏幕输出内容，所以不必使用`map`方法。
+
+`forEach`方法也可以接受第二个参数，绑定参数函数的`this`变量。
+```
+var out = [];
+
+[1, 2, 3].forEach(function(elem) {
+  this.push(elem * elem);
+}, out);
+
+out             // [1, 4, 9] elem是当前值，相乘
+```
+上面代码中，空数组`out`是`forEach`方法的第二个参数，结果，灰调函数内部的`this`关键字就指向`out`。
