@@ -501,3 +501,65 @@ var out = [];
 out             // [1, 4, 9] elem是当前值，相乘
 ```
 上面代码中，空数组`out`是`forEach`方法的第二个参数，结果，灰调函数内部的`this`关键字就指向`out`。
+
+注意，`forEach`方法无法中断执行，总是会将所有成员遍历完。如果希望符合某种条件时，就中断遍历，要使用`for`循环。
+```
+let arr = [1, 2, 3];
+
+for(let i = 0; i < arr.length; i++){
+    if(arr[i] === 2) break;
+    console.log(arr[i]);        // 1
+}
+```
+上面代码中，执行到数组的第二个成员时，就会中断执行。`forEach`方法做不到这一点。
+
+`forEach`方法也会跳过数组的空位。
+```
+var log = function (n) {
+  console.log(n + 1);
+};
+
+[1, undefined, 2].forEach(log)
+// 2
+// NaN
+// 3
+
+[1, null, 2].forEach(log)
+// 2
+// 1
+// 3
+
+[1, , 2].forEach(log)
+// 2
+// 3
+```
+上面代码中，`forEach`方法不会跳过`undefined`和`null`，但会跳过空位。
+
+## filter()
+`filter`方法用于过滤数组成员，满足条件的成员组成一个新数组返回。
+
+它的参数是一个函数，所有数组成员依次执行该函数，返回结果为`true`的成员组成一个新数组返回。该方法不会改变原数组。
+```
+[1, 2, 3, 4, 5].filter(function (elem) {
+  return (elem > 3);
+})
+// [4, 5]
+```
+上面代码将大于`3`的数组成员，作为一个新数组返回。
+
+```
+var arr = [0, 1, 'a', false];
+
+arr.filter(Boolean)
+// [1, "a"]
+```
+上面代码中，`filter`方法返回数组`arr`里面所有布尔值为`true`的成员。
+
+`filter`方法的参数函数可以接受三个参数：当前成员、当前位置和整个数组。
+```
+[1, 2, 3, 4, 5].filter(function (elem, index, arr) {
+  return index % 2 === 0;
+});
+// [1, 3, 5]
+```
+上面代码返回偶数位置的成员组成的新数组。
