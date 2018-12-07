@@ -793,3 +793,17 @@ if (new Boolean(false).valueOf()) {
 
 ## Boolean函数的类型转换作用
 `Boolean`对象除了可以作为构造函数，还可以单独使用，将任意值转为布尔值。这是`Boolean`就是一个单纯的工具方法。
+```
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean('') // false
+Boolean(NaN) // false
+
+Boolean(1) // true
+Boolean('false') // true
+Boolean([]) // true
+Boolean({}) // true
+Boolean(function () {}) // true
+Boolean(/foo/) // true
+```
