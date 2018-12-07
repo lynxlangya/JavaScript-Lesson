@@ -608,3 +608,82 @@ function isEven(x) { return x % 2 === 0 }
 [].every(isEven) // true
 ```
 `some`和`every`方法还可以接受第二个参数，用来绑定参数函数内部的`this`变量。
+
+## indexOf(), lastIndexOf()
+`indexOf`方法返回给定元素在数组中第一次出现的位置，如果没有出现则返回`-1`。
+```
+var a = ['a', 'b', 'c'];
+
+a.indexOf('b') // 1
+a.indexOf('y') // -1
+```
+`indexOf`方法还可以接受第二个参数，表示搜索的开始位置。
+```
+['a', 'b', 'c'].indexOf('a', 1) // -1
+```
+上面代码从1号位置开始搜索字符`a`，结果为`-1`，表示没有搜索到。
+
+`lastIndexOf`方法返回给定元素在数组中最后一次出现的位置，如果没有出现则返回`-1`
+```
+var a = [2, 5, 9, 2];
+a.lastIndexOf(2) // 3
+a.lastIndexOf(7) // -1
+```
+注意，这两个方法不能用来搜索`NaN`的位置，即它们无法确定数组成员是否包含`NaN`。
+```
+[NaN].indexOf(NaN) // -1
+[NaN].lastIndexOf(NaN) // -1
+```
+这是因为这两个方法内部，使用严格相等运算符（`===`）进行比较，而`NaN`是唯一一个不等于自身的值。
+
+## 链式使用
+上面这些数组方法之中，有不少返回的还是数组，所以可以链式使用
+```
+var users = [
+  {name: 'tom', email: 'tom@example.com'},
+  {name: 'peter', email: 'peter@example.com'}
+];
+
+users
+.map(function (user) {
+  return user.email;
+})
+.filter(function (email) {
+  return /^t/.test(email);
+})
+.forEach(function (email) {
+  console.log(email);
+});
+// "tom@example.com"
+```
+上面代码中，先产生一个所有Email地址组成的数组，然后再过滤出以`t`开头的Email地址，最后将它打印出来。
+
+# 包装对象
+## 定义
+对象是JavaScript语言最主要的数据类型，三种原始类型的值——数值、字符串、布尔值——在一定条件下，也会自动转为对象，也就是原始类型的“包装对象”。
+
+所谓“包装对象”，就是分别与数值、字符串、布尔值相对应的`Number`、`String`、`Boolean`三个原生对象。这三个原生对象可以把原始类型的值变成（包装成）对象。
+```
+var v1 = new Number(123);
+var v2 = new String('abc');
+var v3 = new Boolean(true);
+```
+上面代码中，基于原始类型的值，生成了三个对应的包装对象。
+```
+typeof v1 // "object"
+typeof v2 // "object"
+typeof v3 // "object"
+
+v1 === 123 // false
+v2 === 'abc' // false
+v3 === true // false
+```
+包装对象的最大目的，首先是使得JavaScript的对象涵盖所有的值，其次使得原始的值可以方便地调用某些方法。
+
+`Number`、`String`和`Boolean`如果不作为构造函数调用（即调用时不加`new`），常常用于将任意类型的值转为数值、字符串和布尔值。
+```
+Number(123) // 123
+String('abc') // "abc"
+Boolean(true) // true
+```
+这三个对象作为狗在函数使用（带有`new`）时，可以将原始类型的值转为对象；作为普通函数使用时（不带有`new`），可以将任意类型的值，转为原始类型的值。
