@@ -687,3 +687,109 @@ String('abc') // "abc"
 Boolean(true) // true
 ```
 这三个对象作为狗在函数使用（带有`new`）时，可以将原始类型的值转为对象；作为普通函数使用时（不带有`new`），可以将任意类型的值，转为原始类型的值。
+
+## 实例方法
+三种包装对象各自提供了许多实例方法，这里介绍两种它们共同具有、从`Object`对象继承的方法：`valueOf`和`toString`
+
+### valueOf()
+`valueOf`方法返回包装对象实例对应的原始类型的值。
+```
+new Number(123).valueOf()  // 123
+new String('abc').valueOf() // "abc"
+new Boolean(true).valueOf() // true
+```
+
+### toString()
+`toString`方法返回对应的字符串形式。
+```
+new Number(123).toString() // "123"
+new String('abc').toString() // "abc"
+new Boolean(true).toString() // "true"
+```
+
+## 原始类型与实例对象的自动转换
+原始类型的值，可以自动当做包装对象调用，即调用包装对象的属性和方法。这时，JavaScript引擎会自动将原始类型的值转为包装对象实例，在使用后立刻销毁实例。
+
+比如，字符串可以调用`length`属性，返回字符串的长度。
+```
+'abc'.length 		// 3
+```
+上面代码中，`abc`是一个字符串，本身不是对象，不能调用`length`属性。JavaScript引擎自动将其转为包装对象，在这个对象上调用`length`属性。调用结束后，这个临时对象就会被销毁。这就叫原始类型与实例对象的自动转换。
+```
+var str = 'abc';
+str.length // 3
+
+// 等同于
+var strObj = new String(str)
+// String {
+//   0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"
+// }
+strObj.length // 3
+```
+上面代码中，字符串`abc`的包装对象提供了多个属性。
+
+自动转换生成的包装对象是只读的，无法修改。所以，字符串无法添加新属性。
+```
+let s = 'Hello World';
+s.x = 123l
+s.x		// undefined
+```
+上面代码为字符串`s`添加了一个`x`属性，结果无效，总是返回`undefined`
+
+另一方面，调用结束后，包装对象实例会自动销毁。这意味着，下一次调用字符串的属性时，实际是调用一个新生成的对象，而不是上一次调用时生成的那个对象，所以取不到赋值在上一个对象的属性。如果要为字符串添加属性，只有在它的原型对象`String.prototype`上定义
+
+## 自定义方法
+除了原生的实例方法，包装对象还可以自定义方法和属性，供原始类型的值直接调用
+
+比如，我们可以新增一个`double`方法，使得字符串和数组翻倍
+```
+String.prototype.double = function () {
+  return this.valueOf() + this.valueOf();
+};
+
+'abc'.double()
+// abcabc
+
+Number.prototype.double = function () {
+  return this.valueOf() + this.valueOf();
+};
+
+(123).double()
+// 246
+```
+上面代码在`123`外面必须要加上圆括号，否则后面的点运算符（`.`）会被解释成小数点。
+
+但是，这种自定义方法和属性的机制，只能定义在包装对象的原型上，如果直接对原始类型的变量添加属性，则无效。
+```
+var s = 'abc';
+
+s.p = 123;
+s.p // undefined
+```
+上面代码直接对字符串`abc`添加属性，结果无效。主要原因是上面说的，这里的包装对象是自动生成的，赋值后自动销毁，所以最后一行实际上调用的是一个新的包装对象。
+
+# Boolean对象
+## 概述
+`Boolean`对象是JavaScript的三个包装对象之一。作为构造函数，它主要用于生成布尔值的包装对象实例。
+```
+var b = new Boolean(true);
+
+typeof b // "object"
+b.valueOf() // true
+```
+上面代码的变量`b`是一个`Boolean`对象的实例，它的类型是对象，值为布尔值`true`。
+
+注意，`false`对应的包装对象实例，布尔运算的结果也是`true`
+```
+if (new Boolean(false)) {
+  console.log('true');
+} // true		；false也是个布尔值啊
+
+if (new Boolean(false).valueOf()) {
+  console.log('true');
+} // 无输出
+```
+上面代码的第一个例子之所以得到`true`，是因为`false`对应的包装对象实例是一个对象，进行逻辑运算时，被自动转化成布尔值`true`（因为所有对象对应的布尔值都是`true`）。而实例的`valueOf`方法，则返回实例对应的原始值，本例为`false`。
+
+## Boolean函数的类型转换作用
+`Boolean`对象除了可以作为构造函数，还可以单独使用，将任意值转为布尔值。这是`Boolean`就是一个单纯的工具方法。
