@@ -7,7 +7,7 @@ JavaScript 的所有其他对象都继承自 `Object` 对象，即那些对象�
 所谓“本身的方法”就是直接定义在 `Object` 对象的方法。
 ```
 Object.print = function (i) {
-    console.log(i)
+		console.log(i)
 }
 ```
 上面代码中，`print`方法就是直接定义在`Object`对象上。
@@ -16,7 +16,7 @@ Object.print = function (i) {
 所谓实例方法就是定义在`Object`原型对象`Object.prototype`上的方法。它可以被`Object`实例直接使用。
 ```
 Object.prototype.print = function () {
-    console.log(this);
+		console.log(this);
 };
 
 let obj = new Object();
@@ -70,8 +70,8 @@ obj instanceof Number       // true
 `Object.keys`方法的参数是一个对象，返回一个数组。该数组的成员都是该对象自身的(而不是继承的)所有属性名。
 ```
 let obj = {
-    p1: 123,
-    p2: 456
+		p1: 123,
+		p2: 456
 };
 
 Object.keys(obj)        // ["p1", "p2"]
@@ -79,8 +79,8 @@ Object.keys(obj)        // ["p1", "p2"]
 `Object.getOwnPropertyNames`方法与`Object.keys`类似，也是接受一个对象作为参数，返回一个数组，包含了该对象自身的所有属性名。
 ```
 let obj = {
-    p1: 123,
-    p2: 456
+		p1: 123,
+		p2: 456
 };
 
 Object.getOwnPropertyNames(obj)     // ["p1", "p2"]
@@ -126,8 +126,8 @@ Object.prototype.toString.call([])          // "[object Array]"
 利用这个特性，可以写出一个比`typeof`运算符更准确的类型判断函数。
 ```
 let type = function (o){
-    let s = Object.prototype.toString.call(o);
-    return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+		let s = Object.prototype.toString.call(o);
+		return s.match(/\[object (.*?)\]/)[1].toLowerCase();
 };
 
 type({});           // "object"
@@ -218,7 +218,7 @@ let list = [1, 2, 3, 4];
 let item;
 
 while (item = list.shift()){
-    console.log(item);      // 1, 2, 3, 4
+		console.log(item);      // 1, 2, 3, 4
 }
 
 list                        // []
@@ -272,9 +272,9 @@ Array.prototype.join.call(obj, '-')         // 'a-b'
 ```
 ['hello'].concat(['world'])
 // ["hello", "world"]
-    // 0: "hello"
-    // 1: "world"
-    // length: 2
+		// 0: "hello"
+		// 1: "world"
+		// length: 2
 
 ['hello'].concat(['world'], ['!'])
 // ["hello", "world", "!"]
@@ -409,18 +409,18 @@ a               // [1, 2]
 如果想让`sort`方法按照自定义方式排序，可以传入一个函数作为参数。
 ```
 [10111, 1101, 111].sort(function (a, b) {
-  return a - b;
+	return a - b;
 })
 // [111, 1101, 10111]
 ```
 上面代码中，`sort`的参数函数本身接受两个参数，表示进行比较的两个数组成员。如果该函数的返回值大于`0`，表示第一个成员排在第二个成员后面；其他情况下，都是第一个元素排在第二个元素前面。
 ```
 [
-  { name: "张三", age: 30 },
-  { name: "李四", age: 24 },
-  { name: "王五", age: 28  }
+	{ name: "张三", age: 30 },
+	{ name: "李四", age: 24 },
+	{ name: "王五", age: 28  }
 ].sort(function (o1, o2) {
-  return o1.age - o2.age;
+	return o1.age - o2.age;
 })
 // [
 //   { name: "李四", age: 24 },
@@ -435,7 +435,7 @@ a               // [1, 2]
 let numbers = [1, 2, 3];
 
 numbers.map(function (n) {
-  return n + 1;
+	return n + 1;
 });
 // [2, 3, 4]
 
@@ -447,7 +447,7 @@ numbers
 `map`方法接受一个函数作为参数。该函数调用时，`map`方法向它传入三个参数：当前成员、当前位置和数组本身。
 ```
 [1, 2, 3].map(function(elem, index, arr) {
-  return elem * index;
+	return elem * index;
 });
 // [0, 2, 6]
 ```
@@ -458,7 +458,7 @@ numbers
 let arr = ['a', 'b', 'c'];
 
 [1, 2].map(function (e) {
-  return this[e];
+	return this[e];
 }, arr)
 // ['b', 'c']
 ```
@@ -480,7 +480,7 @@ var f = function (n) { return 'a' };
 `forEach`的用法与`map`方法一致，参数是一个函数，该函数同样接受三个参数：当前值、当前位置、整个数组。
 ```
 function log(element, index, array) {
-  console.log('[' + index + '] = ' + element);
+	console.log('[' + index + '] = ' + element);
 }
 
 [2, 5, 9].forEach(log);
@@ -495,7 +495,7 @@ function log(element, index, array) {
 var out = [];
 
 [1, 2, 3].forEach(function(elem) {
-  this.push(elem * elem);
+	this.push(elem * elem);
 }, out);
 
 out             // [1, 4, 9] elem是当前值，相乘
@@ -507,8 +507,8 @@ out             // [1, 4, 9] elem是当前值，相乘
 let arr = [1, 2, 3];
 
 for(let i = 0; i < arr.length; i++){
-    if(arr[i] === 2) break;
-    console.log(arr[i]);        // 1
+		if(arr[i] === 2) break;
+		console.log(arr[i]);        // 1
 }
 ```
 上面代码中，执行到数组的第二个成员时，就会中断执行。`forEach`方法做不到这一点。
@@ -516,7 +516,7 @@ for(let i = 0; i < arr.length; i++){
 `forEach`方法也会跳过数组的空位。
 ```
 var log = function (n) {
-  console.log(n + 1);
+	console.log(n + 1);
 };
 
 [1, undefined, 2].forEach(log)
@@ -541,7 +541,7 @@ var log = function (n) {
 它的参数是一个函数，所有数组成员依次执行该函数，返回结果为`true`的成员组成一个新数组返回。该方法不会改变原数组。
 ```
 [1, 2, 3, 4, 5].filter(function (elem) {
-  return (elem > 3);
+	return (elem > 3);
 })
 // [4, 5]
 ```
@@ -558,8 +558,53 @@ arr.filter(Boolean)
 `filter`方法的参数函数可以接受三个参数：当前成员、当前位置和整个数组。
 ```
 [1, 2, 3, 4, 5].filter(function (elem, index, arr) {
-  return index % 2 === 0;
+	return index % 2 === 0;
 });
 // [1, 3, 5]
 ```
 上面代码返回偶数位置的成员组成的新数组。
+
+`filter`方法还可以接受第二个参数，用来绑定参数函数内部的`this`变量。
+```
+let obj = {MAX: 3};
+let myFilter = function(item){
+	if(item > this.MAX) return true;
+};
+let arr = [2, 8, 3, 4, 1, 3, 2, 9];
+arr.filter(myFilter, obj)		// [8, 4, 9]
+```
+上面代码中，过滤器`myFilter`内部有`this`变量，它可以被`filter`方法的第二个参数`obj`绑定，返回大于`3`的成员。
+
+## some(), every()
+这两个方法类似“断言”(assert)，返回一个布尔值，表示判断数组成员是否符合某种条件。
+
+它们接受一个函数作为参数，所有数组成员依次执行该函数。该函数接受三个参数：当前成员、当前位置和整个数组，然后返回一个布尔值。
+
+`some`方法是只要一个成员的返回值是`true`，则整个`some`方法的返回值就是`true`，否则返回`false`。
+```
+var arr = [1, 2, 3, 4, 5];
+arr.some(function (elem, index, arr) {
+  return elem >= 3;
+});
+// true
+```
+上面代码中，如果数组`arr`有一个成员大于等于3，`some`方法就返回`true`。
+
+`every`方法是所有成员的返回值都是`true`，整个`every`方法才返回`true`，否则返回`fasle`。
+```
+var arr = [1, 2, 3, 4, 5];
+arr.every(function (elem, index, arr) {
+  return elem >= 3;
+});
+// false
+```
+上面代码中，数组`arr`并非所有成员大于等于`3`,所以返回`fasle`。
+
+注意，对于空数组，`some`方法返回`false`，`every`方法返回`true`，回调函数都不会执行。
+```
+function isEven(x) { return x % 2 === 0 }
+
+[].some(isEven) // false
+[].every(isEven) // true
+```
+`some`和`every`方法还可以接受第二个参数，用来绑定参数函数内部的`this`变量。
