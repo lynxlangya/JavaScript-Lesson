@@ -1189,3 +1189,180 @@ ToInteger(-3.2) 	// -3
 ToInteger(-3.5) 	// -3
 ToInteger(-3.8) 	// -3
 ```
+
+### Math.round()
+
+`Math.round`方法用于四舍五入
+
+```
+Math.round(0.1) // 0
+Math.round(0.5) // 1
+Math.round(0.6) // 1
+
+// 等同于
+Math.floor(x + 0.5)
+```
+
+注意，他对负数的处理（主要是对`0.5`的处理）
+
+```
+Math.round(-1.1) // -1
+Math.round(-1.5) // -1
+Math.round(-1.6) // -2
+```
+
+### Math.pow()
+
+`Math.pow`方法返回以第一个参数为底数、第二个参数为幂的指数值
+
+```
+// 等同于 2 * 2
+Math.pow(2, 2) // 4
+
+// 等同于 2 * 2 * 2
+Math.pow(2, 3) // 8
+```
+
+下面是计算圆面积的方法
+
+```
+let radius = 20;
+let area = Math.PI * Math.pow(radius, 2);
+```
+
+### Math.sqrt()
+
+`Math.sqrt`方法返回参数值的平方根。如果参数是一个负值，则返回`NaN`
+
+```
+Math.sqrt(4)		// 2
+Math.sqrt(-4)		// NaN
+```
+
+### Math.log()
+
+`Math.log`方法返回以`e`为底的自然对数值
+
+```
+Math.log(Math.E) // 1
+Math.log(10) // 2.302585092994046
+```
+
+如果要计算以 10 为底数的对数，可以先用`Math.log`求出自然对数，然后除以`Math.LN10`；求以 2 为底的对数，可以除以`Math.LN2`
+
+```
+Math.log(100)/Math.Ln10			// 2
+Math.log(8)/Math.LN2			// 3
+```
+
+### Math.exp()
+
+`Math.exp`方法返回常数`e`的参数次方
+
+```
+Math.exp(1)			// 2.718281828459045
+Math.exp(3)			// 20.085536923187668
+```
+
+### Math.random()
+
+`Math.random()`返回 0 到 1 之间的一个伪随机数，可能等于 0，但是一定小于 1。
+
+```
+Math.random()			// 0.49929512398302545
+```
+
+任意范围的随机数生成函数如下
+
+```
+function sjs(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+sjs(22, 120)			// 115.13572569250084
+```
+
+任意范围的随机整数生成函数如下
+
+```
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+getRandomInt(1, 6) // 5
+```
+
+返回随机字符的例子如下
+
+```
+function random_str(length) {
+  var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  ALPHABET += 'abcdefghijklmnopqrstuvwxyz';
+  ALPHABET += '0123456789-_';
+  var str = '';
+  for (var i = 0; i < length; ++i) {
+    var rand = Math.floor(Math.random() * ALPHABET.length);
+    str += ALPHABET.substring(rand, rand + 1);
+  }
+  return str;
+}
+
+random_str(6) // "tR-yyL"
+```
+
+上面代码中，`random_str`函数接受一个整数作为参数，返回变量`ALPHABET`内的随机字符所组成的指定长度的字符串。
+
+### 三角函数方法
+
+`Math`对象还提供一系列三角函数方法
+
+- `Math.sin()`：返回参数的正弦（参数为弧度值）
+- `Math.cos()`：返回参数的余弦（参数为弧度值）
+- `Math.tan()`：返回参数的正切（参数为弧度值）
+- `Math.asin()`：返回参数的反正弦（返回值为弧度值）
+- `Math.acos()`：返回参数的反余弦（返回值为弧度值）
+- `Math.atan()`：返回参数的反正切（返回值为弧度值）
+
+```
+Math.sin(0) // 0
+Math.cos(0) // 1
+Math.tan(0) // 0
+
+Math.sin(Math.PI / 2) // 1
+
+Math.asin(1) // 1.5707963267948966
+Math.acos(1) // 0
+Math.atan(1) // 0.7853981633974483
+```
+
+# Date 对象
+
+`Date`对象是 JavaScript 原生的时间库。它以 1970 年 1 月 1 日 00:00 作为时间的零点，可以表示的时间范围是前后各 1 亿天(单位为毫秒)。
+
+## 普通函数的用法
+
+`Date` 对象可以作为普通函数直接调用，返回一个代表当前时间的字符串。
+
+```
+Date();
+// "Mon Dec 10 2018 12:13:02 GMT+0800 (中国标准时间)"
+```
+
+注意，即使带有参数，`Date`作为普通函数使用时，返回的还是当前时间
+
+```
+Date(1996, 4, 18);
+// "Mon Dec 10 2018 12:14:10 GMT+0800 (中国标准时间)"
+```
+
+上面代码说明，无论有没有参数，直接调用`Date`总是返回当前时间。
+
+## 构造函数的用法
+
+`Date`还可以当作构造函数使用。对它使用`new`命令，会返回一个`Date`对象的实例。如果不加参数，实例代表的就是当前时间。
+
+```
+let today = new Date();
+```
+
+`Date`实例有一个独特的地方。其他对象求值的时候，都是默认调用`.valueOf()`方法，但是`Date`实例求值的时候，默认调用的是`toString()`方法，这导致对`Date`实例求值，返回的是一个字符串，代表该实例对应的时间。
