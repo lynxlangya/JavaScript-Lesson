@@ -1073,3 +1073,119 @@ Number.MIN_VALUE > 0
 Number.MAX_SAFE_INTEGER // 9007199254740991
 Number.MIN_SAFE_INTEGER // -9007199254740991
 ```
+
+# String 对象
+
+## 概述
+
+`String`对象是 JavaScript 原生提供的三个包装对象之一，用来生成字符串对象。
+
+```
+var s1 = 'abc';
+var s2 = new String('abc');
+
+typeof s1 // "string"
+typeof s2 // "object"
+
+s2.valueOf() // "abc"
+```
+
+上面代码中，变量`s1`是字符串，`s2`是对象。由于`s2`是字符串对象，`s2.valueOf`方法返回的就是它所对应的原始字符串。
+
+# Math 对象
+
+`Math`是 JavaScript 的原生对象，提供各种数学功能。该对象不是构造函数，不能生成实例，所有的属性和方法都必须在`Math`对象上调用。
+
+## 静态属性
+
+`Math`对象的静态属性，提供以下一些数学常数
+
+- `Math.E`：常数`e`
+- `Math.LN2`：2 的自然对数
+- `Math.LN10`：10 的自然对数
+- `Math.LOG2E`：以 2 为底的`e`的对数
+- `Math.LOG10E`：以 10 为底的`e`的对数
+- `Math.PI`：常数`π`
+- `Math.SQRT1_2`：0.5 的平方根
+- `Math.SQRT2`：2 的平方根
+
+```
+Math.E 			// 2.718281828459045
+Math.LN2 		// 0.6931471805599453
+Math.LN10 		// 2.302585092994046
+Math.LOG2E 		// 1.4426950408889634
+Math.LOG10E 		// 0.4342944819032518
+Math.PI 		// 3.141592653589793
+Math.SQRT1_2 		// 0.7071067811865476
+Math.SQRT2 		// 1.4142135623730951
+```
+
+这些属性都是只读的，不能修改
+
+## 静态方法
+
+`Math`对象提供以下一些静态方法
+
+- `Math.abs()`: 绝对值
+- `Math.ceil()`: 向上取整
+- `Math.floor()`: 向下取整
+- `Math.max()`: 最大值
+- `Math.min()`: 最小值
+- `Math.pow()`: 指数运算
+- `Math.sqrt()`: 平方根
+- `Math.log()`: 自然指数
+- `Math.exp()`: `e`的指数
+- `Math.round()`: 四舍五入
+- `Math.random()`: 随机数
+
+### Math.abs()
+
+`Math.abs`方法返回参数值的绝对值
+
+```
+Math.abs(1)			// 1
+Math.abs(-1)		// 1
+```
+
+### Math.max(),Math.min()
+
+`Math.max`方法返回参数之中最大的那个值，`Math.min`返回最小的那个值。如果参数为空，`Math.min`返回`Infinity`,`Math.max`返回`-Infinity`。
+
+```
+Math.max(2, -1, 5)			// 5
+Math.min(2, -1, 5)			// -1
+Math.max()			// Infinity
+Math.min()			// -Infinity
+```
+
+### Math.floor(), Math.ceil()
+
+`Math.floor`方法返回小于参数值的最大整数（地板值）
+
+```
+Math.floor(3.2)		// 3
+Math.floor(-3.2)	// -4
+```
+
+`Math.ceil`方法返回大于参数值的最小整数（天花板值）
+
+```
+Math.ceil(3.2)		// 4
+Math.ceil(-3.2)		// -3
+```
+
+这两个方法可以结合起来，实现一个总是返回数值的整数部分的函数
+
+```
+function ToInteger(x) {
+    x = Number(x);
+    return x < 0 ? Math.ceil(x) : Math.floor(x);
+}
+
+ToInteger(3.2)		// 3
+ToInteger(3.5) 		// 3
+ToInteger(3.8) 		// 3
+ToInteger(-3.2) 	// -3
+ToInteger(-3.5) 	// -3
+ToInteger(-3.8) 	// -3
+```
