@@ -74,3 +74,75 @@ r.source // "abc"
 
 上面代码验证参数字符串之中是否包含`cat`，结果返回`true`
 
+如果正则表达式带有`g`修饰符，则每一次`test`方法都从上一次结束的位置开始向后匹配。
+
+```
+var r = /x/g;
+var s = '_x_x';
+
+r.lastIndex // 0
+r.test(s) // true
+
+r.lastIndex // 2
+r.test(s) // true
+
+r.lastIndex // 4
+r.test(s) // false
+```
+
+上面代码的正则表达式使用了`g`修饰符，表示是全局搜索，会有多个结果。接着，三次使用`test`方法，每一次开始搜索的位置都是上一次匹配的后一个位置。
+
+带有`g`修饰符时，可以通过正则对象的`lastIndex`属性制定开始搜索的位置。
+
+```
+var r = /x/g;
+var s = '_x_x';
+
+r.lastIndex = 4;
+r.test(s) // false
+
+r.lastIndex // 0
+r.test(s)
+```
+
+上面代码指定从字符串的第五个位置开始搜索，这个位置为空，所以返回`false`。同时，`lastIndex`属性重置为`0`,所以第二次执行`r.test(s)`会返回`true`
+
+注意，带有`g`修饰符时没正则表达式内部会记住上一次的`lastIndex`属性，这时不应该更换所要匹配的字符串，否则会有一些难以察觉的错误。
+
+```
+let r = /bb/g;
+r.test('bb')            // true
+r.test('-bb-')          // false
+```
+
+上面代码中，由于正则表达式`r`是从上一次的`lastIndex`位置开始匹配，导致第二次执行`test`方法时出现预期以外的结果。
+
+`lastIndex`属性只对同一个正则表达式有效，所以下面这样写是错误的。
+
+```
+let count = 0;
+while(/a/g.test('babaa')) count++;
+```
+
+上面代码会导致无限循环，因为`while`循环的每一匹配条件都是一个新的正则表达式，导致`lastIndex`属性总是等于 0;。
+
+如果正则模式是一个空字符串，则匹配所有字符串
+
+```
+new RegExp('').test('abc')          // true
+```
+
+### RegExp.prototype.exec()
+
+正则实例对象的`exec`方法，用来返回匹配结果。如果发现匹配，就返回一个数组，成员是匹配成功的子字符串，否则返回`null`。
+
+```
+let s = '_x_x';
+let r1 = /x/;
+let r2 = /y/;
+
+r1.exec(s)          // ["x"]
+r2.exec(s)          // null
+```
+
+上面代码中，正则对象`r1`匹配成功，返回一个数组，成员是匹配结果；正则对象`r2`匹配失败，返回`null`。
