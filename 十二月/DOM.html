@@ -7,19 +7,20 @@
     <title>Document</title>
   </head>
   <body>
-    <!--
-      DOM:
-      D: document(文档)
-      O: object(对象)
-      M: Model(模型)
-      DOM 把一份文档表示为一颗家谱树。家谱树本身又是一种模型。
-
-      一个文档由<html>开始，<html>标签既没有父元素，也没有兄弟元素，所以它就是文档的根标签。
-    -->
+    <p title="The test for P" id="purchase">This is just a test</p>
     <script>
-        alert(document.getElementsByTagName('*').length);       
-        // 8 返回文档内所有元素节点
-        // * 通配符
+      // alert(document.getElementsByTagName('*').length);
+      // 8 返回文档内所有元素节点
+      // * 通配符
+      let TEST = document.getElementsByTagName("p");
+      let shopping = document.getElementById("purchase");
+
+      shopping.setAttribute("title", "a list of goods");
+      // 改变了title属性值
+
+      for (let i = 0; i < TEST.length; i++) {
+        alert(TEST[i].getAttribute("title"));
+      }
     </script>
   </body>
 </html>
