@@ -50,3 +50,8 @@ JSON 对值的类型和何时有严格的规定
 # JSON 对象
 
 `JSON`对象是 JavaScript 的原生对象，用来处理 JSON 格式数据。它有两个静态方法：`JSON.stringify()`和`JSON.parse()`
+
+## JSON.stringify()
+### 基本用法
+
+`JSON。stringify方法用于将一个值转为JSON字符串。该字符串复合JSON格式`
