@@ -52,6 +52,88 @@ JSON 对值的类型和何时有严格的规定
 `JSON`对象是 JavaScript 的原生对象，用来处理 JSON 格式数据。它有两个静态方法：`JSON.stringify()`和`JSON.parse()`
 
 ## JSON.stringify()
+
 ### 基本用法
 
-`JSON。stringify方法用于将一个值转为JSON字符串。该字符串复合JSON格式`
+`JSON.stringify`方法用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被`JSON.parse`方法还原
+
+```
+JSON.stringify('abc') // ""abc""
+JSON.stringify(1) // "1"
+JSON.stringify(false) // "false"
+JSON.stringify([]) // "[]"
+JSON.stringify({}) // "{}"
+
+JSON.stringify([1, "false", false])
+// '[1,"false",false]'
+
+JSON.stringify({ name: "张三" })
+// '{"name":"张三"}'
+```
+
+上面代码将各种类型的值，转成 JSON 字符串
+
+注意，对于原始类型的字符串，转换结果会带双引号
+
+```
+JSON.stringify('foo') === "foo"     // false
+
+JSON.stringify('foo') === "\"foo"\" // true
+```
+
+上面代码中，字符串`foo`，被转成了`"\"foo"\"`。这是因为将来还原的时候，内层双引号可以让 JavaScript 引擎知道，这是一个字符串，而不是其他类型的值
+
+```
+JSON.stringify(false)     // "false"
+
+JSON.stringify('false')   // "\"false\""
+```
+
+上面代码中，如果不是内层的双引号，将来还原的时候，引擎就无法知道原始值是布尔值还是字符串
+
+如果对象的属性是`undefined`、函数或 XML 对象，该属性会被`JSON.stringify`过滤
+
+```
+let obj = {
+  a: undefined,
+  b: function() {}
+};
+
+JSON.stringify(obj)     // "{}"
+```
+
+上面代码中，对象`obj`的`a`属性是`undefined`，而`b`属性是一个函数，结果都被`JSON.stringify`过滤。
+
+如果数组的成员是`undefined`、函数或 XML 对象，则这些值被转成`null`
+
+```
+var arr = [undefined, function () {}];
+
+JSON.stringify(arr)     // "[null,null]"
+```
+
+上面代码中，数组`arr`的成员是`undefined`和函数，它们都被转成了`null`
+
+正则对象会被转成空对象
+
+```
+JSON.stringify(/foo/)     // "{}"
+```
+
+`JSON.stringify`方法会忽略对象的不可遍历的属性
+
+```
+var obj = {};
+Object.defineProperties(obj, {
+  'foo': {
+    value: 1,
+    enumerable: true
+  },
+  'bar': {
+    value: 2,
+    enumerable: false
+  }
+});
+
+JSON.stringify(obj); // "{"foo":1}"
+```
