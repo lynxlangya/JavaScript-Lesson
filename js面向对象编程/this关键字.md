@@ -227,4 +227,210 @@ o.f1()
 // Object
 ```
 
-上面代码定义了变量`that`，固定指向外层的`this`，然后在内层使用`that`，
+上面代码定义了变量`that`，固定指向外层的`this`，然后在内层使用`that`，就不会发生`this`指向的改变
+
+事实上，使用一个变量固定`this`的值，然后内层函数调用这个变量，是非常常见的做法，请务必掌握
+
+JavaScript 提供了严格模式，也可以硬性避免这种问题。严格模式下，如果函数内部的`this`指向顶层对象，就会报错
+
+```
+var counter = {
+  count: 0
+};
+counter.inc = function () {
+  'use strict';
+  this.count++
+};
+var f = counter.inc;
+f()
+// TypeError: Cannot read property 'count' of undefined
+```
+
+上面代码中，`inc`方法通过`use strict`声明采用严格模式，这是内部的`this`一旦指向顶层对象，就会报错
+
+## 避免数组处理方法中的 this
+
+数组的`map`和`foreach`方法，允许提供一个函数作为参数。这个函数内部不应该使用`this`
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    this.p.forEach(function (item) {
+      console.log(this.v + ' ' + item);
+    });
+  }
+}
+
+o.f()
+// undefined a1
+// undefined a2
+```
+
+上面代码中，`foreach`方法的回调函数中的`this`，其实是指向`window`对象，因此取不到`o.v`的值。原因跟上一段的多层`this`是一样的，就是内层的`this`不指向外部，而指向顶层对象
+
+解决这个问题的一种方法，即使前面提到的，使用中间变量固定`this`
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    var that = this;
+    this.p.forEach(function (item) {
+      console.log(that.v+' '+item);
+    });
+  }
+}
+
+o.f()
+// hello a1
+// hello a2
+```
+
+另一种方法是将`this`当作`foreach`方法的第二个参数，固定它的运行环境
+
+```
+var o = {
+  v: 'hello',
+  p: [ 'a1', 'a2' ],
+  f: function f() {
+    this.p.forEach(function (item) {
+      console.log(this.v + ' ' + item);
+    }, this);
+  }
+}
+
+o.f()
+// hello a1
+// hello a2
+```
+
+## 避免回调函数中的 this
+
+回调函数中的`this`往往回改变指向，最好避免使用
+
+```
+var o = new Object();
+o.f = function () {
+  console.log(this === o);
+}
+
+// jQuery 的写法
+$('#button').on('click', o.f);
+```
+
+上面代码中，点击按钮以后，控制台会显示`false`。原因是此时`this`不再指向`o`对象，而是指向按钮的 DOM 对象，因为`f`方法是在按钮对象的环境中被调用。这种细微的差别，很容易在编程中遭到忽视，导致难以察觉的错误
+
+为了解决这个问题，可以采用下面的一些方法对`this`进行绑定，也就使得`this`固定指向某个对象，减少不确定性
+
+## 绑定 this 的方法
+
+`this`的动态切换，固然为 javaScript 创造了巨大的灵活性，但也使得编程变得困难和模糊。有时，需要把`this`固定下来，避免出现意向不到的情况。JavaScript 提供了`call`、`apply`、`bind`这三个方法，来切换/固定`this`的指向
+
+### Function.prototype.call()
+
+函数实例的`call`方法，可以制定函数内部`this`的指向（即函数执行时所在的作用域），然后在所制定的作用域中，调用该函数
+
+```
+var obj = {};
+
+var f = function () {
+  return this;
+};
+
+f() === window // true
+f.call(obj) === obj // true
+```
+
+上面代码中，全局环境运行函数`f`时，`this`指向全局环境（浏览器为`window`对象）；`call`方法可以改变`this`的指向，指定`this`指向对象`obj`，然后在对象`obj`的作用域中运行函数`f`
+
+`call`方法的参数，应该是一个对象。如果参数为空、`null`和`undefined`，则默认传入全局对象
+
+```
+var n = 123;
+var obj = { n: 456 };
+
+function a() {
+  console.log(this.n);
+}
+
+a.call() // 123
+a.call(null) // 123
+a.call(undefined) // 123
+a.call(window) // 123
+a.call(obj) // 456
+```
+
+上面代码中，`a`函数中的`this`关键字，如果指向全局对象，返回结果为`123`。如果使用`call`方法将`this`关键字指向`obj`对象，返回结果为`456`。可以看到，如果`call`方法没有参数，或者参数为`null`或`undefined`，则等同于指向全局对象
+
+如果`call`方法的参数是一个原始值，那么这个原始值会自动转成对应的包装对象，然后传入`call`方法
+
+```
+var f = function () {
+  return this;
+};
+
+f.call(5)
+// Number {[[PrimitiveValue]]: 5}
+```
+
+上面代码中，`call`的参数为`5`，不是对象，会被自动转成包装对象（`Number`的实例），绑定`f`内部的`this`
+
+`call`方法还可以接受多个参数
+
+```
+func.call(thisValue, arg1, arg2, ...)
+```
+
+`call`的第一个参数就是`this`所要指向的那个对象，后面的参数则是函数调用时所需的参数。
+
+```
+function add(a, b) {
+  return a + b;
+}
+
+add.call(this, 1, 2) // 3
+```
+
+上面代码中，`call`方法指定函数`add`内部的`this`绑定当前环境（对象），并且参数为`1`和`2`，因此函数`add`运行后得到`3`
+
+`call`方法的一个应用是调用对象的原生方法
+
+```
+var obj = {};
+obj.hasOwnProperty('toString') // false
+
+// 覆盖掉继承的 hasOwnProperty 方法
+obj.hasOwnProperty = function () {
+  return true;
+};
+obj.hasOwnProperty('toString') // true
+
+Object.prototype.hasOwnProperty.call(obj, 'toString') // false
+```
+
+上面代码中，`hasOwnProperty`是`obj`对象继承的方法，如果这个方法一旦被覆盖，就不会得到正确的结果。`call`方法可以解决这个问题，它将`hasOwnProperty`方法的原始定义放到`obj`对象上执行，这样无论`obj`上有没有同名方法，都不会影响结果
+
+### Function.prototype.apply()
+
+`apply`方法的作用与`call`方法类似，也是改变`this`指向，然后再调用该函数。唯一的区别就是，它接受一个数组作为函数执行时的参数，使用格式如下
+
+```
+func.apply(thisValue, [arg1, arg2, ...])
+```
+
+`apply`方法的第一个参数也是`this`所要指向的那个对象，如果设为`null`或`undefined`,则等同于指定全局对象。第二个参数则是一个数组，该数组的所有成员依次作为参数，传入原函数。原函数的参数，在`call`方法中必须一个个添加，但是在`apply`方法中，必须以数组的形式添加
+
+```
+function f(x, y){
+  console.log(x + y);
+}
+
+f.call(null, 1, 1) // 2
+f.apply(null, [1, 1]) // 2
+```
+
+上面代码中，`f`函数本来接受两个参数，使用`apply`方法以后，就变成可以接受一个数组作为参数
+
