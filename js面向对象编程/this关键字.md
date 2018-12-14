@@ -134,3 +134,97 @@ let obj = function (p) {
     this.p = p;
 }
 ```
+
+上面代码定义了一个构造函数`Obj`。由于`this`执行实例对象，所以在构造函数内部定义`this.p`，就相当于定义实例对象有一个`p`属性
+
+```
+let o = new Obj('Hello World');
+o.p         // "Hello World"
+```
+
+### 对象的方法
+
+如果对象的方法里面包含`this`，`this`的指向就是方法运行时所在的对象。该方法赋值给另一个对象，就会改变`this`的指向
+
+但是，这条规则很不容易把握
+
+```
+var obj ={
+  foo: function () {
+    console.log(this);
+  }
+};
+
+obj.foo() // obj
+```
+
+上面代码中，`obj.foo`方法执行时，它内部的`this`指向`obj`
+
+但是，下面这几种用法，都会改变`this`的指向
+
+```
+// 情况一
+(obj.foo = obj.foo)() // window
+
+// 情况二
+(false || obj.foo)() // window
+
+// 情况三
+(1, obj.foo)() // window
+```
+
+上面代码中，`obj.foo`就是一个值。这个值真正调用的时候，运行环境已经不是`obj`了，而是全局环境，所以`this`不再指向`obj`
+
+## 使用注意点
+
+由于`this`的指向是不确定的，所以切勿在函数中包含多层的`this`
+
+```
+var o = {
+  f1: function () {
+    console.log(this);
+    var f2 = function () {
+      console.log(this);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Window
+```
+
+上面代码包含两层`this`，结果运行后，第一层指向对象`o`，第二层指向全局对象，因为实际执行的是下面的代码
+
+```
+var temp = function () {
+  console.log(this);
+};
+
+var o = {
+  f1: function () {
+    console.log(this);
+    var f2 = temp();
+  }
+}
+```
+
+一个解决方法是在第二层改用一个指向外层`this`的变量
+
+```
+var o = {
+  f1: function() {
+    console.log(this);
+    var that = this;
+    var f2 = function() {
+      console.log(that);
+    }();
+  }
+}
+
+o.f1()
+// Object
+// Object
+```
+
+上面代码定义了变量`that`，固定指向外层的`this`，然后在内层使用`that`，
