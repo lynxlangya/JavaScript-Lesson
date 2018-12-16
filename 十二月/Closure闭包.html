@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      {
+        function callMethod() {
+          let money = 1000;
+          // 定义一个变量 money
+
+          return function(price) {
+            // 这里就是一个闭包，不过目前只会使用一次
+            money = money - price;
+            // 返回这个变量
+            return money;
+          };
+        }
+
+        let myMoney = callMethod()(100);
+        // 存取内部函数的变数
+        // 100 是 price
+        console.log(myMoney);
+        // myMoney 结果就是 1000 - 100 = 900
+      }
+
+      {
+        function callMethod() {
+          let money = 1000;
+          changeMoney = function() {
+            money = 500;
+          };
+          return function(price) {
+            money = money - price;
+            return money;
+          };
+        }
+        let updateMyMoney = callMethod();
+        // changeMoney(); 如果此处调用 changeMoney函数， money值就会变成 500
+        console.log(updateMyMoney(100));
+        // 此处的 money 值还是1000
+      }
+
+      {
+        function callMethod(newMoney) {
+          let money = newMoney || 1000;
+          changeMoney = function() {
+            money = 500;
+          };
+          return function(price) {
+            money = money - price;
+            return money;
+          };
+        }
+
+        let updateMyMoney = callMethod(100000000000);
+        let updateYourMoney = callMethod(1000);
+        // changeMoney();
+        console.log(updateMyMoney(100));
+        console.log(updateYourMoney(100));
+      }
+    </script>
+  </body>
+</html>
