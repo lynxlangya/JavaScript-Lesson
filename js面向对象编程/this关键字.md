@@ -440,3 +440,39 @@ f.apply(null, [1, 1]) // 2
 2. 有事件源指向事件源本身
 3. 在定时器下（除了 ES6）`this` 指向 `window`
 4. 在对象下`this`指向的是自己本身
+
+```
+let obj = {
+  foo: function(){}
+};
+
+let foo = obj.foo;
+
+// 写法一
+obj.foo
+
+// 写法二
+foo()
+```
+
+上面代码中，虽然`obj.foo`和`foo`指向同一个函数，但是执行结果可能不一样。
+
+```
+let obj = {
+  foo: function(){
+    console.log(this.bar)
+  }
+  bar: 1
+};
+
+let foo = obj.foo;
+let bar = 2;
+
+obj.foo()     // 1
+foo()         // 2
+```
+
+这种差异的原因，就在于函数内部使用了`this`关键字。对于`obj.foo()`来说，`foo`运行在`obj`环境，所以`this`指向`obj`；对于`foo()`来说，`foo`运行在全局环境，所以`this`指向全局环境
+
+## [阮一峰博客关于`this`详解](http://www.ruanyifeng.com/blog/2018/06/javascript-this.html)
+
