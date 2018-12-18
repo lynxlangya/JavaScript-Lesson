@@ -22,7 +22,7 @@ body {
 }
 
 body {
-    background: linear-gradient(45deg, #02001F, #1F1B4E);
+    background: linear-gradient(50deg, #090707, #E53A40);
     transform-style: preserve-3d;
     transform: perspective(60rem);
     position: fixed;
@@ -65,7 +65,7 @@ body {
     height: 4px;
     border-radius: 4px;
     margin-top: -2px;
-    background: #FF2C75;
+    background: #00b9f1;
     transform: scale(0);
     transition: transform 0.8s cubic-bezier(0.16, 1.08, 0.38, 0.98);
     z-index: 1;
@@ -78,7 +78,7 @@ body {
     display: block;
     position: absolute;
     overflow: hidden;
-    color: #FF2C75;
+    color: #EFDC05;
     top: 0;
     height: 49%;
     transition: all 0.8s cubic-bezier(0.16, 1.08, 0.38, 0.98);
@@ -105,7 +105,7 @@ body {
 
 .Menu-list-item:hover .Mask,
 .Menu-list-item:active .Mask {
-    color: #FFF;
+    color: #00b9f1;
     transform: skewX(12deg) translateX(5px);
 }
 
