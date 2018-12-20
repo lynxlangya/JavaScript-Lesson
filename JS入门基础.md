@@ -1,56 +1,81 @@
 # Javascript
 
-
 ## 1.语句
-javascript程序的执行单位为行(line), 也就是一行行的执行．一般情况下，每行就是一个语句.
 
+javascript 程序的执行单位为行(line), 也就是一行行的执行．一般情况下，每行就是一个语句.
+
+```js
+let i = 1 + 3;
 ```
-let i = 1 + 3
-```
+
 `let` 命令,声明变量 `i` ,然后将 `1 + 3` 的运算结果赋值给变量 `i`;
+
 ## 2.变量
+
 ### 2.1 概念
+
 变量就是对"值"的具名引用.简而言之:变量就是为"值"起名,然后引用这名字,就等于引用这儿值.顾名思义:变量名就是变量的名字.
-```
+
+```js
 let a = 1;
 ```
-上面代码先声明变量 `a` ,然后在变量 `a` 与数值1之间建立引用关系,称为将数值 `1` "赋值"给变量 `a` ; 往后引用变量名 `a` 就会得到数值 1, `let` 是变量声明命令.它表示通知解释引擎,要创建一个变量 `a` ;
-### 注意:
+
+上面代码先声明变量 `a` ,然后在变量 `a` 与数值 1 之间建立引用关系,称为将数值 `1` "赋值"给变量 `a` ; 往后引用变量名 `a` 就会得到数值 1, `let` 是变量声明命令.它表示通知解释引擎,要创建一个变量 `a` ;
+
+### 注意
+
 javascript 的变量名区分大小写, `A` 和 `a` 是两个不同的变量
 
 变量的声明和赋值,其实是分开的两个步骤,通常我们的代码中会将他们融合到一起写,实际步骤是这样的.
-```
-let a;      // 先在此处声明变量 a;
-a = 1;      // 随后给声明的变量 a 赋值;
-```
-如果只是声明变量而没有诶变量赋值的话,则该变量的值是 `undefined`. `undefined` 是JavaScript 的关键字,表示 "未定义".
-## 3.标识符
-标识符(identifier)指的是用来识别各种值的合法名称.最常见的标识符就是变量名, Javascript 语言的标识符对大小写及其敏感, 所以 `a` 和 `A` 是两个不同的标识符.
-### 标识符命名规则
-+ 第一个字符,可以是任意Unicode字母(包括英文字母和其他语言的字母), 以及美元符号( `$` )和下划线( `_` ).
 
-+ 第二个字符几后面的字符,除了Unicode字母, 美元符号和下划线, 还可以使用数字 `0-9` .
----
-不合法标识符实例:
+```js
+let a; // 先在此处声明变量 a;
+a = 1; // 随后给声明的变量 a 赋值;
 ```
+
+如果只是声明变量而没有诶变量赋值的话,则该变量的值是 `undefined`. `undefined` 是 JavaScript 的关键字,表示 "未定义".
+
+## 3.标识符
+
+标识符(identifier)指的是用来识别各种值的合法名称.最常见的标识符就是变量名, Javascript 语言的标识符对大小写及其敏感, 所以 `a` 和 `A` 是两个不同的标识符.
+
+### 标识符命名规则
+
+- 第一个字符,可以是任意 Unicode 字母(包括英文字母和其他语言的字母), 以及美元符号( `$` )和下划线( `_` ).
+
+- 第二个字符几后面的字符,除了 Unicode 字母, 美元符号和下划线, 还可以使用数字 `0-9` .
+
+---
+
+不合法标识符实例:
+
+```js
 1a              // 第一个字符不能是数字
 23              // 原因同上
 ***             // 标识符不能包含星号
 a+b             // 标识符不能包含加号
 -d              // 标识符不能包含减号或者连词线
 ```
+
 中文是合法的标识符,也可以用作变量名.
+
+```js
+let 临时变量 = 1;
+console.log(临时变量); // 1
 ```
-    let 临时变量 = 1;
-    console.log(临时变量);      // 1
-```
+
 ---
-> JavaScript有一些保留字,不能用作标识符: arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
+
+> JavaScript 有一些保留字,不能用作标识符: arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
+
 ## 4.注释
-源码中被JavaScript引擎忽略的部分就叫做注释, 是对代码进行的解释. JavaScript 提供了两种注释的写法:
+
+源码中被 JavaScript 引擎忽略的部分就叫做注释, 是对代码进行的解释. JavaScript 提供了两种注释的写法:
+
 1. 单行注释, 用 `//` 起头.
 2. 多行注释, 放在 `/*` 和 `*/` 之间
-```
+
+```js
 //          这是单行注释
 
 /*
@@ -61,62 +86,81 @@ a+b             // 标识符不能包含加号
 ```
 
 ## 5. 区块
+
 JavaScript 使用大括号,将多个相关的语句组合在一起,称之为 "区块" (block).
 
 对于 `let` 命令来说,JavaScript 的区块不构成单独的作用域(scope).
-```
+
+```js
 {
-    let a = 1;
-    console.log(a);         // 1
+  let a = 1;
+  console.log(a); // 1
 }
 
-a       // Uncaught ReferenceError: a is not defined
+a; // Uncaught ReferenceError: a is not defined
 ```
-```
+
+```js
 {
-    var a = 1;
+  var a = 1;
 }
 
-a       // 1
+a; // 1
 ```
+
 上面的代码都在区块内部,分别使用 `let` 和 `var` 命令声明并赋值了变量 `a` , 但是 `let` 只有在区块内才能使用,外部不可调用; `var` 则可以在外部调用.
+
 ## 6. 条件语句
+
 JavaScript 提供 `if` 结构和 `switch` 结构,完成条件判断,即只有满足预设的条件,才会执行相应的语句.
-### 6.1 if结构
-`if` 结构先判断一个表达式的布尔值,然后根据布尔值的真伪,执行不同的语句.所谓布尔值,值得就是JavaScript 的两个特殊的值, `true` 表示 `真`, `false` 表示 `伪`.
-```
+
+### 6.1 if 结构
+
+`if` 结构先判断一个表达式的布尔值,然后根据布尔值的真伪,执行不同的语句.所谓布尔值,值得就是 JavaScript 的两个特殊的值, `true` 表示 `真`, `false` 表示 `伪`.
+
+```js
 // if (布尔值) 执行语句.
 
-if (true) alert ("Hello World!")        // Hello World!
+if (true) alert("Hello World!"); // Hello World!
 ```
+
 "布尔值" 往往是由一个套件表达式产生的,必须放在圆括号中,表示对表达式求值.如果表达式结果为 `true`, 就执行紧跟在后面的语句; 如果表达式为 `false`, 则跳过紧跟在后面的语句.
+
 - 建议: 总是在 `if` 语句中使用大括号,因为这样方便插入语句.
 - 注意: `if` 后面的表达式之中,不要混淆复制表达式 (`=`),严格相等运算符 (`===`)和相等运算符 (`==`). 尤其是赋值表达式不具有比较作用.
+
+```js
+let x = 1;
+let y = 2;
+if ((x = y)) {
+  console.log(x); // 2
+}
 ```
-    let x = 1;
-    let y = 2;
-    if (x = y) {
-        console.log(x);         // 2
-    }
-```
-上面代码的原意为: 当`x`等于`y`的时候,才执行相关的语句.但是,讲严格的相等运算符写成了赋值表达式,结果变成了将 `y` 赋值给变量 `x`,再判断变量 `x` 的值(等于2)的布尔值(结果为`true`).
+
+上面代码的原意为: 当`x`等于`y`的时候,才执行相关的语句.但是,讲严格的相等运算符写成了赋值表达式,结果变成了将 `y` 赋值给变量 `x`,再判断变量 `x` 的值(等于 2)的布尔值(结果为`true`).
 
 这种错误可以正常生成一个布尔值,因此不会报错.为了避免这种情况,部分开发者习惯将常量写在运算符的左边,这样的话,一旦不小心将相等运算符写成赋值运算符,就会报错,因为常量不能被赋值.
-```
+
+```js
 if (x = 2) {        // 不报错
 if (2 = x) {        // 报错
 ```
+
 ### 6.2 if...else 结构
+
 `if` 代码块后面,还可以跟一个 `else` 代码块,表示不满足条件时,所要执行的代码.
-```
+
+```js
 if (m === 3) {
-    console.log('满足条件时,需要执行的语句!')
+  console.log("满足条件时,需要执行的语句!");
 } else {
-    console.log('不满足条件时,执行的语句!')
+  console.log("不满足条件时,执行的语句!");
 }
 ```
+
 对同一个变量进行多次判断时,多个 `if...else` 语句可以连写在一起.
-```
+
+```js
 if (m ===0 ){
     // ...
 } else if {
@@ -127,55 +171,70 @@ if (m ===0 ){
     // ...
 }
 ```
+
 `else` 代码块总是与了自己最近的那个 `if` 语句配对.
+
 ### 6.3 switch 结构
+
 多个 `if...switch` 连在一起使用的时候，可以转为更加方便的　`switch` 结构.
-```
+
+```js
 switch (fruit) {
-    case "banana":
-        // ...
-        break;
-    case "apple":
-        // ...
-        break;
-    default:
-        // ...
+  case "banana":
+    // ...
+    break;
+  case "apple":
+    // ...
+    break;
+  default:
+  // ...
 }
 ```
-上面代码根据变量 `fruit` 的值,选择执行相对应的 `case`. 如果所有的 `case` 都不符合,则张最后的 `default` 部分.需要注意的是,每个 `case` 代码内部的 `break` 语句不能少,否则会接下去执行下一个 `case` 代码块,而不是跳出 `switch` 结构.
-### 6.4 三元运算符 ? :
-Javascript 还有一个三元运算符(即该运算符需要三个运算子) `? :`, 也可以用于逻辑判断.
-```
-(条件) ? 表达式1 : 表达式2
-```
-上面代码中,如果'条件'为 `true`, 则返回"表达式1"的值,否则返回"表达式2"的值.
-```
-let even = (n % 2 === 0) ? true : false;
 
-    等同于如下代码
+上面代码根据变量 `fruit` 的值,选择执行相对应的 `case`. 如果所有的 `case` 都不符合,则张最后的 `default` 部分.需要注意的是,每个 `case` 代码内部的 `break` 语句不能少,否则会接下去执行下一个 `case` 代码块,而不是跳出 `switch` 结构.
+
+### 6.4 三元运算符 ? :
+
+Javascript 还有一个三元运算符(即该运算符需要三个运算子) `? :`, 也可以用于逻辑判断.
+
+```js
+条件 ? 表达式1 : 表达式2;
+```
+
+上面代码中,如果'条件'为 `true`, 则返回"表达式 1"的值,否则返回"表达式 2"的值.
+
+```js
+let even = n % 2 === 0 ? true : false;
+
+等同于如下代码;
 
 let even;
-if (n % 2 === 0){
-    even = true;
+if (n % 2 === 0) {
+  even = true;
 } else {
-    even = false;
+  even = false;
 }
 ```
-上面代码中,如果 `n` 可以被2整除,则 `even` 等于 `true`,否则等于 `false`.
-```
+
+上面代码中,如果 `n` 可以被 2 整除,则 `even` 等于 `true`,否则等于 `false`.
+
+```js
 let n = 20;
-let msg = '数字' + n + '是' + (n % 2 === 0 ? '偶数' : '奇数');
-alert(msg);         // 数字20是偶数;
+let msg = "数字" + n + "是" + (n % 2 === 0 ? "偶数" : "奇数");
+alert(msg); // 数字20是偶数;
 ```
 
 ## 7. 循环语句
+
 循环语句用于重复执行某个操作,它有多种形式.
 
 ### 7.1 while 循环
+
 `while` 语句包括一个循环条件和一段代码块,只要条件为真,就不断循环执行代码块.`while` 语句循环条件是一个表达式,必须放在圆括号中,代码块部分,如果只有一条语句,可以省略大括号,否则就必须加上大括号.
-```
+
+```js
 while (条件) {
-    执行语句;
+  执行语句;
 }
 
 // 例:
@@ -183,25 +242,31 @@ while (条件) {
 let i = 0;
 
 while (i < 100) {
-    console.log('i当前为:' + i);
-    i++;
+  console.log("i当前为:" + i);
+  i++;
 }
 ```
-上面的代码从0开始,循环100次,直到 `i` 等于100;输出到99为止.
-```
+
+上面的代码从 0 开始,循环 100 次,直到 `i` 等于 100;输出到 99 为止.
+
+```js
 while (true) {
-    console.log('Hello World!');
+  console.log("Hello World!");
 }
 ```
+
 上面的例子是一个无限循环,因为循环的条件总是真.尽量避免程序中出现此种循环,会导致程序卡死甚至崩溃(特殊情况除外).
+
 ### 7.2 for 循环
+
 `for` 语句是循环命令的另一种形式,可以指定循环的起点,终点和终止条件.
 `for` 语句后面的括号里面,有三个表达式.
 
 - 初始化表达式(initialize): 确定循环变量的初始值,只是循环开始时执行一次.
 - 条件表达式(test): 每轮循环开始时,都要执行这个条件表达式,只有值为真,才继续进行循环.
 - 递增表达式(increment): 每轮循环的最后一个操作,通常用来递增循环变量.
-```
+
+```js
 for (初始化表达式; 条件; 递增表达式){
     执行语句;
 }
@@ -215,27 +280,35 @@ for (let i = 0; i < x; i++){
 // 1
 // 2
 ```
-上面代码中,初始化表达式是 `let i = 0`, 即初始化一个变量 `i`; 测试表达式是 `i < x` ; 即只要 `i` 小于 `x`, 就会执行循环; 递增表达式是 `i++`,即每次循环结束后, `i`增大1;
+
+上面代码中,初始化表达式是 `let i = 0`, 即初始化一个变量 `i`; 测试表达式是 `i < x` ; 即只要 `i` 小于 `x`, 就会执行循环; 递增表达式是 `i++`,即每次循环结束后, `i`增大 1;
 所有 `for` 循环,都可以改成 `while` 循环, 把上面的例子改为 `while` 循环,代码如下.
-```
+
+```js
 let x = 3;
 let i = 0;
 
 while (i < x) {
-    console.log(i);
-    i++;
+  console.log(i);
+  i++;
 }
 ```
+
 `for` 语句的三个部分(initialize,test,increment),可以省略任何一个,也可以全部省略.
-```
-for ( ; ; ) {
-    console.log("Hello World");
+
+```js
+for (;;) {
+  console.log("Hello World");
 }
 ```
+
 上面的代码省略了 `for` 语句表达式的三个部分,结果导致了一个无限循环.
+
 ### 7.3 do...while 循环
+
 `do...while` 循环与 `while` 循环类似,唯一的区别就是先运行一次循环体,然后再判断循环条件;不管条件是否为真, `do...while` 循环至少运行一次,这是这种结构最大的特点.另外, `while` 语句后面的分好注意不要省略.
-```
+
+```js
 语法:
 do {
     执行语句;
@@ -249,94 +322,108 @@ do {
     console.log(i);
 } while (i < x);
 ```
+
 ### 7.4 break 语句和 continue 语句
+
 `break` 语句和 `continue` 语句都具有跳转作用,可以让代码不按既有的顺序执行.
 `break` 语句用于跳出代码块或循环.
-```
+
+```js
 let i = 0;
 while (i < 100) {
-    console.log('i 当前为:' + i);
-    i++;
-    if (i === 10) break;
+  console.log("i 当前为:" + i);
+  i++;
+  if (i === 10) break;
 }
 ```
-上面代码只会执行10次循环,一旦 `i` 等于10, 就会跳出循环.
+
+上面代码只会执行 10 次循环,一旦 `i` 等于 10, 就会跳出循环.
 `for` 循环也可以使用 `break` 语句跳出循环.
-```
-for (let i = 0; i < 5; i++){
-    console.log(i);
-    if (i === 3)
-    break;
+
+```js
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+  if (i === 3) break;
 }
 // 0
 // 1
 // 2
 // 3
 ```
-上面的代码执行带 `i` 等于3,就会跳出循环.
+
+上面的代码执行带 `i` 等于 3,就会跳出循环.
 `continue` 语句用于立即终止本轮循环,返回循环结构的头部,开始下一轮循环.
-```
+
+```js
 let i = 0;
-while (i < 100){
-    i++;
-    if (i % 2 === 0) continue;
-    console.log('i 当前为:' + i);
+while (i < 100) {
+  i++;
+  if (i % 2 === 0) continue;
+  console.log("i 当前为:" + i);
 }
 ```
+
 上面代码只有在 `i` 为奇数时,才会输出 `i` 的值.如果 `i` 为偶数,则直接进入下一轮循环.
 如果存在多重循环,不带参数的 `break` 语句和 `continue` 语句都只针对最内层循环.
+
 ### 7.5 标签(label)
-JavaScript语言允许语句前面有标签(label),相当于定位符,用于跳转到程序的任意位置,标签的格式如下;
+
+JavaScript 语言允许语句前面有标签(label),相当于定位符,用于跳转到程序的任意位置,标签的格式如下;
+
+```js
+label: 执行语句;
 ```
-label:
-    执行语句;
-```
+
 标签可以使任意标识符,但不能是保留字,语句部分可以使任意语句.
 
 标签通常与 `break` 语句和 `continue` 语句配合使用,跳出特定循环.
+
+```js
+top: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) break top;
+    console.log("i=" + i + ",j=" + j);
+  }
+}
+// i=0, j=0;
+// i=0, j=1;
+// i=0, j=2;
+// i=1, j=0;
 ```
-top:
-    for (let i =0; i < 3; i++){
-        for (let j = 0; j < 3; j++){
-            if (i === 1 && j === 1) break top;
-            console.log('i=' + i + ',j=' + j);
-        }
-    }
-    // i=0, j=0;
-    // i=0, j=1;
-    // i=0, j=2;
-    // i=1, j=0;
-```
+
 上面代码为一个双重循环区块,`break` 命令后面加上 `top` 标签(注意:`top`不用家引号), 满足条件是,直接跳出双层循环.如果`break` 语句后面不使用标签,则只能跳出内层循环,进入下一次的外层循环.
 
 标签也可以用于跳出代码块,如下:
-```
+
+```js
 foo: {
-    console.log("Hello");
-    break foo;
-    console.log("本行不会输出");
+  console.log("Hello");
+  break foo;
+  console.log("本行不会输出");
 }
 console.log("World");
 // Hello
 // World
 ```
+
 上面的代码执行到 `break foo` 就不会接着执行下面的语句了,就会跳出区块.
 
 `continue` 语句也可以与标签配合使用,如下:
+
+```js
+top: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) continue top;
+    console.log("i=" + i + ",j=" + j);
+  }
+}
+// i=0, j=0
+// i=0, j=1
+// i=0, j=2
+// i=1, j=0
+// i=2, j=0
+// i=2, j=1
+// i=2, j=2
 ```
-top:
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            if (i === 1 && j === 1) continue top;
-            console.log('i=' + i + ',j=' + j);
-        }
-    }
-    // i=0, j=0
-    // i=0, j=1
-    // i=0, j=2
-    // i=1, j=0
-    // i=2, j=0
-    // i=2, j=1
-    // i=2, j=2
-```
+
 上面的代码中, `continue` 命令后面有一个标签名,满足条件时,会跳出当前循环,直接进入下一轮外层循环. 如果 `continue` 语句后面不使用标签,则只能进入下一轮的内层循环.
