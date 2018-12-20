@@ -8,22 +8,22 @@
 
 新建正则表达式有两种方法，一种是使用字面量，以斜杠表示开始和结束。
 
-```
+```js
 let regex = /xyz/;
 ```
 
 另一种是使用`RegExp`构造函数
 
-```
-let regexp = new RegExp('xyz');
+```js
+let regexp = new RegExp("xyz");
 ```
 
 上面两种写法是等价的，都新建了一个内容为`xyz`的正则表达式对象。它们的主要区别是，第一种方法在引擎编译代码时，就会新建正则表达式，第二种方法在运行时新建正则表达式。所以前者的效率较高。而且，前者比较便利和直观，所以实际应用中，基本上都采用字面量定义正则表达式。
 
 `RegExp`构造函数还可以接受第二个参数
 
-```
-let regex = new RegExp('xyz', 'i');
+```js
+let regex = new RegExp("xyz", "i");
 // 等价于
 let regex = /xyz/i;
 ```
@@ -42,12 +42,12 @@ let regex = /xyz/i;
 
 上面三个属性都是只读的
 
-```
-let r = /abc/igm;
+```js
+let r = /abc/gim;
 
-r.ignoreCase  // true
-r.global      // true
-r.multiline   // true
+r.ignoreCase; // true
+r.global; // true
+r.multiline; // true
 ```
 
 另一类是与修饰符无关的属性，主要是下面两个
@@ -55,11 +55,11 @@ r.multiline   // true
 - `RegExp.prototype.lastIndex`：返回一个整数，表示下一次开始搜索的位置。该属性可读写，但是只在进行连续搜索时有意义，详细介绍请看后文。
 - `RegExp.prototype.source`：返回正则表达式的字符串形式（不包括反斜杠），该属性只读。
 
-```
-var r = /abc/igm;
+```js
+var r = /abc/gim;
 
-r.lastIndex // 0
-r.source // "abc"
+r.lastIndex; // 0
+r.source; // "abc"
 ```
 
 ## 实例方法
@@ -68,81 +68,81 @@ r.source // "abc"
 
 正则是对象的`test`方法返回一个布尔值，表示当前模式是否能匹配参数字符串
 
-```
-/cat/.test('cats and dogs')       // true
+```js
+/cat/.test("cats and dogs"); // true
 ```
 
 上面代码验证参数字符串之中是否包含`cat`，结果返回`true`
 
 如果正则表达式带有`g`修饰符，则每一次`test`方法都从上一次结束的位置开始向后匹配。
 
-```
+```js
 var r = /x/g;
-var s = '_x_x';
+var s = "_x_x";
 
-r.lastIndex // 0
-r.test(s) // true
+r.lastIndex; // 0
+r.test(s); // true
 
-r.lastIndex // 2
-r.test(s) // true
+r.lastIndex; // 2
+r.test(s); // true
 
-r.lastIndex // 4
-r.test(s) // false
+r.lastIndex; // 4
+r.test(s); // false
 ```
 
 上面代码的正则表达式使用了`g`修饰符，表示是全局搜索，会有多个结果。接着，三次使用`test`方法，每一次开始搜索的位置都是上一次匹配的后一个位置。
 
 带有`g`修饰符时，可以通过正则对象的`lastIndex`属性制定开始搜索的位置。
 
-```
+```js
 var r = /x/g;
-var s = '_x_x';
+var s = "_x_x";
 
 r.lastIndex = 4;
-r.test(s) // false
+r.test(s); // false
 
-r.lastIndex // 0
-r.test(s)
+r.lastIndex; // 0
+r.test(s);
 ```
 
 上面代码指定从字符串的第五个位置开始搜索，这个位置为空，所以返回`false`。同时，`lastIndex`属性重置为`0`,所以第二次执行`r.test(s)`会返回`true`
 
 注意，带有`g`修饰符时没正则表达式内部会记住上一次的`lastIndex`属性，这时不应该更换所要匹配的字符串，否则会有一些难以察觉的错误。
 
-```
+```js
 let r = /bb/g;
-r.test('bb')            // true
-r.test('-bb-')          // false
+r.test("bb"); // true
+r.test("-bb-"); // false
 ```
 
 上面代码中，由于正则表达式`r`是从上一次的`lastIndex`位置开始匹配，导致第二次执行`test`方法时出现预期以外的结果。
 
 `lastIndex`属性只对同一个正则表达式有效，所以下面这样写是错误的。
 
-```
+```js
 let count = 0;
-while(/a/g.test('babaa')) count++;
+while (/a/g.test("babaa")) count++;
 ```
 
 上面代码会导致无限循环，因为`while`循环的每一匹配条件都是一个新的正则表达式，导致`lastIndex`属性总是等于 0;。
 
 如果正则模式是一个空字符串，则匹配所有字符串
 
-```
-new RegExp('').test('abc')          // true
+```js
+new RegExp("").test("abc"); // true
 ```
 
 ### RegExp.prototype.exec()
 
 正则实例对象的`exec`方法，用来返回匹配结果。如果发现匹配，就返回一个数组，成员是匹配成功的子字符串，否则返回`null`。
 
-```
-let s = '_x_x';
+```js
+let s = "_x_x";
 let r1 = /x/;
 let r2 = /y/;
 
-r1.exec(s)          // ["x"]
-r2.exec(s)          // null
+r1.exec(s); // ["x"]
+r2.exec(s); // null
 ```
 
 上面代码中，正则对象`r1`匹配成功，返回一个数组，成员是匹配结果；正则对象`r2`匹配失败，返回`null`。
@@ -160,34 +160,34 @@ r2.exec(s)          // null
 
 字符串实例对象的`match`方法对字符串进行正则匹配，返回匹配结果
 
-```
-var s = '_x_x';
+```js
+var s = "_x_x";
 var r1 = /x/;
 var r2 = /y/;
 
-s.match(r1) // ["x"]
-s.match(r2) // null
+s.match(r1); // ["x"]
+s.match(r2); // null
 ```
 
 从上面代码可以看到，字符串的`match`方法与正则对象的`exec`方法非常类似：匹配成功返回一个数组，匹配失败返回`null`。
 
 如果正则表达式带有`g`修饰符，则该方法与正则对象的`exec`方法行为不同，会一次性返回所有匹配成功的结果。
 
-```
-let s = 'abba';
+```js
+let s = "abba";
 let r = /a/g;
 
-s.match(r)          // ["a", "a"]
-r.exec(s)           // ["a"]
+s.match(r); // ["a", "a"]
+r.exec(s); // ["a"]
 ```
 
 设置正则表达式的`lastIndex`属性，对`match`方法无效，匹配总是从字符串的第一个字符开始。
 
-```
+```js
 let r = /a|b/g;
 r.lastIndex = 7;
-'xaxb'.match(r)         // ['a', 'b']
-r.lastIndex             // 0
+"xaxb".match(r); // ['a', 'b']
+r.lastIndex; // 0
 ```
 
 上面代码表示，设置正则对象的`lastIndex`属性是无效的。
@@ -196,10 +196,10 @@ r.lastIndex             // 0
 
 字符串对象的`search`方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回`-1`
 
-```
-'_x_x'.search(/x/)          // 1    x出现在1号位置
+```js
+"_x_x".search(/x/); // 1    x出现在1号位置
 
-'_x_x'.search(/_/)          // 0    _出现在0号位置
+"_x_x".search(/_/); // 0    _出现在0号位置
 ```
 
 上面代码中，第一个匹配结果出现在字符串的`1`号位置
@@ -208,26 +208,26 @@ r.lastIndex             // 0
 
 字符串对象的`repalce`方法可以替换匹配的值。它接受两个参数，第一个是正则表达式，表示搜索模式，第二个是替换的内容。
 
-```
-str.replace(search, replacement)
+```js
+str.replace(search, replacement);
 ```
 
 正则表达式如果不加`g`修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值
 
-```
-'aaa'.replace('a', 'b') // "baa"
-'aaa'.replace(/a/, 'b') // "baa"
-'aaa'.replace(/a/g, 'b') // "bbb"
+```js
+"aaa".replace("a", "b"); // "baa"
+"aaa".replace(/a/, "b"); // "baa"
+"aaa".replace(/a/g, "b"); // "bbb"
 ```
 
 上面代码中，最后一个正则表达式使用了`g`修饰符，导致所有的`a`都被替换成`b`
 
 `repalce`方法的一个应用，就是消除字符串首尾两端的空格
 
-```
-var str = '  #id div.class  ';
+```js
+var str = "  #id div.class  ";
 
-str.replace(/^\s+|\s+$/g, '')
+str.replace(/^\s+|\s+$/g, "");
 // "#id div.class"
 ```
 
@@ -239,11 +239,11 @@ str.replace(/^\s+|\s+$/g, '')
 - `$n`：匹配成功的第 n 组内容，n 是从 1 开始的自然数
 - `$$`：指代美元符号\$
 
-```
-'hello world'.replace(/(\w+)\s(\w+)/, '$2 $1')
+```js
+"hello world".replace(/(\w+)\s(\w+)/, "$2 $1");
 // "world hello"
 
-'abc'.replace('b', '[$`-$&-$\']')
+"abc".replace("b", "[$`-$&-$']");
 // "a[a-b-c]c"
 ```
 
@@ -251,14 +251,14 @@ str.replace(/^\s+|\s+$/g, '')
 
 `replace`方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值。
 
-```
-'3 and 5'.replace(/[0-9]+/g, function (match) {
+```js
+"3 and 5".replace(/[0-9]+/g, function(match) {
   return 2 * match;
-})
+});
 // "6 and 10"
 
-var a = 'The quick brown fox jumped over the lazy dog.';
-var pattern = /quick|brown|lazy/ig;
+var a = "The quick brown fox jumped over the lazy dog.";
+var pattern = /quick|brown|lazy/gi;
 
 a.replace(pattern, function replacer(match) {
   return match.toUpperCase();
@@ -270,34 +270,33 @@ a.replace(pattern, function replacer(match) {
 
 字符串对象的`split`方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。
 
-```
-str.split(separator, [limit])
+```js
+str.split(separator, [limit]);
 ```
 
 该方法接受两个参数，第一个参数是正则表达式，表示分隔规则，第二个参数是返回数组的最大成员数。
 
-```
+```js
 // 非正则分隔
-'a,  b,c, d'.split(',')
+"a,  b,c, d".split(",");
 // [ 'a', '  b', 'c', ' d' ]
 
 // 正则分隔，去除多余的空格
-'a,  b,c, d'.split(/, */)
+"a,  b,c, d".split(/, */);
 // [ 'a', 'b', 'c', 'd' ]
 
 // 指定返回数组的最大成员
-'a,  b,c, d'.split(/, */, 2)
-[ 'a', 'b' ]
+"a,  b,c, d".split(/, */, 2)[("a", "b")];
 ```
 
 # 匹配规则
 
-##　字面量字符和元字符
+## 字面量字符和元字符
 
 大部分字符在正则表达式中，就是字面的含义，比如`/a/`匹配`a`，`/b/`匹配`b`。如果在正则表达式中，某个字符只表示它字面的含义（就像前面的`a`和`b`），那么它们就叫做“字面量字符”（literal characters）
 
-```
-/dog/.test('old dog')           // true
+```js
+/dog/.test("old dog"); // true
 ```
 
 上面代码中正则表达式的`dog`，就是字面量字符，所以`/dog/`匹配`old dog`，因为它就表示`d`、`o`、`g`三个字母连在一起。
@@ -308,8 +307,8 @@ str.split(separator, [limit])
 
 点字符（`.`）匹配除回车（`\r`）、换行（`\n`）、行分隔符（`\u2028`）和段分隔符（`\u2029`）以外的所有字符。注意，对于码点大于`0xFFFF`字符，点字符不嗯呢个正确匹配，会认为这是两个字符
 
-```
-/c.t/
+```js
+/c.t/;
 ```
 
 上面代码中，`c.t`匹配`c`和`t`之间包含任意一个字符的情况，只要这三个字符在同一行，比如`cat`、`c2t`、`c-t`等等，但是不匹配`coot`
@@ -321,7 +320,7 @@ str.split(separator, [limit])
 - `^` 表示字符串的开始位置
 - `$` 表示字符串的结束位置
 
-```
+```js
 // test必须出现在开始位置
 /^test/.test('test123') // true
 
@@ -337,23 +336,23 @@ str.split(separator, [limit])
 
 竖线符号（`|`）在正则表达式中表示“或关系”（or），即`cat|dog`表示匹配`cat`或`dog`
 
-```
-/11|22/.test('911')     // true
+```js
+/11|22/.test("911"); // true
 ```
 
 上面代码中，正则表达式指定必须匹配`11`或者`22`
 
 多个选择符可以联合使用
 
-```
+```js
 // 匹配fred、barney、betty之中的一个
-/fred|barney|betty/
+/fred|barney|betty/;
 ```
 
 选择符会包括它前后的多个字符，比如`/ab|cd/`指的是匹配`ab`或者`cd`,而不是指匹配`b`或者`c`。如果想修改这个行为，可以使用圆括号。
 
-```
-/a( |\t)b/.test('a\tb')         // true
+```js
+/a( |\t)b/.test("a\tb"); // true
 ```
 
 上面代码指的是，`a`和`b`之间有一个空格或者一个制表符。
@@ -364,7 +363,7 @@ str.split(separator, [limit])
 
 正则表达式中那些有特殊含义的元字符，如果要匹配它们本身，就需要在它们前面要加上反斜杠。比如要匹配`+`，就要写成`\+`
 
-```
+```js
 /1+1/.test('1+1')           // false
 
 /1\+1/.test('1+1')          // true
@@ -374,10 +373,15 @@ str.split(separator, [limit])
 
 正则表达式中，需要反斜杠转义的，一共有 12 个字符：`^`、`.`、`[`、`$`、`(`、`)`、`|`、`*`、`+`、`?`、`{`、`\` 。需要特别注意的是，如果使用`RegExp`方法生成正则对象，转义需要使用两个斜杠，因为字符串内部会先转义一次。
 
-```
-(new RegExp('1\+1')).test('1+1')            // false
+```js
+new RegExp("1+1")
+  .test("1+1")
+  (
+    // false
 
-(new RegExp('1\\+1')).test('1+1')           // true
+    new RegExp("1\\+1")
+  )
+  .test("1+1"); // true
 ```
 
 上面代码中，`RegExp`作为构造函数，参数是一个字符串。但是，在字符串内部，反斜杠也是转义字符，所以它会先被反斜杠转义一次，然后再被正则表达式转义一次，因此需要两个反斜杠进行转义。
@@ -401,7 +405,7 @@ str.split(separator, [limit])
 
 字符类（class）表示有一系列字符可供选择，只要匹配其中一个就可以了。所以可供选择的字符都放在方括号内，比如`[xyz]`表示`x`、`y`、`z`之中任选一个匹配。
 
-```
+```js
 /[abc]/.test('hello world') // false
 
 /[abc]/.test('apple') // true
@@ -411,11 +415,11 @@ str.split(separator, [limit])
 
 有两个字符在字符类中的特殊含义。
 
-#### 托字符(^)
+### 托字符(^)
 
 如果方括号内的第一个字符是`[^]`，则表示除了字符类之中的字符，其他字符都可以匹配。比如，`[^xyz]`表示除了`x`、`y`、`z`之外都可以匹配
 
-```
+```js
 /[^abc]/.test('hello world') // true
 
 /[^abc]/.test('bbc') // false
@@ -425,22 +429,22 @@ str.split(separator, [limit])
 
 如果方括号内没有其他字符，即只有`[^]`，就表示匹配一切字符，其中包括换行符。相比之下，点号作为元字符(`.`)是不包括换行符的。
 
-```
-var s = 'Please yes\nmake my day!';
+```js
+var s = "Please yes\nmake my day!";
 
-s.match(/yes.*day/) // null
-s.match(/yes[^]*day/) // [ 'yes\nmake my day']
+s.match(/yes.*day/); // null
+s.match(/yes[^]*day/); // [ 'yes\nmake my day']
 ```
 
 上面代码中，字符串`s`含有一个换行符，点号不包括换行符，所以第一个正则表达式匹配失败；第二个正则表达式`[^]`包含一切字符，所以匹配成功
 
 > 注意，脱字符只有在字符类的第一个位置才有特殊含义，否则就是字面含义
 
-#### 连字符(-)
+### 连字符(-)
 
 某些情况下，对于连续序列的字符，连字符（`-`）用来提供简写形式，表示字符的连续范围。比如，`[abc]`可以写成`[a-c]`，`[0123456789]`可以写成`[0-9]`，同理`[A-Z]`表示 26 个大写字母
 
-```
+```js
 /a-z/.test('b')         // false
 
 /[a-z]/.test('b')       // true     必须写在 [] 中
@@ -450,7 +454,7 @@ s.match(/yes[^]*day/) // [ 'yes\nmake my day']
 
 以下都是合法的字符类简写形式
 
-```
+```js
 [0-9.,]                 // 0到无限
 [0-9a-fA-F]
 [a-zA-Z0-9-]
@@ -461,8 +465,8 @@ s.match(/yes[^]*day/) // [ 'yes\nmake my day']
 不要过分使用连字符，设定一个很大的范围，否则很可能选中意料之外的字符。最典型的例子就是`[A-z]`，表面上它是选中从大写`A`到小写`z`之间的52个字母，但是由于在Ascll编码直之中，大写字母与小写字母之间还有其他字符，结果就会出现意料之外的结果。
 </b>
 
-```
-/[A-z]/.test('\\')          // true
+```js
+/[A-z]/.test("\\"); // true
 ```
 
 上面代码中，由于反斜杠（`\`）的 Ascll 码在大写字母与小写字母之间，结果会被选中。
@@ -482,7 +486,7 @@ s.match(/yes[^]*day/) // [ 'yes\nmake my day']
 
 例子
 
-```
+```js
 // \s 的例子
 /\s\w*/.exec('hello world') // [" world"]
 
@@ -500,19 +504,19 @@ s.match(/yes[^]*day/) // [ 'yes\nmake my day']
 
 通常，正则表达式遇到换行符（`\n`）就会停止匹配
 
-```
+```js
 var html = "<b>Hello</b>\n<i>world!</i>";
 
-/.*/.exec(html)[0]
+/.*/.exec(html)[0];
 // "<b>Hello</b>"
 ```
 
 上面代码中，字符串`html`包含一个换行符，结果点字符（`.`）不匹配换行符，导致匹配结果可能不符合原意。这时使用`\s`字符类，就能包括换行符。
 
-```
+```js
 var html = "<b>Hello</b>\n<i>world!</i>";
 
-/[\S\s]*/.exec(html)[0]
+/[\S\s]*/.exec(html)[0];
 // "<b>Hello</b>\n<i>world!</i>"
 ```
 
@@ -522,7 +526,7 @@ var html = "<b>Hello</b>\n<i>world!</i>";
 
 模式的精确匹配次数，使用大括号（`{}`）表示。`{n}`表示恰好重复`n`次，`{n,}`表示至少重复`n`次，`{n,m}`表示重复不少于`n`次，不多于`m`次。
 
-```
+```js
 /lo{2}k/.test('look')       // true
 
 /lo{2,5}k/.test('looook')   // true
@@ -538,7 +542,7 @@ var html = "<b>Hello</b>\n<i>world!</i>";
 - `*` 星号表示某个模式出现 0 次或多次，等同于`{0,}`
 - `+` 加号表示某个模式出现 1 次或多次，等同于`{1,}`s
 
-```
+```js
 // t 出现0次或1次
 /t?est/.test('test') // true
 /t?est/.test('est') // true
@@ -559,18 +563,18 @@ var html = "<b>Hello</b>\n<i>world!</i>";
 
 上一小节的三个量词符，默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式
 
-```
-let s = 'aaa';
-s.match(/a+/)           // ["aaa"]
+```js
+let s = "aaa";
+s.match(/a+/); // ["aaa"]
 ```
 
 上面代码中，模式是`/a+/`，表示匹配 1 个`a`或多个`a`，那么到底会匹配几个`a`呢？因为默认是贪婪模式，会一直匹配到字符`a`不出现为止，所以匹配结果是 3 个`a`
 
 如果想将贪婪模式改为非贪婪模式，可以在量词符后面加一个问号
 
-```
-let s = 'aaa';
-s.match(/a+?/)          // ["a"]
+```js
+let s = "aaa";
+s.match(/a+?/); // ["a"]
 ```
 
 上面代码中，模式结尾添加了一个问好`/a+?/`，这时就改为非贪婪模式，一旦条件满足，就不在往下匹配
@@ -581,12 +585,12 @@ s.match(/a+?/)          // ["a"]
 - `*?`：表示某个模式出现 0 次或多次，匹配时采用非贪婪模式。
 - `??`：表格某个模式出现 0 次或 1 次，匹配时采用非贪婪模式。
 
-```
-'abb'.match(/ab*b/) // ["abb"]
-'abb'.match(/ab*?b/) // ["ab"]
+```js
+"abb".match(/ab*b/); // ["abb"]
+"abb".match(/ab*?b/); // ["ab"]
 
-'abb'.match(/ab?b/) // ["abb"]
-'abb'.match(/ab??b/) // ["ab"]
+"abb".match(/ab?b/); // ["abb"]
+"abb".match(/ab??b/); // ["ab"]
 ```
 
 ## 修饰符
@@ -595,21 +599,21 @@ s.match(/a+?/)          // ["a"]
 
 修饰符可以单个使用，也可以多个一起使用
 
-```
+```js
 // 单个修饰符
 var regex = /test/i;
 
 // 多个修饰符
-var regex = /test/ig;
+var regex = /test/gi;
 ```
 
 ### g 修饰符
 
 默认情况下，第一次匹配成功后，正则对象就停止向下匹配了。`g`修饰符表示全局匹配（global），加上它以后，正则对象将匹配全部复合条件的结果，主要用于搜索和替换。
 
-```
+```js
 var regex = /b/;
-var str = 'abba';
+var str = "abba";
 
 regex.test(str); // true
 regex.test(str); // true
@@ -618,9 +622,9 @@ regex.test(str); // true
 
 上面代码中，正则模式不含`g`修饰符，每次都是从字符串头部开始匹配。所以，连续做了三次匹配，都返回`true`
 
-```
+```js
 var regex = /b/g;
-var str = 'abba';
+var str = "abba";
 
 regex.test(str); // true
 regex.test(str); // true
@@ -633,10 +637,10 @@ regex.test(str); // false
 
 默认情况下，正则对象区分字母的大小写，加上`i`修饰符以后表示忽略大小写（ignorecase）
 
-```
-/abc/.test('ABC')       // false 不区分大小写
-
-/abc/i.test('ABC')      // true  区分大小写
+```js
+/abc/.test("ABC") / // false 不区分大小写
+  abc /
+  i.test("ABC"); // true  区分大小写
 ```
 
 上面代码表示，加上`i`修饰符以后，不考虑大小写，所以模式`abc`匹配字符串`ABC`
@@ -645,16 +649,16 @@ regex.test(str); // false
 
 `m`修饰符表示多行模式(multiline)，会修改`^`和`$`的行为。默认情况下（即不加`m`修饰符时），`^`和`$`匹配字符串的开始处和结尾处，加上`m`修饰符以后，`^`和`$`还会匹配行首和行尾，即`^`和`$`会是识别换行符（`\n`）
 
-```
-/world$/.test('hello world\n')      // false
-
-/world$/m.test('hello world\n')     // true
+```js
+/world$/.test("hello world\n") / // false
+  world$ /
+  m.test("hello world\n"); // true
 ```
 
 上面的代码中，字符串结尾处有一个换行符。如果不加`m`修饰符，匹配不成功，因为字符串的结尾不是`world`；加上以后，`$`可以匹配行尾
 
-```
-/^b/m.test('a\nb') // true
+```js
+/^b/m.test("a\nb"); // true
 ```
 
 上面代码要求匹配行首的`b`，如果不加`m`修饰符，就相当于`b`只能处在字符串的开始处。加上`b`修饰符以后，换行符`\n`也会被认为是一行的开始
@@ -665,19 +669,19 @@ regex.test(str); // false
 
 正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容
 
-```
-/fred+/.test('fredd') // true
-
-/(fred)+/.test('fredfred') // true
+```js
+/fred+/.test("fredd") / // true
+  fred +
+  /.test('fredfred') / / true;
 ```
 
 上面代码中，第一个模式没有括号，结果`+`只表示重复字母`d`，第二个模式右括号，结果`+`就表示匹配`fred`这个词。
 
 下面是另外一个分组捕获的例子
 
-```
-let m = 'abcabc'.match(/(.)b(.)/);
-m
+```js
+let m = "abcabc".match(/(.)b(.)/);
+m;
 // ['abc', 'a', 'c']
 ```
 
@@ -685,16 +689,16 @@ m
 
 <b>注意，使用组匹配时，不宜同时使用`g`修饰符，否则`match`方法不会捕获分组的内容</b>
 
-```
-let m = 'abcabc'.match(/(.)b(.)/g);
-m
+```js
+let m = "abcabc".match(/(.)b(.)/g);
+m;
 // ['abc', 'abc']
 ```
 
 上面代码使用带`g`修饰符的正则表达式，结果`match`方法只捕获了匹配整个表达式的部分。这时必须使用正则表达式的`exec`方法，配合循环，才能读到每一轮匹配的组捕获
 
-```
-var str = 'abcabc';
+```js
+var str = "abcabc";
 var reg = /(.)b(.)/g;
 while (true) {
   var result = reg.exec(str);
@@ -704,4 +708,3 @@ while (true) {
 // ["abc", "a", "c"]
 // ["abc", "a", "c"]
 ```
-

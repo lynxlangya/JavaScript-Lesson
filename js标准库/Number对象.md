@@ -6,17 +6,17 @@
 
 作为构造函数时，它用于生成值为数值的对象。
 
-```
+```js
 var n = new Number(1);
-typeof n // "object"
+typeof n; // "object"
 ```
 
 上面代码中，`Number`对象作为构造函数使用，返回一个值为`1`的对象。
 
 作为工具函数时，他可以将任何类型的值转为数值。
 
-```
-Number( true)			// 1
+```js
+Number(true); // 1
 ```
 
 上面代码将布尔值`true`转为数值`1`
@@ -32,21 +32,21 @@ Number( true)			// 1
 - `Number.MAX_SAFE_INTEGER`: 表示能够精确表示的最大整数，即`9007199254740991`
 - `Number.MIN_SAFE_INTEGER`: 表示能后精确表示的最小整数，即`-9007199254740991`
 
-```
-Number.POSITIVE_INFINITY // Infinity
-Number.NEGATIVE_INFINITY // -Infinity
-Number.NaN // NaN
+```js
+Number.POSITIVE_INFINITY; // Infinity
+Number.NEGATIVE_INFINITY; // -Infinity
+Number.NaN; // NaN
 
-Number.MAX_VALUE
+Number.MAX_VALUE;
 // 1.7976931348623157e+308
-Number.MAX_VALUE < Infinity
+Number.MAX_VALUE < Infinity;
 // true
 
-Number.MIN_VALUE
+Number.MIN_VALUE;
 // 5e-324
-Number.MIN_VALUE > 0
+Number.MIN_VALUE > 0;
 // true
 
-Number.MAX_SAFE_INTEGER // 9007199254740991
-Number.MIN_SAFE_INTEGER // -9007199254740991
+Number.MAX_SAFE_INTEGER; // 9007199254740991
+Number.MIN_SAFE_INTEGER; // -9007199254740991
 ```
