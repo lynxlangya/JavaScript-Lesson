@@ -6,7 +6,7 @@
 
 `null` 与 `undefined` 都可以表示"没有",含义非常相似.将变量赋值为`undefined`或`null`,语法效果几乎没有区别.
 
-```
+```js
 let a = undefined;
 
 let a = null;
@@ -16,7 +16,7 @@ let a = null;
 
 在 `if` 语句中,它们都会被自动转为 `false` ,相等运算符 (`==`) 甚至直接报告两者相等.
 
-```
+```js
 if (!undefined) {
     console.log('undefined is false');
 }
@@ -34,7 +34,7 @@ undefined == null;
 
 两者区别在于: `null` 是一个表示"空"的对象,转为数值时为 `0`; `undefined` 是一个表示"此处无定义" 的原始值,转为数值时为 `NaN`.
 
-```
+```js
 Number (undefined)      // NaN
 5 + undefined           // NaN
 ```
@@ -47,7 +47,7 @@ Number (undefined)      // NaN
 
 `undefined` 表示"未定义",下面是返回`undefined` 的典型场景.
 
-```
+```js
 // 声明了变量,但是没有赋值
 let i;
 i;              // undefined
@@ -89,7 +89,7 @@ f()             // undefined
 
 布尔值往往用于程序流程的控制
 
-```
+```js
 if ('') {
     console.log('true');
 }
@@ -100,7 +100,7 @@ if ('') {
 
 注意:空数组 (`[]`) 和空对象 (`{}`) 对应的布尔值,都是 `true`.
 
-```
+```js
 if ([]) {
     console.log('true');
 }
