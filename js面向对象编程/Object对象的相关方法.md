@@ -6,49 +6,49 @@ JavaScript 在`Object`对象上面，提供了很多相关的方法，处理面�
 
 `Object.getPrototypeOf`方法返回参数对象的原型，这是获取原型对象的标准方法
 
-```
-let F = function () {};
+```js
+let F = function() {};
 let f = new F();
-Object.getPrototypeOf(f) === F.prototype        // true
+Object.getPrototypeOf(f) === F.prototype; // true
 ```
 
 上面代码中，实例对象 `f` 的原型是 `F.prototype`
 
 下面是几种特殊对象的原型
 
-```
+```js
 // 空对象的原型是 Object.prototype
-Object.getPrototypeOf({}) === Object.prototype // true
+Object.getPrototypeOf({}) === Object.prototype; // true
 
 // Object.prototype 的原型是 null
-Object.getPrototypeOf(Object.prototype) === null // true
+Object.getPrototypeOf(Object.prototype) === null; // true
 
 // 函数的原型是 Function.prototype
 function f() {}
-Object.getPrototypeOf(f) === Function.prototype // true
+Object.getPrototypeOf(f) === Function.prototype; // true
 ```
 
 ## `Object.setPrototypeOf()`
 
 `Object.setPrototypeOf`方法为参数对象设置原型，返回该参数对象。它接受两个参数，第一个是现有对象，第二个是原型对象
 
-```
+```js
 var a = {};
-var b = {x: 1};
+var b = { x: 1 };
 Object.setPrototypeOf(a, b);
 
-Object.getPrototypeOf(a) === b      // true
-a.x             // 1
+Object.getPrototypeOf(a) === b; // true
+a.x; // 1
 ```
 
 上面代码中，`Object.setPrototypeOf`方法将对象`a`的原型，设置为对象`b`，因此`a`可以共享`b`的属性
 
 `new`命令可以使用`Object.setPrototypeOf`方法模拟
 
-```
-let F = function () {
-     this.foo = 'bar';
-}
+```js
+let F = function() {
+  this.foo = "bar";
+};
 
 let f = new F();
 // 等同于
@@ -64,33 +64,33 @@ F.call(f);
 
 JavaScript 提供了`Object.create`方法，用来满足这种需求。该方法接受一个对象作为参数，然后以它为原型，返回一个实例对象。该实例完全继承原型对象的属性
 
-```
+```js
 // 原型对象
 var A = {
-  print: function () {
-    console.log('hello');
+  print: function() {
+    console.log("hello");
   }
 };
 
 // 实例对象
 var B = Object.create(A);
 
-Object.getPrototypeOf(B) === A // true
-B.print() // hello
-B.print === A.print // true
+Object.getPrototypeOf(B) === A; // true
+B.print(); // hello
+B.print === A.print; // true
 ```
 
 上面代码中，`Object.create`方法以`A`对象为原型，生成了`B`对象。`B`继承了`A`的所有属性和方法
 
 实际上，`Object.create`方法可以用下面的代码代替
 
-```
-if (typeof Object.create !== 'function'){
-    Object.create = function (obj) {
-        function F() {}
-            F.prototype = obj;
-            return new F();
-    }
+```js
+if (typeof Object.create !== "function") {
+  Object.create = function(obj) {
+    function F() {}
+    F.prototype = obj;
+    return new F();
+  };
 }
 ```
 
@@ -100,13 +100,13 @@ if (typeof Object.create !== 'function'){
 
 实例对象的`isPrototypeOf`方法，用来判断该对象是否为参数对象的原型
 
-```
+```js
 let o1 = {};
 let o2 = Object.create(o1);
 let o3 = Object.create(o2);
 
-o2.isPrototypeOf(o3);       // true
-o1.isPrototypeOf(o3)        // true
+o2.isPrototypeOf(o3); // true
+o1.isPrototypeOf(o3); // true
 ```
 
 上面代码中，由于`Object.prototypeOf`处于原型链的最顶端，所以对各种实例都返回`true`，只有直接继承自`null`的对象除外
@@ -115,12 +115,12 @@ o1.isPrototypeOf(o3)        // true
 
 实例对象的`__proto__`属性（前后各两个下划线），返回该对象的原型，该属性可读写
 
-```
+```js
 let obj = {};
 let p = {};
 
 obj.__proto__ = p;
-Object.getPrototpeOf(obj) === p         // true
+Object.getPrototpeOf(obj) === p; // true
 ```
 
 上面代码通过`__proto__`属性，将`p`对象设为`obj`对象的原型
@@ -129,13 +129,13 @@ Object.getPrototpeOf(obj) === p         // true
 
 如前所述，`__proto__`属性指向当前对象的原型对象，即构造函数的`prototype`属性
 
-```
+```js
 let obj = new Object();
 
-obj.__proto__ === Object.prototype
+obj.__proto__ === Object.prototype;
 // true
 
-obj.__proto__ === obj.constructor.prototype
+obj.__proto__ === obj.constructor.prototype;
 // true
 ```
 
@@ -149,25 +149,25 @@ obj.__proto__ === obj.constructor.prototype
 
 上面三种方法之中，前两种都不是很可靠。`__proto__`属性只有浏览器才需要部署，其他环境可以不部署。而`obj.constructor.prototype`在手动改变原型对象时，可能会失效
 
-```
-var P = function () {};
+```js
+var P = function() {};
 var p = new P();
 
-var C = function () {};
+var C = function() {};
 C.prototype = p;
 var c = new C();
 
-c.constructor.prototype === p // false
+c.constructor.prototype === p; // false
 ```
 
 上面代码中，构造函数`C`的原型对象被改成了`p`，但是实例对象的`c.constructor.prototype`却没有指向`p`。所以，在改变原型对象时，一般要设置`constructor`属性
 
-```
+```js
 C.prototype = p;
 C.prototype.constructor = C;
 
 var c = new C();
-c.constructor.prototype === p // true
+c.constructor.prototype === p; // true
 ```
 
 推荐使用第三种`Object.getPrototypeOf`方法，获取原型对象
@@ -176,8 +176,8 @@ c.constructor.prototype === p // true
 
 `Object.getOwnPropertyNames`方法返回一个数组，成员是参数对象本身的所有属性的键名，不包含继承的属性键名
 
-```
-Object.getOwnPropertyNames(Date)
+```js
+Object.getOwnPropertyNames(Date);
 // ["parse", "arguments", "UTC", "caller", "name", "prototype", "now", "length"]
 ```
 
@@ -185,8 +185,8 @@ Object.getOwnPropertyNames(Date)
 
 对象本身的属性之中，有的是可以遍历的(enumerable)，有的是不可以遍历的`Object.getOwnPropertyNames`方法返回所有键名，不管是否可以遍历。只获取那些可以遍历的属性，使用`Object.keys`方法
 
-```
-Object.keys(Date)           // []
+```js
+Object.keys(Date); // []
 ```
 
 上面代码表明，`Date`对象所有自身的属性，都是不可以遍历的
@@ -195,9 +195,9 @@ Object.keys(Date)           // []
 
 对象实例的`hasOwnProperty`方法返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上
 
-```
-Date.hasOwnProperty('length') // true
-Date.hasOwnProperty('toString') // false
+```js
+Date.hasOwnProperty("length"); // true
+Date.hasOwnProperty("toString"); // false
 ```
 
 上面代码表明，`Date.length`（构造函数`Date`可以接受多少个参数）是`Date`自身的属性，`Date.toString`是继承的属性
@@ -208,16 +208,16 @@ Date.hasOwnProperty('toString') // false
 
 `in`运算符返回一个布尔值，表示一个对象是否具有某个属性。它不区分该属性是对象自身的属性，还是继承的属性
 
-```
-'length' in Date // true
-'toString' in Date // true
+```js
+"length" in Date; // true
+"toString" in Date; // true
 ```
 
 `in`运算符常用于检查一个属性是否存在
 
 获得对象的所有可遍历属性（不管是自身的还是继承的），可以使用`for...in`循环
 
-```
+```js
 var o1 = { p1: 123 };
 
 var o2 = Object.create(o1, {
@@ -235,9 +235,9 @@ for (p in o2) {
 
 为了在`for...in`循环中获得对象自身的属性，可以采用`hasOwnProperty`方法判断一下
 
-```
-for ( var name in object ) {
-  if ( object.hasOwnProperty(name) ) {
+```js
+for (var name in object) {
+  if (object.hasOwnProperty(name)) {
     /* loop code */
   }
 }
@@ -245,10 +245,10 @@ for ( var name in object ) {
 
 获得对象的所有属性（不管是自身的还是继承的，也不管是否可枚举），可以使用下面的函数
 
-```
+```js
 function inheritedPropertyNames(obj) {
   var props = {};
-  while(obj) {
+  while (obj) {
     Object.getOwnPropertyNames(obj).forEach(function(p) {
       props[p] = true;
     });
@@ -262,8 +262,8 @@ function inheritedPropertyNames(obj) {
 
 下面是一个例子，列出`Date`对象的所有属性
 
-```
-inheritedPropertyNames(Date)
+```js
+inheritedPropertyNames(Date);
 // [
 //  "caller",
 //  "constructor",
