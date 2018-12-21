@@ -77,3 +77,145 @@ p.nodeType; // 1
 ## 实例属性
 
 ### 元素特性和相关属性
+
+#### Element.id
+
+`Element.id`属性返回指定元素的`id`属性，该属性可读写
+
+```js
+// HTML 代码为 <p id="foo">
+var p = document.querySelector("p");
+p.id; // "foo"
+```
+
+注意，`id`属性的值是大小写敏感，即浏览器能正确识别`<p id='foo'>`和`<p id='FOO'>`这两个元素的`id`属性，但是最好不要这样命名
+
+#### Element.tagName
+
+`Element.tagName`属性返回指定元素的大写标签名，与`nodeName`属性的值相等
+
+```js
+// HTML代码为
+// <span id="myspan">Hello</span>
+var span = document.getElementById("myspan");
+span.id; // "myspan"
+span.tagName; // "SPAN"
+```
+
+#### Element.lang
+
+`Element.lang`属性返回当前元素的语言设置。该属性可读写
+
+```js
+// HTML 代码如下
+// <html lang="en">
+document.documentElement.lang; // "en"
+```
+
+### 元素状态的相关属性
+
+#### Element.hidden
+
+`Element.hidden`属性返回一个布尔值，表示当前元素的`hidden`属性，用来控制当前元素是否可见
+
+```js
+var btn = document.getElementById("btn");
+var mydiv = document.getElementById("mydiv");
+
+btn.addEventListener(
+  "click",
+  function() {
+    mydiv.hidden = !mydiv.hidden;
+  },
+  false
+);
+```
+
+### Element.innerHTML
+
+`Element.innerHTML`属性返回一个字符串，等同于该元素包含的所有 HTML 代码。该属性可读写，常用来设置某个节点的内容。它能改写所有元素节点的内容，包括`<HTML>`和`<body>`元素
+
+如果将`innerHTML`属性设为空，等于删除所有它包含的所有节点
+
+```js
+el.innerHTML = "";
+```
+
+上面代码等于将`el`节点变成一个空节点，`el`原来包含的节点被全部删除
+
+注意，读取属性值的时候，如果文本节点包含`&`、小于号（`<`）和大于号（`>`），`innerHTML`属性会将它们转为实体形式`&amp;`、`&lt;`、`&gt`。如果想得到原文，建议使用`element.textContent`属性
+
+```js
+// HTML代码如下 <p id="para"> 5 > 3 </p>
+document.getElementById("para").innerHTML;
+// 5 &gt; 3
+```
+
+写入的时候，如果插入的文本包含 HTML 标签，会被解析成为节点对象插入 DOM。注意，如果文本之中含有`<script>`标签，虽然可以生成`script`节点，但是插入的代码不会执行
+
+```js
+let name = "<script>alert('haha')</script>";
+el.innerHTML = name;
+```
+
+上面代码将脚本插入内容，脚本并不会执行。但是，`innerHTML`还是有安全风险的
+
+```js
+let name = "<img src = x onerror = alert(1)>";
+el.innerHTML = name;
+```
+
+上面代码中，`alert`方法是会执行的。因此为了安全考虑，如果插入的是文本，最好用`textContent`属性代替`innerHTML`
+
+### Element.outerHTML
+
+`Element.outerHTML`属性返回一个字符串，表示当前元素节点的所有 HTML 代码，包括该元素本身和所有子元素
+
+```js
+// HTML 代码如下
+// <div id="d"><p>Hello</p></div>
+var d = document.getElementById("d");
+d.outerHTML;
+// '<div id="d"><p>Hello</p></div>'
+```
+
+`outerHTML`属性是可读写的，对它进行赋值，等于替换掉当前元素
+
+```js
+// HTML 代码如下
+// <div id="container"><div id="d">Hello</div></div>
+var container = document.getElementById("container");
+var d = document.getElementById("d");
+container.firstChild.nodeName; // "DIV"
+d.nodeName; // "DIV"
+
+d.outerHTML = "<p>Hello</p>";
+container.firstChild.nodeName; // "P"
+d.nodeName; // "DIV"
+```
+
+上面代码中，变量`d`代表子节点，它的`outerHTML`属性重新赋值以后，内层的`div`元素就不存在了，被 `p`元素替换了。但是，变量`d`依然指向原来的`div`元素，这表示被替换的`DIV`元素还存在与内存中。
+
+注意，如果一个节点没有父节点，设置`outerHTML`属性会报错
+
+```js
+let div = document.createElement("div");
+div.outerHTML = "<p>test</p>";
+// DOMException: This element has no parent node.
+```
+
+上面代码中，`div`元素没有父节点，设置`outerHTML`属性会报错
+
+## 实例方法
+
+### 属性相关方法
+
+元素节点提供六个方法，用来操作属性
+
+- `getAttribute()`: 读取某个属性的值
+- `getAttributeNames()`: 返回当前元素的所有属性名
+- `setAttribute()`: 写入属性值
+- `hasAttribute()`: 某个属性是否存在
+- `hasAttributes()`: 当前元素是否有属性
+- `removeAttribute()`: 删除属性
+
