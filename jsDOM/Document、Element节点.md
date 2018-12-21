@@ -218,4 +218,3 @@ div.outerHTML = "<p>test</p>";
 - `hasAttribute()`: 某个属性是否存在
 - `hasAttributes()`: 当前元素是否有属性
 - `removeAttribute()`: 删除属性
-
