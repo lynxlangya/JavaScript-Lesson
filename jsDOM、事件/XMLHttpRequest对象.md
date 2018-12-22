@@ -45,3 +45,42 @@ function handleStateChange() {
 
 一旦拿到服务器返回的数据，AJAX 不会刷新整个网页，而是只更新网页里面的相关部分，从而不打断用户正在做的事情
 
+### XMLHttpRequest.status，XMLHttpRequest.statusText
+
+`XMLHttpRequest.status`属性返回一个整数，表示服务器回应的 HTTP 状态码。一般来说，如果通信成功的话，这个状态码是 200；如果服务器没有返回状态码，那么这个属性默认是 200.请求发出之前，该属性为`0`。该属性只读
+
+- 200, OK，访问正常
+- 301, Moved Permanently，永久移动
+- 302, Moved temporarily，暂时移动
+- 304, Not Modified，未修改
+- 307, Temporary Redirect，暂时重定向
+- 401, Unauthorized，未授权
+- 403, Forbidden，禁止访问
+- 404, Not Found，未发现指定网址
+- 500, Internal Server Error，服务器发生错误
+
+基本上，只有 2xx 和 304 的状态码，表示服务器返回是正常状态
+
+```js
+if (xhr.readyState === 4) {
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+    // 处理服务器的返回数据
+  } else {
+    // 出错
+  }
+}
+```
+
+`XMLHttpRequest.statusText`属性返回一个字符串，表示服务器发送的状态提示。不同于`status`属性，该属性包含整个状态信息，比如“OK”和“Not Found”。在请求发送之前（即调用`open()`方法之前），该属性的值是空字符串；如果服务器没有返回状态提示，该属性的值默认为“OK”。该属性为只读属性
+
+### 事件监听属性
+
+XMLHttpRequest 对象可以对以下事件指定监听函数。
+
+- XMLHttpRequest.onloadstart：loadstart 事件（HTTP 请求发出）的监听函数
+- XMLHttpRequest.onprogress：progress 事件（正在发送和加载数据）的监听函数
+- XMLHttpRequest.onabort：abort 事件（请求中止，比如用户调用了 abort()方法）的监听函数
+- XMLHttpRequest.onerror：error 事件（请求失败）的监听函数
+- XMLHttpRequest.onload：load 事件（请求成功完成）的监听函数
+- XMLHttpRequest.ontimeout：timeout 事件（用户指定的时限超过了，请求还未完成）的监听函数
+- XMLHttpRequest.onloadend：loadend 事件（请求完成，不管成功或失败）的监听函数
