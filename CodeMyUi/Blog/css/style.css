@@ -72,6 +72,10 @@ nav {
   font-size: 2em;
 }
 
+#overlay ul a:hover {
+  color: #bdc3c7;
+}
+
 #overlay ul span {
   color: #bdc3c7;
   display: block;
