@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster|Permanent+Marker");
+
+body,
+html {
+  font-family: "Lobster", cursive;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  padding: 2em;
+}
+
+header .logo {
+  color: black;
+  font-size: 1.2em;
+}
+
+header .menu-btn {
+  float: right;
+  cursor: pointer;
+}
+
+section{
+    padding: 4em;
+}
+
+section h1{
+    font-size: 3em;
+    margin: 3em auto;
+    width: 70%;
+    /* text-align: center; */
+}
+
+section h1::before{
+    content: "";
+    border-top: 0.15em solid #bdc3c7;
+    display: block;
+}
