@@ -1,0 +1,15 @@
+html,
+body {
+    overflow: hidden;
+    background: #000000;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ffffff;
+}
