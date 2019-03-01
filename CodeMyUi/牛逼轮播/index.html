@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>牛逼轮播</title>
+    <link rel="stylesheet" href="https://alikinvv.github.io/previewSlider/demo/css/preview-slider.min.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .slider-desc {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .slider-desc .title {
+            font-size: 95px;
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+
+        .slider-desc .desc {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .zoom .slider-item {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview-slider">
+        <div class="slider-wrapper">
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img4.jpg)"></div>
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img1.jpg)"></div>
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img6.jpg)"></div>
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img3.jpg)"></div>
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img5.jpg)"></div>
+            <div class="slider-item" style="background-image: url(https://alikinvv.github.io/previewSlider/demo/img/img2.jpg)"></div>
+        </div>
+
+        <div class="arrow arrow-right"></div>
+        <div class="arrow arrow-left"></div>
+
+        <div class="slider-desc">
+            <p class="title">True Detective</p>
+
+            <span class="desc">True Detective is an American crime drama television series <br>
+                created and written by Nic Pizzolatto. The series is broadcast <br>
+                by the premium cable network HBO in the United States.</span>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
