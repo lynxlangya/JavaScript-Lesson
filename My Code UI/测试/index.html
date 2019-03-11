@@ -2,119 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        var count = 0;
+  <script>
+    var count = 0;
 
-        function cc(card) {
-            // 请把你的代码写在这条注释以下
-            // 解法 1
-            switch (card) {
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                    count += 1;
-                    break;
-                case 10:
-                case "J":
-                case "Q":
-                case "K":
-                case "A":
-                    count -= 1;
-                    break;
-                default:
-                    count += 0;
-            }
-            if (count > 0) {
-                return count + " Bet";
-            } else {
-                return count + " Hold";
-            }
-            return "Change Me";
+    function cc(card) {
+      // 请把你的代码写在这条注释以下
+      // 解法 1
+      switch (card) {
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+          count += 1;
+          break;
+        case 10:
+        case "J":
+        case "Q":
+        case "K":
+        case "A":
+          count -= 1;
+          break;
+        default:
+          count += 0;
+      }
+      if (count > 0) {
+        return count + " Bet";
+      } else {
+        return count + " Hold";
+      }
+      return "Change Me";
 
-            // 解法 2
-            var cards = {
-                2: 1,
-                3: 1,
-                4: 1,
-                5: 1,
-                6: 1,
-                7: 0,
-                8: 0,
-                9: 0,
-                10: -1,
-                "J": -1,
-                "Q": -1,
-                "K": -1,
-                "A": -1
-            };
-            count = count + cards[card];
-            if (count > 0) {
-                return count + "Bet";
-            } else {
-                return count + "Hold"
-            }
-            // 请把你的代码写在这条注释以上
-        }
+      // 解法 2
+      var cards = {
+        2: 1,
+        3: 1,
+        4: 1,
+        5: 1,
+        6: 1,
+        7: 0,
+        8: 0,
+        9: 0,
+        10: -1,
+        "J": -1,
+        "Q": -1,
+        "K": -1,
+        "A": -1
+      };
+      count = count + cards[card];
+      if (count > 0) {
+        return count + "Bet";
+      } else {
+        return count + "Hold"
+      }
+      // 请把你的代码写在这条注释以上
+    }
 
-        // 你可以在这里添加/删除 cc 方法的调用来测试结果
-        // 提示: 左边只会显示最后一次执行的返回值
-        cc(2);
-        cc(3);
-        cc(7);
-        cc('K');
-        cc('A');
-    </script>
+    // 你可以在这里添加/删除 cc 方法的调用来测试结果
+    // 提示: 左边只会显示最后一次执行的返回值
+    cc(2);
+    cc(3);
+    cc(7);
+    cc('K');
+    cc('A');
+  </script>
 
-    <script>
-        // 定义 phoneticLookup
-        function phoneticLookup(val) {
-            var result = "";
+  <script>
+    // 定义 phoneticLookup
+    function phoneticLookup(val) {
+      var result = "";
 
-            // 请只修改这条注释以下的代码
-            switch (val) {
-                case "alpha":
-                    result = "Adams";
-                    break;
-                case "bravo":
-                    result = "Boston";
-                    break;
-                case "charlie":
-                    result = "Chicago";
-                    break;
-                case "delta":
-                    result = "Denver";
-                    break;
-                case "echo":
-                    result = "Easy";
-                    break;
-                case "foxtrot":
-                    result = "Frank";
-            }
+      // 请只修改这条注释以下的代码
+      switch (val) {
+        case "alpha":
+          result = "Adams";
+          break;
+        case "bravo":
+          result = "Boston";
+          break;
+        case "charlie":
+          result = "Chicago";
+          break;
+        case "delta":
+          result = "Denver";
+          break;
+        case "echo":
+          result = "Easy";
+          break;
+        case "foxtrot":
+          result = "Frank";
+      }
 
-            var lookup = {
-                "alpha": "Adams",
-                "bravo": "Boston",
-                "charlie": "Chicago",
-                "delta": "Denver",
-                "echo": "Easy",
-                "foxtrot": "Frank"
-            }
-            // 请只修改这条注释以上的代码
-            return result;
-        }
+      var lookup = {
+        "alpha": "Adams",
+        "bravo": "Boston",
+        "charlie": "Chicago",
+        "delta": "Denver",
+        "echo": "Easy",
+        "foxtrot": "Frank"
+      }
+      // 请只修改这条注释以上的代码
+      return result;
+    }
 
-        // 你可以修改这一行来测试你的代码
-        phoneticLookup("charlie");
-    </script>
+    // 你可以修改这一行来测试你的代码
+    phoneticLookup("charlie");
+  </script>
 </body>
 
 </html>
