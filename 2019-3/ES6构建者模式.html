@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6构建者模式</title>
+</head>
+
+<body>
+  <script>
+    let studentCount = 0;
+
+    /**
+     * let 定义可变化的变量
+     * 
+     * const 定义不可变化的常量
+     */
+
+    class Student {
+
+    }
+
+    class StudentBuilder {
+      constructor() {
+        this.student = new Student();
+      }
+
+      setName(name) {
+        this.student.name = name;
+      }
+
+      setGender(gender) {
+        if (gender != '男' && gender != '女') {
+          throw '逗我呢？'
+        }
+
+        this.student.gender = gender;
+      }
+
+      setHairLength(hairLength) {
+        if (
+          (this.student.gender == '男' && hairLength > 1) ||
+          (this.student.gender == '女' && hairLength > 25)
+        ) {
+          throw '回去剪头！'
+        }
+        this.student.hairLength = hairLength;
+      }
+
+      build() {
+        studentCount++;
+        console.log(studentCount);
+        return this.student;
+      }
+    }
+
+    const builder = new StudentBuilder();
+    builder.setName('王雲帆');
+    builder.setGender('男');
+    builder.setHairLength(1);
+    const mars = builder.build();
+
+    const builder2 = new StudentBuilder();
+    builder2.setName('约翰');
+    builder2.setGender('女');
+    builder2.setHairLength(22);
+    const john = builder2.build();
+
+    console.log(mars);
+    console.log(john);
+  </script>
+</body>
+
+</html>
