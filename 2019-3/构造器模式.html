@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>构造器模式</title>
+</head>
+
+<body>
+  <!-- <script>
+    // ES5 方式
+    function Student(name, gender, score) {
+      this.name = name;
+      this.gender = gender;
+      this.score = score;
+      this.quality = 100;
+
+      this.sumScore = function () {
+        return this.score + this.quality;
+      }
+    }
+
+    var mars = new Student('王雲帆', '男', 99);
+    var john = new Student('约翰', '男', 80);
+
+    console.log(mars.name, mars.sumScore());
+    console.log(john.name, john.sumScore());
+  </script> -->
+
+  <script>
+    // ES6 方式
+    class Student {
+      constructor(name, gender, score) {
+        // constructor 构造器
+        this.name = name;
+        this.gender = gender;
+        this.score = score;
+        this.quality = 100;
+      }
+
+      sumScore() {
+        return this.score + this.quality;
+      }
+    }
+
+    let mars = new Student('王雲帆', '男', 99);
+    let john = new Student('约翰', '男', 80);
+
+    mars.score = 100;
+    console.log(mars.name, mars.sumScore());
+    console.log(john.name, john.sumScore());
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原型模式的应用</title>
+  <!-- <style>
+    #roster,
+    td {
+      border: 1px solid #000000;
+    }
+  </style> -->
+</head>
+
+<body>
+  <table id="roster"></table>
+
+  <script>
+    var rootElement = document.getElementById('roster');
+
+    function Student(name, gender, score) {
+      this.name = name;
+      this.gender = gender;
+      this.score = score;
+      this.quality = 100;
+
+      this.mount();
+    }
+
+    Student.prototype.sumScore = function () {
+      return this.score + this.quality;
+    }
+
+    /**
+     * 将数据转换为HTML插入到表格中
+     */
+    Student.prototype.mount = function () {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td>' + this.name + '</td>' +
+        '<td>' + this.gender + '</td>' +
+        '<td>' + this.score + '</td>' +
+        '<td>' + this.quality + '</td>' +
+        '<td>' + this.sumScore() + '</td>'
+
+      rootElement.appendChild(tr);
+    }
+
+    var mars = new Student('王雲帆', '男', 98);
+    var john = new Student('约翰', '男', 23);
+    var alen = new Student('阿伦', '男', 13);
+  </script>
+</body>
+
+</html>
